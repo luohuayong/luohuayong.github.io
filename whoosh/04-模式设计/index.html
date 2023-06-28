@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="关于模式和字段模式指定索引中文档的字段。 每个文档可以有多个字段，比如标题、内容、url、日期等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 04 - 模式设计">
+<meta property="og:url" content="http://example.com/whoosh/04-%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="关于模式和字段模式指定索引中文档的字段。 每个文档可以有多个字段，比如标题、内容、url、日期等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:35:51.313Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/04-%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/04-%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/","path":"whoosh/04-模式设计/","title":"Whoosh 04 - 模式设计"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 04 - 模式设计 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%A8%A1%E5%BC%8F%E5%92%8C%E5%AD%97%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">关于模式和字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.</span> <span class="nav-text">内置字段类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">创建模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95%E5%90%8E%E4%BF%AE%E6%94%B9%E6%9E%B6%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">索引后修改架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E5%AD%97%E6%AE%B5"><span class="nav-number">5.</span> <span class="nav-text">动态字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">高级模式设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E6%8F%90%E5%8D%87-Field-boosts"><span class="nav-number">6.1.</span> <span class="nav-text">字段提升 (Field boosts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5%E7%B1%BB%E5%9E%8B"><span class="nav-number">6.2.</span> <span class="nav-text">字段类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-number">6.3.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F"><span class="nav-number">6.4.</span> <span class="nav-text">向量</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/04-%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 04 - 模式设计 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 04 - 模式设计
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:35:51" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="关于模式和字段"><a href="#关于模式和字段" class="headerlink" title="关于模式和字段"></a>关于模式和字段</h2><p>模式指定索引中文档的字段。</p>
+<p>每个文档可以有多个字段，比如标题、内容、url、日期等。</p>
+<span id="more"></span>
+
+<p>一些字段可以被索引，一些字段可以与文档一起存储，以便字段值在搜索结果中可用。一些字段将被索引和存储。</p>
+<p>模式是文档中所有可能字段的集合。每个单独的文档可能只使用模式中可用字段的一个子集。</p>
+<p>例如，用于索引电子邮件的简单模式可能包含 <code>from_addr</code>、<code>to_addr</code>、<code>subject</code>、<code>body</code> 和 <code>attachments</code> 等字段 ，其中 <code>attachments</code> 字段列出了电子邮件附件的名称。对于没有附件的电子邮件，你可以省略附件字段。</p>
+<h2 id="内置字段类型"><a href="#内置字段类型" class="headerlink" title="内置字段类型"></a>内置字段类型</h2><p>Whoosh 提供了一些有用的预定义字段类型：</p>
+<p><code>whoosh.fields.TEXT</code><br>这种类型用于正文。它索引（并可选地存储）文本并存储词条位置以允许短语搜索。</p>
+<p><code>TEXT</code> 字段默认使用 <code>StandardAnalyzer</code> 分析器。要指定不同的分析器，请在构造函数中使用 <code>analyzer</code> 参数，例如 <code>TEXT(analyzer=analysis.StemmingAnalyzer())</code>. 请参阅 <a href="http">关于分析器</a>。</p>
+<p>默认情况下，<code>TEXT</code> 字段存储每个索引词条的位置信息，以允许你搜索短语。如果你不需要能够在文本字段中搜索短语，你可以关闭存储词条位置以节省空间。使用 <code>TEXT(phrase=False)</code>。</p>
+<p>默认情况下，<code>TEXT</code> 不存储字段。通常你不想将正文存储在搜索索引中。通常你可以根据搜索结果阅读或链接到索引文档本身，因此你不需要将它们的文本存储在搜索索引中。但是，在某些情况下它可能很有用（请参阅 <a href="http">如何创建高亮显示的搜索结果摘录</a>）。使用 <code>TEXT(stored=True)</code> 指定将文本存储在索引中。</p>
+<p><code>whoosh.fields.KEYWORD</code><br>此字段类型专为以空格或逗号分隔的关键字而设计。这种类型是索引和可搜索的（并且可以选择存储）。为了节省空间，它不支持短语搜索。</p>
+<p>要将字段的值存储在索引中，请在构造函数中使用 <code>stored=True</code> 。要在索引关键字之前自动将关键字小写，请使用 <code>lowercase=True</code>.</p>
+<p>默认情况下，关键字以空格分隔。要改为用逗号分隔关键字（以允许关键字包含空格），请使用 <code>commas=True</code>.</p>
+<p>如果你的用户需要使用 <code>KEYWORD</code> 字段进行搜索，请使用 <code>scorable=True</code>.</p>
+<p><code>whoosh.fields.ID</code><br>字段 <code>ID</code> 类型只是将字段的整个值作为一个单元进行索引（并可选地存储）也就是说，它不会将其分解为单独的词条。这种类型的字段不存储频率信息，因此它非常紧凑，但对于评分不是很有用。</p>
+<p>将 <code>ID</code> 用于 URL 或路径（文档的 URL 或文件路径）、日期、类别等字段，这些字段的值必须作为一个整体来处理，并且每个文档只能有一个值使用此类型。</p>
+<p>默认情况下，<code>ID</code> 字段不存储。使用 <code>ID(stored=True)</code> 指定字段的值应与文档一起存储以用于搜索结果。例如，你可能希望存储 URL 字段的值，以便你可以在搜索结果中提供指向原始内容的链接。</p>
+<p><code>whoosh.fields.STORED</code><br>该字段与文档一起存储，但未编入索引且不可搜索。这对于你希望在搜索结果中向用户显示但不需要能够搜索到的文档信息很有用。</p>
+<p><code>whoosh.fields.NUMERIC</code><br>该字段以紧凑、可排序的格式存储整数、长整数或浮点数。</p>
+<p><code>whoosh.fields.DATETIME</code><br>该字段以紧凑、可排序的格式存储日期时间对象。</p>
+<p><code>whoosh.fields.BOOLEAN</code><br>这个简单的字段索引布尔值并允许用户搜索 <code>yes</code>, <code>no</code>, <code>true</code>, <code>false</code>, <code>1</code>, <code>0</code>,<code>t</code> 或 <code>f</code>。</p>
+<p><code>whoosh.fields.NGRAM</code><br>待定。</p>
+<p>专家用户可以创建自己的字段类型。</p>
+<h2 id="创建模式"><a href="#创建模式" class="headerlink" title="创建模式"></a>创建模式</h2><p>创建一个模式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh.fields <span class="keyword">import</span> Schema, TEXT, KEYWORD, ID, STORED</span><br><span class="line"><span class="keyword">from</span> whoosh.analysis <span class="keyword">import</span> StemmingAnalyzer</span><br><span class="line"></span><br><span class="line">schema = Schema(from_addr=ID(stored=<span class="literal">True</span>),</span><br><span class="line">                to_addr=ID(stored=<span class="literal">True</span>),</span><br><span class="line">                subject=TEXT(stored=<span class="literal">True</span>),</span><br><span class="line">                body=TEXT(analyzer=StemmingAnalyzer()),</span><br><span class="line">                tags=KEYWORD)</span><br></pre></td></tr></table></figure>
+
+<p>如果你不需要为预定义字段构造函数指定任何参数，则可以省略括号（例如，使用 <code>fieldname=TEXT</code> 替代 <code>fieldname=TEXT()</code>）。Whoosh 将为你实例化该类。</p>
+<p>或者，你可以使用 <code>SchemaClass</code> 基类以声明方式创建模式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh.fields <span class="keyword">import</span> SchemaClass, TEXT, KEYWORD, ID, STORED</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MySchema</span>(<span class="title class_ inherited__">SchemaClass</span>):</span><br><span class="line">    path = ID(stored=<span class="literal">True</span>)</span><br><span class="line">    title = TEXT(stored=<span class="literal">True</span>)</span><br><span class="line">    content = TEXT</span><br><span class="line">    tags = KEYWORD</span><br></pre></td></tr></table></figure>
+
+<p>你可以将声明类传递给实例 <code>create_in()</code> 或 <code>create_index()</code> 代替 <code>Schema</code> 实例。</p>
+<h2 id="索引后修改架构"><a href="#索引后修改架构" class="headerlink" title="索引后修改架构"></a>索引后修改架构</h2><p>创建索引后，你可以使用 <code>add_field()</code> 和 <code>remove_field()</code> 方法向模式添加或删除字段。这些方法在 <code>Writer</code> 对象上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">writer = ix.writer()</span><br><span class="line">writer.add_field(<span class="string">&quot;fieldname&quot;</span>, fields.TEXT(stored=<span class="literal">True</span>))</span><br><span class="line">writer.remove_field(<span class="string">&quot;content&quot;</span>)</span><br><span class="line">writer.commit()</span><br></pre></td></tr></table></figure>
+
+<p>（如果你要修改模式并使用同一编写器添加文档，则必须在添加任何文档之前调用 <code>add_field()</code> 或 <code>remove_field</code>）</p>
+<p>为了方便起见，这些方法也在 <code>Index</code> 对象上，但是当你在 <code>Index</code> 上调用它们时 ，<code>Index</code> 对象只是创建编写器，在其上调用相应的方法，然后提交，因此如果你想要添加或删除多个字段，自己创建编写器效率更高：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ix.add_field(<span class="string">&quot;fieldname&quot;</span>, fields.KEYWORD)</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>filedb</code> 后端，删除字段只是简单的从架构中删除该字段 —— 索引不会变小，有关该字段的数据将保留在索引中，直到你进行优化。优化将压缩索引，同时删除对已删除字段的引用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">writer = ix.writer()</span><br><span class="line">writer.add_field(<span class="string">&quot;uuid&quot;</span>, fields.ID(stored=<span class="literal">True</span>))</span><br><span class="line">writer.remove_field(<span class="string">&quot;path&quot;</span>)</span><br><span class="line">writer.commit(optimize=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>因为数据是以字段名存储在磁盘上的，所以在没有优化中间索引的情况下，不要添加与已删除字段同名的新字段：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">writer = ix.writer()</span><br><span class="line">writer.delete_field(<span class="string">&quot;path&quot;</span>)</span><br><span class="line"><span class="comment"># 不要这样做！！！</span></span><br><span class="line">writer.add_field(<span class="string">&quot;path&quot;</span>, fields.KEYWORD)</span><br></pre></td></tr></table></figure>
+
+<p>（Whoosh 的未来版本可能会自动防止此错误。）</p>
+<h2 id="动态字段"><a href="#动态字段" class="headerlink" title="动态字段"></a>动态字段</h2><p>动态字段让你可以将字段类型与任意 “glob”（包含<code>*</code>、<code>?</code>、<code>/</code>、<code>[abc]</code> 等通配符的名称）类型字段相匹配。</p>
+<p>你可以使用 <code>add()</code> 方法将动态字段添加到 <code>glob</code> 关键字设置为 <code>True</code> 的新模式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">schema = fields.Schema(...)</span><br><span class="line"><span class="comment"># 任何以 &quot;_d&quot; 结尾的字段名，都将被存储为 DATETIME 类型</span></span><br><span class="line">schema.add(<span class="string">&quot;*_d&quot;</span>, fields.DATETIME(stored=<span class="literal">True</span>), glob=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>要在现有索引上设置动态字段，与添加常规字段相同，使用 <code>IndexWriter.add_field</code> 方法，但 <code>glob</code> 关键字参数需要设置为 <code>True</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writer = ix.writer()</span><br><span class="line">writer.add_field(<span class="string">&quot;*_d&quot;</span>, fields.DATETIME(stored=<span class="literal">True</span>), glob=<span class="literal">True</span>)</span><br><span class="line">writer.commit()</span><br></pre></td></tr></table></figure>
+
+<p>要删除动态字段，请对以 glob 作为名称的字段使用 <code>IndexWriter.remove_field()</code> 方法 ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writer = ix.writer()</span><br><span class="line">writer.remove_field(<span class="string">&quot;*_d&quot;</span>)</span><br><span class="line">writer.commit()</span><br></pre></td></tr></table></figure>
+
+<p>例如，要允许文档包含以 <code>_id</code> 结尾的任何字段名称并将其与 <code>ID</code> 字段类型相关联：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">schema = fields.Schema(path=fields.ID)</span><br><span class="line">schema.add(<span class="string">&quot;*_id&quot;</span>, fields.ID, glob=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">ix = index.create_in(<span class="string">&quot;myindex&quot;</span>, schema)</span><br><span class="line"></span><br><span class="line">w = ix.writer()</span><br><span class="line">w.add_document(path=<span class="string">u&quot;/a&quot;</span>, test_id=<span class="string">u&quot;alfa&quot;</span>)</span><br><span class="line">w.add_document(path=<span class="string">u&quot;/b&quot;</span>, class_id=<span class="string">u&quot;MyClass&quot;</span>)</span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line">w.commit()</span><br><span class="line"></span><br><span class="line">qp = qparser.QueryParser(<span class="string">&quot;path&quot;</span>, schema=schema)</span><br><span class="line">q = qp.parse(<span class="string">u&quot;test_id:alfa&quot;</span>)</span><br><span class="line"><span class="keyword">with</span> ix.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    results = s.search(q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级模式设置"><a href="#高级模式设置" class="headerlink" title="高级模式设置"></a>高级模式设置</h2><h3 id="字段提升-Field-boosts"><a href="#字段提升-Field-boosts" class="headerlink" title="字段提升 (Field boosts)"></a>字段提升 (Field boosts)</h3><p>你可以为字段指定字段提升。这是一个乘数，适用于在该字段中找到的任何词条的分数。例如，要使 <code>title</code> 字段中的词条得分是 <code>body</code> 字段中词条得分的两倍：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schema = Schema(title=TEXT(field_boost=<span class="number">2.0</span>), body=TEXT)</span><br></pre></td></tr></table></figure>
+
+<h3 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h3><p>上面列出的预定义字段类型是 <code>fields.FieldType</code> 的子类。 <code>FieldType</code> 是一个非常简单的类。它的属性包含定义字段行为的信息。</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>format</td>
+<td>fields.Format</td>
+<td>定义字段记录关于每个词条的信息类型，以及信息如何存储在磁盘上。</td>
+</tr>
+<tr>
+<td>vector</td>
+<td>fields.Format</td>
+<td>可选：如果已定义，则为该字段存储每个文档的前向索引信息的格式。</td>
+</tr>
+<tr>
+<td>scorable</td>
+<td>bool</td>
+<td>如果为 <code>True</code>，则每个文档中字段存储在索引中的长度（词条的数量）。有点命名错误，因为字段长度不是所有评分所必需的。但是需要字段长度才能从 BM25F 获得正确的结果。</td>
+</tr>
+<tr>
+<td>stored</td>
+<td>bool</td>
+<td>如果为 <code>True</code>，则此字段的值存储在索引中。</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>bool</td>
+<td>如果为 <code>True</code>，则当用户在 <code>IndexWriter</code> 上调用 <code>document_update()</code> 时，此字段的值可用于替换具有相同值的文档。</td>
+</tr>
+</tbody></table>
+<p>大多数预定义字段类型的构造函数都具有可让你自定义这些部分的参数。例如：</p>
+<ul>
+<li>大多数预定义的字段类型都可以在构造函数中使用 <code>FieldType.stored</code> 参数。</li>
+<li><code>TEXT()</code> 构造函数可以使用 <code>analyzer</code> 参数设置格式对象。</li>
+</ul>
+<h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><p>对象 <code>Format</code> 定义字段记录关于每个词条的信息类型，以及信息如何在磁盘上存储。</p>
+<p>例如，<code>Existence</code> 格式将存储这样的帖子 (postings)：</p>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td></td>
+</tr>
+<tr>
+<td>20</td>
+<td></td>
+</tr>
+<tr>
+<td>30</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>而 <code>Positions</code> 格式将存储这样的帖子：</p>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th>Positions</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>[1,5,23]</td>
+</tr>
+<tr>
+<td>20</td>
+<td>[45]</td>
+</tr>
+<tr>
+<td>30</td>
+<td>[7,12]</td>
+</tr>
+</tbody></table>
+<p>索引代码将字段的 <code>unicode</code> 字符串传递给字段的 <code>Format</code> 对象。该 <code>Format</code> 对象调用其分析器（请参阅文本分析）将字符串分解为标记，然后对有关每个标记的信息进行编码。</p>
+<p>Whoosh 附带以下预定义格式。</p>
+<table>
+<thead>
+<tr>
+<th>类名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Stored</td>
+<td>存储但未索引的字段的“null”格式。</td>
+</tr>
+<tr>
+<td>Existence</td>
+<td>只记录词是否在文档中，而不存储词频。对于标识符字段（例如路径或 ID）和 “tag” 类型字段很有用，这些字段的频率应始终为 0 或 1</td>
+</tr>
+<tr>
+<td>Frequency</td>
+<td>存储每个词条在每个文档中出现的次数。</td>
+</tr>
+<tr>
+<td>Positions</td>
+<td>存储每个词条在每个文档中出现的次数以及出现的位置。</td>
+</tr>
+</tbody></table>
+<p><code>STORED</code> 字段类型使用 <code>Stored</code> 格式（什么都不做，所以 <code>STORED</code> 字段没有索引）。</p>
+<p>类型 <code>ID</code> 使用 <code>Existence</code> 格式。</p>
+<p>类型 <code>KEYWORD</code> 使用 <code>Frequency</code> 格式。</p>
+<p>类型 <code>TEXT</code> 如果使用 <code>phrase=True</code>（默认值）实例化则使用 <code>Positions</code> 格式 ，如果 <code>phrase=False</code> 则使用 <code>Frequency</code> 格式.</p>
+<p>此外，为方便专家用户而实现了以下格式，但目前尚未在 Whoosh 中使用：</p>
+<table>
+<thead>
+<tr>
+<th>类名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DocBoosts</td>
+<td>与 Existence 类似，但额外存储每个文档的提升(boosts)</td>
+</tr>
+<tr>
+<td>Characters</td>
+<td>与 Positions 类似，但额外存储每个词条的开始和结束字符索引</td>
+</tr>
+<tr>
+<td>PositionBoosts</td>
+<td>与 Positions 类似，但额外存储每个位置的提升</td>
+</tr>
+<tr>
+<td>CharacterBoosts</td>
+<td>与 Positions 类似，但额外存储每个词条和每个位置提升的开始和结束字符索引</td>
+</tr>
+</tbody></table>
+<h3 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h3><p>主索引是倒排索引。它将词条映射到它们出现的文档。存储前向索引（也称为词向量）有时也很有用，它将文档映射到出现在其中的词条。</p>
+<p>例如，想象一个字段的倒排索引：</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Postings</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>apple</td>
+<td><code>[(doc=1, freq=2), (doc=2, freq=5), (doc=3, freq=1)]</code></td>
+</tr>
+<tr>
+<td>bear</td>
+<td><code>[(doc=2, freq=7)]</code></td>
+</tr>
+</tbody></table>
+<p>相应的前向索引或词向量将是：</p>
+<table>
+<thead>
+<tr>
+<th>Doc</th>
+<th>Postings</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td><code>[(text=apple, freq=2)]</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>[(text=apple, freq=5), (text=&#39;bear&#39;, freq=7)]</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>[(text=apple, freq=1)]</code></td>
+</tr>
+</tbody></table>
+<p>如果设置 <code>FieldType.vector</code> 为一个 <code>Format</code> 对象，索引代码将使用该 <code>Format</code> 对象来存储有关每个文档中的词条的信息。目前默认情况下 <code>Whoosh</code> 根本不使用词条向量，但它们可供希望实现自己的字段类型的专家用户使用。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/05-%E5%A6%82%E4%BD%95%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3/" rel="prev" title="Whoosh 05 - 如何为文档编制索引">
+                  <i class="fa fa-chevron-left"></i> Whoosh 05 - 如何为文档编制索引
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/" rel="next" title="Whoosh 03 - 词汇表">
+                  Whoosh 03 - 词汇表 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

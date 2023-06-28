@@ -19,23 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="技术博客">
-<meta property="og:url" content="http://example.com/tags/Next-SEO/index.html">
+    <meta name="description" content="Analysis将字段的文本分解为要索引的单个词条 (Term) 的过程。这包括将文本标记为词条 (Term)，然后选择性地过滤标记化的词条（例如，小写和删除停用词）。 Whoosh 包括几个不同的分析器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 03 - 词汇表">
+<meta property="og:url" content="http://example.com/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/index.html">
 <meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="Analysis将字段的文本分解为要索引的单个词条 (Term) 的过程。这包括将文本标记为词条 (Term)，然后选择性地过滤标记化的词条（例如，小写和删除停用词）。 Whoosh 包括几个不同的分析器。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:04:23.809Z">
 <meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/tags/Next-SEO/">
+<link rel="canonical" href="http://example.com/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/Next-SEO/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/","path":"whoosh/03-词汇表/","title":"Whoosh 03 - 词汇表"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: Next SEO | 技术博客</title>
+<title>Whoosh 03 - 词汇表 | 技术博客</title>
   
 
 
@@ -164,50 +169,105 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">Next SEO
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 03 - 词汇表 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 03 - 词汇表
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:04:23" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><code>Analysis</code><br>将字段的文本分解为要索引的单个词条 (Term) 的过程。这包括将文本标记为词条 (Term)，然后选择性地过滤标记化的词条（例如，小写和删除停用词）。 Whoosh 包括几个不同的分析器。</p>
+<span id="more"></span>
+
+<p><code>Corpus</code><br>你正在编制索引的文档集。</p>
+<p><code>Documents</code><br>你希望使其可搜索的个别内容。 “文档” 一词可能意味着文件，但数据源实际上可以是任何东西——内容管理系统中的文章、博客系统中的博客文章、非常大的文件块、从 SQL 查询返回的行、来自邮箱文件，或其他任何东西。当你从 Whoosh 获得搜索结果时，结果是一个文档列表，无论 “文档” 在你的搜索引擎中意味着什么。</p>
+<p><code>Fields</code><br>每个文档都包含一组字段 (Fields)。 典型的字段可能是“标题”、“内容”、“url”、“关键字”、“状态”、“日期”等。字段可以被索引（因此它们是可搜索的）和&#x2F;或与文档一起存储。 存储字段使其在搜索结果中可用。 例如，你通常希望存储“标题”字段，以便你的搜索结果可以显示它。</p>
+<p><code>Forward index</code><br>列出每个文档和文档中出现的单词的表格。 Whoosh 允许你存储词向量 (term vectors)，这是一种前向索引 (Forward index)。</p>
+<p><code>Indexing</code><br>检查语料库中的文档并将其添加到反向索引 (Reverse index) 的过程。</p>
+<p><code>Postings</code><br>反向索引 (Reverse index) 列出了语料库 (corpus) 中的每个单词，对于每个单词，还有该单词出现的文档列表，以及一些可选信息（例如该单词在该文档中出现的次数）。 列表中的这些项目，包含文档编号和任何额外信息，称为帖子 (Postings)。 在 Whoosh 中，存储在帖子中的信息可以针对每个字段进行自定义。</p>
+<p><code>Reverse index</code><br>基本上是一个表格，列出了语料库 (corpus) 中的每个单词，以及每个单词出现的文档列表。 它可能更复杂（索引还可以列出单词在每个文档中出现的次数、出现的位置等），但这就是它的基本工作原理。</p>
+<p><code>Schema</code><br>Whoosh 要求你在开始索引 (indexing) 之前指定索引 (index) 的字段 (fields) 。模式 (Schema) 将字段名称与字段的元数据相关联，例如发布的格式以及字段的内容是否存储在索引中。</p>
+<p><code>Term vector</code><br>某个文档中某个字段的正向索引。 你可以在模式 (Schema) 中指定给定字段应存储词向量 (term vectors)。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-06-20T00:00:00+08:00"
-              content="2023-06-20">
-          06-20
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/Next-SEO-%E6%8F%92%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">Next SEO 插件</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/04-%E6%A8%A1%E5%BC%8F%E8%AE%BE%E8%AE%A1/" rel="prev" title="Whoosh 04 - 模式设计">
+                  <i class="fa fa-chevron-left"></i> Whoosh 04 - 模式设计
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/02-%E6%A6%82%E8%BF%B0/" rel="next" title="Whoosh 02 - 简介">
+                  Whoosh 02 - 简介 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述查询由词条 (terms) 和运算符 (operators) 组成。词条有两种类型：单个词条和短语。多个词条可以与 AND 和 OR 等运算符组合。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 08 - 默认查询语言">
+<meta property="og:url" content="http://example.com/whoosh/08-%E9%BB%98%E8%AE%A4%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概述查询由词条 (terms) 和运算符 (operators) 组成。词条有两种类型：单个词条和短语。多个词条可以与 AND 和 OR 等运算符组合。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:36:44.064Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/08-%E9%BB%98%E8%AE%A4%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/08-%E9%BB%98%E8%AE%A4%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/","path":"whoosh/08-默认查询语言/","title":"Whoosh 08 - 默认查询语言"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 08 - 默认查询语言 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E5%88%AB%E8%AF%8D%E6%9D%A1%E5%92%8C%E7%9F%AD%E8%AF%AD"><span class="nav-number">2.</span> <span class="nav-text">个别词条和短语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%83%E5%B0%94%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.</span> <span class="nav-text">布尔运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%97%E6%AE%B5"><span class="nav-number">4.</span> <span class="nav-text">字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8D%E5%87%86%E7%A1%AE%E7%9A%84%E8%AF%8D%E6%9D%A1"><span class="nav-number">5.</span> <span class="nav-text">不准确的词条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8C%83%E5%9B%B4"><span class="nav-number">6.</span> <span class="nav-text">范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8D%87-Boosting-%E6%9F%A5%E8%AF%A2%E5%85%83%E7%B4%A0"><span class="nav-number">7.</span> <span class="nav-text">提升 (Boosting) 查询元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%96%87%E5%AD%97%E6%96%87%E6%9C%AC%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%AF%8D%E6%9D%A1"><span class="nav-number">8.</span> <span class="nav-text">从文字文本中创建一个词条</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/08-%E9%BB%98%E8%AE%A4%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 08 - 默认查询语言 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 08 - 默认查询语言
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:36:44" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>查询由词条 (terms) 和运算符 (operators) 组成。词条有两种类型：单个词条和短语。多个词条可以与 AND 和 OR 等运算符组合。</p>
+<span id="more"></span>
+
+<p>Whoosh 支持索引不同字段的文本。创建对象时必须指定默认字段 <code>whoosh.qparser.QueryParser</code>。这是将搜索用户未明确指定字段的任何词条的字段。</p>
+<p>Whoosh 的查询解析器能够通过使用插件来解析不同的附加语法。请参阅 <a href="7_%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2.md">解析用户查询</a></p>
+<h2 id="个别词条和短语"><a href="#个别词条和短语" class="headerlink" title="个别词条和短语"></a>个别词条和短语</h2><p>查找包含 <code>render</code> 词条的文档 ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render</span><br></pre></td></tr></table></figure>
+
+<p>查找包含 <code>all was well</code> 短语的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;all was well&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，字段必须存储位置信息，以便短语搜索在该字段中工作。</p>
+<p>通常，当你指定一个短语时，短语中每个单词之间的最大位置差为 1（即，这些单词在文档中必须紧挨着彼此）。例如，如果文档 <code>library</code> 在 <code>whoosh</code> 之后 5 个词以内，则以下匹配 ：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;whoosh library&quot;</span>~<span class="number">5</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h2><p>查找包含 <code>render</code> 与 <code>shading</code> 的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render AND shading</span><br></pre></td></tr></table></figure>
+
+<p>请注意，AND 是项之间的默认关系，因此这相同：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render shading</span><br></pre></td></tr></table></figure>
+
+<p>查找包含 <code>render</code>,以及 <code>shading</code> 或 <code>modeling</code> 其中之一的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render AND shading OR modeling</span><br></pre></td></tr></table></figure>
+
+<p>查找包含 <code>render</code> 但不包含 <code>modeling</code> 的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render NOT modeling</span><br></pre></td></tr></table></figure>
+
+<p>查找包含 <code>alpha</code> 但不包含 <code>betaor</code> 或 <code>gamma</code> 的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alpha NOT (beta OR gamma)</span><br></pre></td></tr></table></figure>
+
+<p>请注意，当词条之间没有指定布尔运算符时，将插入一个运算符，默认为 AND。所以这个查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render shading modeling</span><br></pre></td></tr></table></figure>
+
+<p>等同于（默认情况下）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">render AND shading AND modeling</span><br></pre></td></tr></table></figure>
+
+<p>有关如何将默认运算符更改为 OR 的信息，请参阅 <a href="#TODO">自定义默认操作符</a></p>
+<p>将运算符与括号组合在一起。例如，查找同时包含 <code>render</code> 与 <code>shading</code> 或包含 <code>modeling</code> 的文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(render AND shading) OR modeling</span><br></pre></td></tr></table></figure>
+
+<h2 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h2><p>在 <code>name</code> 字段中查找词条 <code>ivan</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name:ivan</span><br></pre></td></tr></table></figure>
+
+<p><code>field:</code> 前缀仅为其前面的词条设置字段，因此查询：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title:open sesame</span><br></pre></td></tr></table></figure>
+
+<p><code>open</code> 将在 <code>title</code> 字段和默认 <code>sesame</code> 字段中搜索。</p>
+<p>要将字段前缀应用于多个词条，请将它们用括号分组：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title:(open sesame)</span><br></pre></td></tr></table></figure>
+
+<p>这与下面的相同：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title:open title:sesame</span><br></pre></td></tr></table></figure>
+
+<p>当然你也可以为短语指定一个字段：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">title:&quot;open sesame&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="不准确的词条"><a href="#不准确的词条" class="headerlink" title="不准确的词条"></a>不准确的词条</h2><p>使用 “globs”（通配符 <code>?</code> 表示单个字符, <code>*</code> 表示任意数量字符）来匹配词条：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">te?t test* *b?g*</span><br></pre></td></tr></table></figure>
+
+<p>请注意，以 <code>?</code> 或 <code>*</code> 开头的通配符非常慢。另请注意，这些通配符仅匹配个别词条。例如，查询：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my*life</span><br></pre></td></tr></table></figure>
+
+<p>不会匹配像这样的索引短语：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my so called life</span><br></pre></td></tr></table></figure>
+
+<p>因为那是四个独立的词条。</p>
+<h2 id="范围"><a href="#范围" class="headerlink" title="范围"></a>范围</h2><p>你可以匹配一系列词条。例如，以下查询将匹配包含词汇范围从 <code>apple</code> 到 <code>bear</code> 的词条的文档。例如，它将匹配包含 <code>azores</code> 与 <code>be</code> 但不包含 <code>blur</code> 的文档 ：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[apple TO bear]</span><br></pre></td></tr></table></figure>
+
+<p>例如，当你以词法排序格式（即 YYYYMMDD）存储日期时，这非常有用：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date:[20050101 TO 20090715]</span><br></pre></td></tr></table></figure>
+
+<p>该范围通常是包含在内的（也就是说，该范围将匹配开始和结束词条之间的所有词条，以及开始和结束词条本身）。你可以使用 <code>&#123;</code> 和 <code>&#125;</code> 字符指定范围的一端或两端排除：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[0000 TO 0025&#125;</span><br><span class="line">&#123;prefix TO suffix&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你还可以通过省略开始或结束词条来指定开放式范围：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[0025 TO]</span><br><span class="line">&#123;TO suffix&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="提升-Boosting-查询元素"><a href="#提升-Boosting-查询元素" class="headerlink" title="提升 (Boosting) 查询元素"></a>提升 (Boosting) 查询元素</h2><p>你可以指定查询的某些部分对于计算匹配文档的分数比其他部分更重要。例如，指定 <code>ninja</code> 重要性是其他词的两倍，并且 <code>bear</code> 是其他词的一半：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ninja^2 cowboy bear^0.5</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用分组括号对多个词条应用提升：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(open sesame)^2.5 roc</span><br></pre></td></tr></table></figure>
+
+<h2 id="从文字文本中创建一个词条"><a href="#从文字文本中创建一个词条" class="headerlink" title="从文字文本中创建一个词条"></a>从文字文本中创建一个词条</h2><p>如果你需要在词条中包含通常由解析器特殊处理的字符，例如空格、冒号或方括号，你可以将词条括在单引号中：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">path:&#x27;MacHD:My Documents&#x27;</span><br><span class="line">&#x27;term with spaces&#x27;</span><br><span class="line">title:&#x27;function()&#x27;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/09-%E7%B4%A2%E5%BC%95%E5%92%8C%E8%A7%A3%E6%9E%90%E6%97%A5%E6%9C%9F&%E6%97%B6%E9%97%B4/" rel="prev" title="Whoosh 09 - 索引和解析日期/时间">
+                  <i class="fa fa-chevron-left"></i> Whoosh 09 - 索引和解析日期/时间
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/07-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2/" rel="next" title="Whoosh 07 - 解析用户查询">
+                  Whoosh 07 - 解析用户查询 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

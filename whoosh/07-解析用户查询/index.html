@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述查询解析器 (query parser) 的工作是将用户提交的查询字符串转换为查询对象（来自 whoosh.query 模块的对象）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 07 - 解析用户查询">
+<meta property="og:url" content="http://example.com/whoosh/07-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概述查询解析器 (query parser) 的工作是将用户提交的查询字符串转换为查询对象（来自 whoosh.query 模块的对象）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:27:26.990Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/07-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/07-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2/","path":"whoosh/07-解析用户查询/","title":"Whoosh 07 - 解析用户查询"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 07 - 解析用户查询 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%BB%98%E8%AE%A4%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">使用默认解析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%AE%9A%E5%88%B6"><span class="nav-number">3.</span> <span class="nav-text">常见的定制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E8%AE%A9%E7%94%A8%E6%88%B7%E6%90%9C%E7%B4%A2%E5%A4%9A%E4%B8%AA%E5%AD%97%E6%AE%B5"><span class="nav-number">3.1.</span> <span class="nav-text">默认让用户搜索多个字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8C%96%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80"><span class="nav-number">3.2.</span> <span class="nav-text">简化查询语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%B4%E6%94%B9-AND%E3%80%81OR%E3%80%81ANDNOT%E3%80%81ANDMAYBE-%E5%92%8C-NOT-%E8%AF%AD%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">更改 AND、OR、ANDNOT、ANDMAYBE 和 NOT 语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%B0%8F%E4%BA%8E%E3%80%81%E5%A4%A7%E4%BA%8E%E7%AD%89"><span class="nav-number">3.4.</span> <span class="nav-text">添加小于、大于等</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%A8%A1%E7%B3%8A-fuzzy-%E8%AF%8D%E6%9D%A1%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.5.</span> <span class="nav-text">添加模糊 (fuzzy) 词条查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E5%A4%8D%E6%9D%82%E7%9A%84%E7%9F%AD%E8%AF%AD%E6%9F%A5%E8%AF%A2"><span class="nav-number">3.6.</span> <span class="nav-text">允许复杂的短语查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E5%AE%9A%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">高级定制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryParser-%E5%8F%82%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">QueryParser 参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%8F%92%E4%BB%B6"><span class="nav-number">4.2.</span> <span class="nav-text">配置插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">4.3.</span> <span class="nav-text">创建自定义运算符</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/07-%E8%A7%A3%E6%9E%90%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 07 - 解析用户查询 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 07 - 解析用户查询
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:27:26" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>查询解析器 (query parser) 的工作是将用户提交的查询字符串转换为查询对象（来自 <code>whoosh.query</code> 模块的对象）。</p>
+<span id="more"></span>
+
+<p>例如，用户查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rendering shading</span><br></pre></td></tr></table></figure>
+
+<p>可能会被解析成这样的查询对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">And([Term(<span class="string">&quot;content&quot;</span>, <span class="string">u&quot;rendering&quot;</span>), Term(<span class="string">&quot;content&quot;</span>, <span class="string">u&quot;shading&quot;</span>)])</span><br></pre></td></tr></table></figure>
+
+<p>Whoosh 包含一个功能强大的模块化解析器，用于 <code>whoosh.qparser</code> 模块中的用户查询。默认解析器实现了一种类似于 Lucene 附带的查询语言。但是，通过更改插件或使用 <code>whoosh.qparser.MultifieldParser()</code>、<code>whoosh.qparser.SimpleParser()</code> 或 <code>whoosh.qparser.DisMaxParser()</code> 等函数 ，你可以更改解析器的工作方式，获得更简单的解析器或更改查询语言语法。</p>
+<p>（在以前版本的 Whoosh 中，查询解析器是基于 <code>pyparsing</code>. 新的手写解析器不那么脆弱，更灵活。）</p>
+<blockquote>
+<p>笔记</p>
+<p>请记住，你可以使用模块中的对象以编程方式直接创建查询对象 <code>whoosh.query</code>。如果你不处理实际的用户查询，这比只是为了解析它而构建查询字符串更可取。</p>
+</blockquote>
+<h2 id="使用默认解析器"><a href="#使用默认解析器" class="headerlink" title="使用默认解析器"></a>使用默认解析器</h2><p>要创建一个 <code>whoosh.qparser.QueryParser</code> 对象，请将要搜索的默认字段的名称和你要搜索的索引的模式 (schema) 传递给它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh.qparser <span class="keyword">import</span> QueryParser</span><br><span class="line"></span><br><span class="line">parser = QueryParser(<span class="string">&quot;content&quot;</span>, schema=myindex.schema)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>提示<br>你可以在不指定架构的情况下实例化 <code>QueryParser</code> 对象，但是解析器不会处理用户查询的文本。当你想了解 <code>QueryParser</code> 将如何构建查询，但又不想仅仅为了测试而构建模式时，这很有用。</p>
+</blockquote>
+<p>一旦你有了一个 <code>QueryParser</code> 对象，你就可以调用 <code>parse()</code> 它来将查询字符串解析为查询对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>parser.parse(<span class="string">u&quot;alpha OR beta gamma&quot;</span>)</span><br><span class="line">And([Or([Term(<span class="string">&#x27;content&#x27;</span>, <span class="string">u&#x27;alpha&#x27;</span>), Term(<span class="string">&#x27;content&#x27;</span>, <span class="string">u&#x27;beta&#x27;</span>)]), Term(<span class="string">&#x27;content&#x27;</span>, <span class="string">u&#x27;gamma&#x27;</span>)])</span><br></pre></td></tr></table></figure>
+
+<p>有关默认解析器查询语言的功能和语法，请参阅 <a href="#TODO">查询语言参考</a>。</p>
+<h2 id="常见的定制"><a href="#常见的定制" class="headerlink" title="常见的定制"></a>常见的定制</h2><p>默认情况下搜索任何词条 (Terms) 而不是所有词条</p>
+<p>如果用户没有明确指定 <code>AND</code> 或 <code>OR</code> 子句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physically based rendering</span><br></pre></td></tr></table></figure>
+
+<p>…默认情况下，解析器将单词视为由 <code>AND</code> 连接 ，这意味着所有词条 (Terms) 都必须存在才能匹配文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physically AND based AND rendering</span><br></pre></td></tr></table></figure>
+
+<p>更改解析器以改为使用 <code>OR</code>，以便文档中可能存在任何词条以进行匹配，即：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physically OR based OR rendering</span><br></pre></td></tr></table></figure>
+
+<p>…使用关键字参数配置 QueryParser，group 如下所示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh <span class="keyword">import</span> qparser</span><br><span class="line"></span><br><span class="line">parser = qparser.QueryParser(fieldname, schema=myindex.schema,</span><br><span class="line">                             group=qparser.OrGroup)</span><br></pre></td></tr></table></figure>
+
+<p>Or 查询允许你指定包含更多查询词的文档得分更高。例如，如果用户搜索 <code>foo bar</code>，则出现 4 次 <code>foo</code> 的文档通常会比包含 <code>foo</code> 和 <code>bar</code> 各出现一次的文档得分高。但是，用户通常希望包含更多他们搜索的词的文档得分更高。要配置解析器以生成具有此行为的 Or 组，请使用 <code>OrGroup</code> 类的 <code>factory()</code> 方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">og = qparser.OrGroup.factory(<span class="number">0.9</span>)</span><br><span class="line">parser = qparser.QueryParser(fieldname, schema, group=og)</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>factory()</code> 的参数是奖金的比例因子（介于 0 和 1 之间）。</p>
+<h3 id="默认让用户搜索多个字段"><a href="#默认让用户搜索多个字段" class="headerlink" title="默认让用户搜索多个字段"></a>默认让用户搜索多个字段</h3><p>默认的 QueryParser 配置采用没有显式字段的词条，并将它们分配给你在创建对象时指定的默认字段，例如，如果你使用以下方法创建对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">physically based rendering</span><br></pre></td></tr></table></figure>
+
+<p>并且用户输入了查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">three blind mice</span><br></pre></td></tr></table></figure>
+
+<p>解析器会将其视为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">content:three content:blind content:mice</span><br></pre></td></tr></table></figure>
+
+<p>但是，你可能希望默认情况下让用户搜索多个字段。例如，你可能希望“unfielded”字词同时搜索 <code>title</code> 和 <code>content</code> 字段。</p>
+<p>在这种情况下，你可以使用 <code>whoosh.qparser.MultifieldParser</code>. 这就像普通的 QueryParser，但不是默认的字段名称字符串，而是采用一系列字段名称：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh.qparser <span class="keyword">import</span> MultifieldParser</span><br><span class="line"></span><br><span class="line">mparser = MultifieldParser([<span class="string">&quot;title&quot;</span>, <span class="string">&quot;content&quot;</span>], schema=myschema)</span><br></pre></td></tr></table></figure>
+
+<p>当此 MultifieldParser 实例解析时，它将其视为：<code>three blind mice</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(title:three OR content:three) (title:blind OR content:blind) (title:mice OR content:mice)</span><br></pre></td></tr></table></figure>
+
+<h3 id="简化查询语言"><a href="#简化查询语言" class="headerlink" title="简化查询语言"></a>简化查询语言</h3><p>一旦你有了解析器 (parser)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;content&quot;</span>, schema=myschema)</span><br></pre></td></tr></table></figure>
+
+<p>你可以使用 <code>remove_plugin_class()</code> 方法从中删除特征。</p>
+<p>例如，要删除用户指定要搜索的字段的能力：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.remove_plugin_class(qparser.FieldsPlugin)</span><br></pre></td></tr></table></figure>
+
+<p>要删除搜索通配符的功能，这可能对查询性能有害：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser.remove_plugin_class(qparser.WildcardPlugin)</span><br></pre></td></tr></table></figure>
+
+<p>有关 Whoosh 的查询解析器中包含的插件的信息，请参阅 qparser 模块。</p>
+<h3 id="更改-AND、OR、ANDNOT、ANDMAYBE-和-NOT-语法"><a href="#更改-AND、OR、ANDNOT、ANDMAYBE-和-NOT-语法" class="headerlink" title="更改 AND、OR、ANDNOT、ANDMAYBE 和 NOT 语法"></a>更改 AND、OR、ANDNOT、ANDMAYBE 和 NOT 语法</h3><p>默认解析器对 AND、OR、ANDNOT、ANDMAYBE 和 NOT 函数使用英语关键字：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;content&quot;</span>, schema=myschema)</span><br></pre></td></tr></table></figure>
+
+<p>你可以替换默认 <code>OperatorsPlugin</code> 对象，用你自己的正则表达式替换默认的英文标记。</p>
+<p><code>whoosh.qparser.OperatorsPlugin</code> 实现了在查询中使用 AND、OR、NOT、ANDNOT 和 ANDMAYBE 子句的能力。你可以实例化一个新的 <code>OperatorsPlugin</code> 并使用 And、Or、Not、AndNot 和 AndMaybe 关键字参数来更改标记模式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Use Spanish equivalents instead of AND and OR</span></span><br><span class="line">op = qparser.OperatorsPlugin(And=<span class="string">&quot; Y &quot;</span>, Or=<span class="string">&quot; O &quot;</span>)</span><br><span class="line">parser.replace_plugin(op)</span><br></pre></td></tr></table></figure>
+
+<p>此外，你可以更改运算符 <code>NOT</code> 的语法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np = qparser.OperatorsPlugin(Not=<span class="string">&#x27; NO &#x27;</span>)</span><br><span class="line">parser.replace_plugin(np)</span><br></pre></td></tr></table></figure>
+
+<p>参数可以是模式字符串或预编译的正则表达式对象。</p>
+<p>例如，要更改默认解析器以使用印刷符号而不是 AND、OR、ANDNOT、ANDMAYBE 和 NOT 函数的单词：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;content&quot;</span>, schema=myschema)</span><br><span class="line"><span class="comment"># These are regular expressions, so we have to escape the vertical bar</span></span><br><span class="line">op = qparser.OperatorsPlugin(And=<span class="string">&quot;&amp;&quot;</span>, Or=<span class="string">&quot;\\|&quot;</span>, AndNot=<span class="string">&quot;&amp;!&quot;</span>, AndMaybe=<span class="string">&quot;&amp;~&quot;</span>, Not=<span class="string">&quot;\\-&quot;</span>)</span><br><span class="line">parser.replace_plugin(op)</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加小于、大于等"><a href="#添加小于、大于等" class="headerlink" title="添加小于、大于等"></a>添加小于、大于等</h3><p>通常，匹配大于 “apple” 的字段中的所有词条的方式是使用开放式范围：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field:&#123;apple to]</span><br></pre></td></tr></table></figure>
+
+<p><code>whoosh.qparser.GtLtPlugin</code> 允许你指定类似这样的搜索：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">field:&gt;apple</span><br></pre></td></tr></table></figure>
+
+<p>该插件允许你在字段说明符之后使用 <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code>, <code>=&gt;</code> 或 <code>=&lt;</code>，并将表达式转换为等效范围：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">date:&gt;=<span class="string">&#x27;31 march 2001&#x27;</span></span><br><span class="line"></span><br><span class="line">date:[<span class="number">31</span> march <span class="number">2001</span> to]</span><br></pre></td></tr></table></figure>
+
+<h3 id="添加模糊-fuzzy-词条查询"><a href="#添加模糊-fuzzy-词条查询" class="headerlink" title="添加模糊 (fuzzy) 词条查询"></a>添加模糊 (fuzzy) 词条查询</h3><p>模糊 (fuzzy) 查询有利于捕捉拼写错误和相似词。<code>whoosh.qparser.FuzzyTermPlugin</code> 允许你搜索模糊 (fuzzy) 词条，即不必完全匹配的词条。模糊词条将匹配一定数量的“编辑”（字符插入、删除 和 转置 —— 这称为 “Damerau-Levenshtein 编辑距离”）内的任何相似词条。</p>
+<p>添加模糊插件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;fieldname&quot;</span>, my_index.schema)</span><br><span class="line">parser.add_plugin(qparser.FuzzyTermPlugin())</span><br></pre></td></tr></table></figure>
+
+<p>将模糊插件添加到解析器后，你可以通过添加 ~ 后跟可选的最大编辑距离 (edit distance) 来指定模糊项。如果不指定编辑距离，则默认为 1.</p>
+<p>例如，以下模糊 (fuzzy) 词条查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat~</span><br></pre></td></tr></table></figure>
+
+<p>将匹配 <code>cat</code> 的一次编辑(edit) 后在索引中的所有词条，例如 cast(插入 s)、at(删除 c) 和 act(将 c 与 a 交换)。</p>
+<p>如果你想 cat 匹配 bat，它需要两次编辑（删除 c 和插入 b）所以你需要将最大编辑距离设置为 2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat~<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>你允许的每个附加编辑都会增加必须检查的可能性的数量，所以当编辑距离大于 2 时可能会非常慢。</p>
+<p>要求模糊词条的前几个字符完全匹配通常很有用。这称为前缀 (prefix)。你可以通过在编辑距离后添加斜杠和数字来设置前缀的长度。例如，要使用最大编辑距离为 2 和前缀长度为 3：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">johannson~<span class="number">2</span>/<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>你可以指定前缀而不指定编辑距离：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">johannson~/<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>默认前缀距离为 0.</p>
+<h3 id="允许复杂的短语查询"><a href="#允许复杂的短语查询" class="headerlink" title="允许复杂的短语查询"></a>允许复杂的短语查询</h3><p>默认解析器设置允许短语（邻近）查询，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;whoosh search library&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>默认将引号之间的文本标记为短语查询，并创建对这些邻近项的搜索。</p>
+<p>如果你想进行更复杂的邻近搜索，你可以将短语插件替换为 <code>whoosh.qparser.SequencePlugin</code>，它允许在引号之间进行任何查询。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;(john OR jon OR jonathan~) peters*&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>序列语法允许你像常规短语一样添加一个“slop”因子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;(john OR jon OR jonathan~) peters*&quot;</span>~<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>用序列插件替换默认的短语插件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;fieldname&quot;</span>, my_index.schema)</span><br><span class="line">parser.remove_plugin_class(qparser.PhrasePlugin)</span><br><span class="line">parser.add_plugin(qparser.SequencePlugin())</span><br></pre></td></tr></table></figure>
+
+<p>或者，你可以保留默认的短语插件，并通过在创建序列插件时为开始&#x2F;结束标记指定正则表达式来为序列插件提供不同的语法。正则表达式应该有一个 slop 用于溢出因子的命名组。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">parser = qparser.QueryParser(<span class="string">&quot;fieldname&quot;</span>, my_index.schema)</span><br><span class="line">parser.add_plugin(qparser.SequencePlugin(<span class="string">&quot;!(~(?P&lt;slop&gt;[1-9][0-9]*))?&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>这将允许你同时使用常规短语查询和序列查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;regular phrase&quot;</span> AND !sequence query~<span class="number">2</span>!</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级定制"><a href="#高级定制" class="headerlink" title="高级定制"></a>高级定制</h2><h3 id="QueryParser-参数"><a href="#QueryParser-参数" class="headerlink" title="QueryParser 参数"></a>QueryParser 参数</h3><p>QueryParser 支持两个额外的关键字参数：</p>
+<p><code>group</code><br>当用户未明确指定布尔运算符（例如 AND 或 OR）时用于连接子查询的查询类。 这使你可以将默认运算符从 AND 更改为 OR。<br>这将是 <code>whoosh.qparser.AndGroup</code> 或 <code>whoosh.qparser.OrGroup</code> 类（不是实例化对象），除非你编写了自己要使用的自定义分组语法。</p>
+<p><code>termclass</code><br>用于包装单个词条的查询类。<br>这必须是 <code>whoosh.query.Query</code> 子类（不是实例化对象），它在其 <code>__init__</code> 方法中接受字段名字符串和词条文本 unicode 字符串。 默认是 <code>whoosh.query.Term</code>。<br>如果你想将默认词条类更改为 <code>whoosh.query.Variations</code>，或者如果你编写了自定义词条类并希望解析器使用而不是 Whoosh 附带的类，这将很有用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> whoosh.qparser <span class="keyword">import</span> QueryParser, OrGroup</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>orparser = QueryParser(<span class="string">&quot;content&quot;</span>, schema=myschema, group=OrGroup)</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置插件"><a href="#配置插件" class="headerlink" title="配置插件"></a>配置插件</h3><p>查询解析器的功能由一组插件提供。你可以删除插件以删除功能，添加插件以添加功能，或者用重新配置或重写的版本替换默认插件。</p>
+<p><code>whoosh.qparser.QueryParser.add_plugin()</code>、<code>whoosh.qparser.QueryParser.remove_plugin_class()</code> 和 <code>whoosh.qparser.QueryParser.replace_plugin()</code> 方法让你可以操作 <code>QueryParser</code> 对象中的插件。</p>
+<p>有关可用插件的信息，请参阅 <a href="#TODO">qparser 模块</a>。</p>
+<h3 id="创建自定义运算符"><a href="#创建自定义运算符" class="headerlink" title="创建自定义运算符"></a>创建自定义运算符</h3><ul>
+<li>决定你是想要 <code>PrefixOperator</code>、<code>PostfixOperator</code> 还是 <code>InfixOperator</code>。</li>
+<li>创建一个新的 <code>whoosh.qparser.syntax.GroupNode</code> 子类来保存受你的操作器 (operator) 影响的节点。该对象负责生成 <code>whoosh.query.Query</code> 语法对应的对象。</li>
+<li>为运算符的查询语法创建正则表达式模式。</li>
+<li>根据以上信息创建一个 <code>OperatorsPlugin.OpTagger</code> 对象。</li>
+<li>创建一个配置了你的自定义运算符的 <code>OperatorsPlugin</code> 新实例。</li>
+<li>用新实例替换解析器中 <code>OperatorsPlugin</code> 的默认值。</li>
+</ul>
+<p>例如，如果你要创建一个 <code>BEFORE</code> 运算符：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh <span class="keyword">import</span> qparser, query</span><br><span class="line"></span><br><span class="line">optype = qparser.InfixOperator</span><br><span class="line">pattern = <span class="string">&quot; BEFORE &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BeforeGroup</span>(qparser.GroupNode):</span><br><span class="line">    merging = <span class="literal">True</span></span><br><span class="line">    qclass = query.Ordered</span><br></pre></td></tr></table></figure>
+
+<p>为你的操作器 (operator) 创建一个 OpTagger：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> whoosh <span class="keyword">import</span> qparser, query</span><br><span class="line"></span><br><span class="line">optype = qparser.InfixOperator</span><br><span class="line">pattern = <span class="string">&quot; BEFORE &quot;</span></span><br><span class="line"></span><br><span class="line">btagger = qparser.OperatorPlugin.OpTagger(pattern, BeforeGroup,</span><br><span class="line">                                          qparser.InfixOperator)</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，中缀运算符是左结合的。要创建右结合中缀运算符，请执行以下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">btagger = qparser.OperatorPlugin.OpTagger(pattern, BeforeGroup,</span><br><span class="line">                                          qparser.InfixOperator,</span><br><span class="line">                                          leftassoc=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用新运算符创建一个 <code>OperatorsPlugin</code> 实例，并替换查询解析器中的默认运算符插件：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qp = qparser.QueryParser(<span class="string">&quot;text&quot;</span>, myschema)</span><br><span class="line">my_op_plugin = qparser.OperatorsPlugin([(btagger, <span class="number">0</span>)])</span><br><span class="line">qp.replace_plugin(my_op_plugin)</span><br></pre></td></tr></table></figure>
+
+<p>请注意，你使用第一个参数指定的运算符列表是默认运算符（AND、OR 等）的补充。要关闭其中一个默认运算符，你可以将 None 传递给相应的关键字参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp = qparser.OperatorsPlugin([(optagger, <span class="number">0</span>)], And=<span class="literal">None</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果你只需要你的运算符列表而不需要任何默认运算符，请使用 <code>clean</code> 关键字参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp = qparser.OperatorsPlugin([(optagger, <span class="number">0</span>)], clean=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>列表前面的运算符比列表后面的运算符绑定得更紧密。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/08-%E9%BB%98%E8%AE%A4%E6%9F%A5%E8%AF%A2%E8%AF%AD%E8%A8%80/" rel="prev" title="Whoosh 08 - 默认查询语言">
+                  <i class="fa fa-chevron-left"></i> Whoosh 08 - 默认查询语言
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/06-%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/" rel="next" title="Whoosh 06 - 如何搜索">
+                  Whoosh 06 - 如何搜索 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

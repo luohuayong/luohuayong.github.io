@@ -19,23 +19,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="技术博客">
-<meta property="og:url" content="http://example.com/tags/Next-SEO/index.html">
+    <meta name="description" content="概念N-gram (n 元语法) 指文本中连续出现的 n 个语词，是一种基于统计语言模型的算法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="N-gram">
+<meta property="og:url" content="http://example.com/whoosh/N-Gram/index.html">
 <meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概念N-gram (n 元语法) 指文本中连续出现的 n 个语词，是一种基于统计语言模型的算法。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-46602f35680c09185c665984026459f7_720w.webp">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:39:23.353Z">
 <meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-46602f35680c09185c665984026459f7_720w.webp">
 
 
-<link rel="canonical" href="http://example.com/tags/Next-SEO/">
+<link rel="canonical" href="http://example.com/whoosh/N-Gram/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/Next-SEO/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/N-Gram/","path":"whoosh/N-Gram/","title":"N-gram"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: Next SEO | 技术博客</title>
+<title>N-gram | 技术博客</title>
   
 
 
@@ -118,7 +125,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -131,6 +138,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">2.</span> <span class="nav-text">应用场景</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,50 +172,105 @@
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">Next SEO
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/N-Gram/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="N-gram | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          N-gram
         </h1>
-      </div>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
       
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:39:23" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>N-gram (n 元语法) 指文本中连续出现的 n 个语词，是一种基于统计语言模型的算法。</p>
+<span id="more"></span>
+
+<p>每一个字节片段称为 gram，对所有 gram 的出现频度进行统计，并且按照事先设定好的阈值进行过滤，形成关键 gram 列表，也就是这个文本的向量特征空间，列表中的每一种 gram 就是一个特征向量维度。</p>
+<p>模型基于这样一种假设，第 N 个词的出现只与前面 N-1 个词相关，而与其它任何词都不相关，整句的概率就是各个词出现概率的乘积。这些概率可以通过直接从语料中统计 N 个词同时出现的次数得到。当 n 分别为 1、2、3 时，又分别称为一元语法（unigram）、二元语法（bigram）与三元语法（trigram）。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>搜索引擎（Google 或者 Baidu）、或者输入法的猜想或者提示。你在用谷歌时，输入一个或几个词，搜索框通常会以下拉菜单的形式给出几个像下图一样的备选，这些备选其实是在猜想你想要搜索的那个词串。</p>
+<p>再者，当你用输入法输入一个汉字的时候，输入法通常可以联系出一个完整的词，例如我输入一个“刘”字，通常输入法会提示我是否要输入的是“刘备”。通过上面的介绍，你应该能够很敏锐的发觉，这其实是以 N-Gram 模型为基础来实现的。比如下图：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-46602f35680c09185c665984026459f7_720w.webp" alt="谷歌联想输入"></p>
+<p>那么原理是什么呢？也就是我打入“我们”的时候，后面的“不一样”，”的爱“这些是怎么出来的，怎么排序的？</p>
+<p>实际上是根据语言模型得出。假如使用的是二元语言模型预测下一个单词：</p>
+<p>排序的过程就是：</p>
+<p>p(”不一样“|”我们”)&gt;p(”的爱“|”我们”)&gt;p(”相爱吧“|”我们”)&gt;…….&gt;p(“这一家”|”我们“)，这些概率值的求法和上面提到的完全一样，数据的来源可以是用户搜索的 log。</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-06-20T00:00:00+08:00"
-              content="2023-06-20">
-          06-20
-        </time>
-      </div>
+    
+    
+    
 
-      <div class="post-title">
-          <a class="post-title-link" href="/Next-SEO-%E6%8F%92%E4%BB%B6/" itemprop="url">
-            <span itemprop="name">Next SEO 插件</span>
-          </a>
-      </div>
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
 
-      
-    </header>
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/01-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" rel="prev" title="Whoosh 01 - 快速开始">
+                  <i class="fa fa-chevron-left"></i> Whoosh 01 - 快速开始
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/video.js/%E4%BD%BF%E7%94%A8%20Video.js%20%E8%BF%9B%E8%A1%8C%E8%A7%86%E9%A2%91%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/" rel="next" title="使用 Video.js 进行视频自动播放的最佳实践">
+                  使用 Video.js 进行视频自动播放的最佳实践 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
   </article>
+</div>
 
-    </div>
-  </div>
-  
-  
-  
+
+
+
+
 
 </div>
   </main>

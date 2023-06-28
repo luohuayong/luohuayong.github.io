@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述Whoosh 的全文索引本质上是一个平面文档数据库。 但是，Whoosh 支持两种技术来模拟分层文档的索引和查询，即形成父子层次结构的文档集，例如“章节 - 部分 - 段落”或“模块 - 类 - 方法”。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 21 - 索引和搜索文档层次结构">
+<meta property="og:url" content="http://example.com/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概述Whoosh 的全文索引本质上是一个平面文档数据库。 但是，Whoosh 支持两种技术来模拟分层文档的索引和查询，即形成父子层次结构的文档集，例如“章节 - 部分 - 段落”或“模块 - 类 - 方法”。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:39:00.763Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/","path":"whoosh/21-索引和搜索文档层次结构/","title":"Whoosh 21 - 索引和搜索文档层次结构"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 21 - 索引和搜索文档层次结构 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%B5%8C%E5%A5%97%E6%96%87%E6%A1%A3%E7%B4%A2%E5%BC%95"><span class="nav-number">2.</span> <span class="nav-text">使用嵌套文档索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A2%E5%BC%95"><span class="nav-number">2.1.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E7%88%B6%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.2.</span> <span class="nav-text">嵌套父查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B5%8C%E5%A5%97%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.3.</span> <span class="nav-text">嵌套子查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%92%8C%E6%9B%B4%E6%96%B0%E5%88%86%E5%B1%82%E6%96%87%E6%A1%A3"><span class="nav-number">2.4.</span> <span class="nav-text">删除和更新分层文档</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%9F%A5%E8%AF%A2%E6%97%B6%E8%BF%9E%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">使用查询时连接</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 21 - 索引和搜索文档层次结构 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 21 - 索引和搜索文档层次结构
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:39:00" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 的全文索引本质上是一个平面文档数据库。 但是，Whoosh 支持两种技术来模拟分层文档的索引和查询，即形成父子层次结构的文档集，例如“章节 - 部分 - 段落”或“模块 - 类 - 方法”。</p>
+<span id="more"></span>
+
+<p>你可以在索引时指定父子关系，方法是将文档分组在同一层次结构中，然后使用 <code>whoosh.query.NestedParent</code> 和 <code>whoosh.query.NestedChildren</code> 根据其子项查找父项，反之亦然。</p>
+<p>或者，你可以使用查询时连接，本质上类似于数据库中的外部键连接，你可以在其中执行一次搜索以查找相关文档，然后使用该文档上的存储值（例如，父字段）来查找另一个文档 .</p>
+<p>这两种方法各有利弊。</p>
+<h2 id="使用嵌套文档索引"><a href="#使用嵌套文档索引" class="headerlink" title="使用嵌套文档索引"></a>使用嵌套文档索引</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>此方法通过将“父”文档及其所有“子”文档索引为一个“组”来工作，因此可以保证它们最终位于同一段中。 你可以使用 <code>IndexWriter.group()</code> 返回的上下文管理器对文档进行分组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;get result&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add all&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add some&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;multiply&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;delete&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或者，你可以使用 start_group() 和 end_group() 方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.start_group()</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    w.end_group()</span><br></pre></td></tr></table></figure>
+
+<p>层次结构的每一层都应该有一个区别于其他层次的查询（例如，在上面的索引中，可以使用 kind:class 或 kind:method 来匹配层次结构的不同层次）。</p>
+<p>为文档的层次结构编制索引后，你可以使用两种查询类型根据子项查找父项，反之亦然。</p>
+<p>（目前默认查询解析器不支持嵌套查询。）</p>
+<h3 id="嵌套父查询"><a href="#嵌套父查询" class="headerlink" title="嵌套父查询"></a>嵌套父查询</h3><p><code>whoosh.query.NestedParent</code> 查询类型允许你指定对子文档的查询，但让查询返回层次结构中更高层的“祖先”文档：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先，我们需要一个查询来匹配层次结构中我们想要的“父”</span></span><br><span class="line"><span class="comment"># 级别中的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后，我们需要一个匹配我们想要找到的孩子的查询</span></span><br><span class="line">wanted_kids = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;close&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以进行查询来匹配“name”为“close”的文档，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配子项的“父”文档</span></span><br><span class="line">q = query.NestedParent(all_parents, wanted_kids)</span><br><span class="line"><span class="comment"># results = Index, Calculator</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，在多于两层的层次结构中，你可以指定匹配层次结构任何层级的“parents”查询，这样你就可以返回匹配子级的顶级祖先，或第二层、第三层等 .</p>
+<p>该查询首先构建一个表示哪些文档是“父”的位向量：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">索引</span><br><span class="line">|      计算器</span><br><span class="line">|      |</span><br><span class="line">1000100100000100</span><br><span class="line">    |        |</span><br><span class="line">    |        累加器</span><br><span class="line">    累加器</span><br></pre></td></tr></table></figure>
+
+<p>然后对于“child”查询的每个匹配项，它从位向量计算前一个父项并将其作为匹配项返回（无论有多少子项匹配，它只返回每个父项一次）。 这个父查找非常有效：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1000100100000100</span><br><span class="line">   |</span><br><span class="line">|&lt;-+ close</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h3><p><code>NestedParent</code> 的对立面是 <code>whoosh.query.NestedChildren</code>。 此查询允许你匹配父母但返回他们的孩子。 这很有用，例如，搜索专辑标题并返回专辑中的歌曲：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询匹配我们想要匹配的“父”级别的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;album&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们要匹配的父文档</span></span><br><span class="line">wanted_parents = query.Term(<span class="string">&quot;album_title&quot;</span>, <span class="string">&quot;heaven&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以查询匹配父文档，其中“album_title”包含“heaven”，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配父文档的“子”文档</span></span><br><span class="line">q1 = query.NestedChildren(all_parents, wanted_parents)</span><br></pre></td></tr></table></figure>
+
+<p>然后，你可以将该查询与 <code>AND</code> 子句结合起来，例如，查找出现在专辑名称为“天堂”的专辑中歌曲名称中带有“heaven”的歌曲：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q2 = query.And([q1, query.Term(<span class="string">&quot;song_title&quot;</span>, <span class="string">&quot;hell&quot;</span>)])</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除和更新分层文档"><a href="#删除和更新分层文档" class="headerlink" title="删除和更新分层文档"></a>删除和更新分层文档</h3><p>索引时间方法的缺点是更新和删除。 因为查询的实现依赖于段中连续的父文档和子文档，所以你不能只更新&#x2F;删除一个子文档。 你一次只能更新&#x2F;删除整个顶级文档（例如，如果你的层次结构是“章节 - 部分 - 段落”，则你只能更新或删除整个章节，而不是部分或段落）。 如果层次结构的顶层代表非常大的文本块，这可能涉及大量删除和重建索引。</p>
+<p>目前 <code>Writer.update_document()</code> 不会自动处理嵌套文档。 你必须手动删除并重新添加文档组才能更新它们。</p>
+<p>要删除嵌套文档组，请使用 Writer.delete_by_query() 方法和 NestedParent 查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 删除“累加器”类</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line">to_delete = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">q = query.NestedParent(all_parents, to_delete)</span><br><span class="line"><span class="keyword">with</span> myindex.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.delete_by_query(q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用查询时连接"><a href="#使用查询时连接" class="headerlink" title="使用查询时连接"></a>使用查询时连接</h2><p>在 Whoosh 中模拟分层文档的第二种技术涉及使用每个文档上的存储字段指向其父文档，然后在查询时使用该字段的值来查找父文档和子文档。</p>
+<p>例如，如果我们使用指向父类的指针而不是嵌套来索引类和方法的层次结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在每个“方法”文档上存储一个指向父级的指针</span></span><br><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Index&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add document&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add reader&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Accumulator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;get result&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Calculator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add all&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add some&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;multiply&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Deleter&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;delete&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在在查询时进行手动连接</span></span><br><span class="line"><span class="keyword">with</span> ix.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    <span class="comment"># 提示：与使用 Searcher.search() 相比，</span></span><br><span class="line">    <span class="comment"># Searcher.document() 和 Searcher.documents()</span></span><br><span class="line">    <span class="comment"># 可让你更轻松地按字段值查找文档</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 子到父：</span></span><br><span class="line">    <span class="comment"># 当&quot;close&quot;方法触发时，打印类的文档字符串</span></span><br><span class="line">    <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(m_name=<span class="string">&quot;close&quot;</span>):</span><br><span class="line">        <span class="comment"># 使用“parent”字段的存储值查找父文档</span></span><br><span class="line">        parent_doc = s.document(c_name=child_doc[<span class="string">&quot;parent&quot;</span>])</span><br><span class="line">        <span class="comment"># 打印父文档存储的文档字符串字段</span></span><br><span class="line">        <span class="built_in">print</span>(parent_doc[<span class="string">&quot;docstring&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 父到子:</span></span><br><span class="line">    <span class="comment"># 在文档字符串中查找带有“big”的类并打印它们的方法</span></span><br><span class="line">    q = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>) &amp; query.Term(<span class="string">&quot;docstring&quot;</span>, <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> hit <span class="keyword">in</span> s.search(q, limit=<span class="literal">None</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Class name=&quot;</span>, hit[<span class="string">&quot;c_name&quot;</span>], <span class="string">&quot;methods:&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(parent=hit[<span class="string">&quot;c_name&quot;</span>]):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;  Method name=&quot;</span>, child_doc[<span class="string">&quot;m_name&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>这种技术比索引时间嵌套更灵活，因为你可以逐个删除&#x2F;更新层次结构中的单个文档，尽管它不支持轻松查找不同的父级别。 它也比索引时间嵌套慢（可能慢得多），因为你必须对每个找到的文档执行额外的搜索。</p>
+<p>Whoosh 的未来版本可能会包含“加入”查询，以使此过程更高效（或至少更自动化）。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/22-Whoosh%20%E9%A3%9F%E8%B0%B1/" rel="prev" title="Whoosh 22 - Whoosh 食谱">
+                  <i class="fa fa-chevron-left"></i> Whoosh 22 - Whoosh 食谱
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/20-%E5%B9%B6%E5%8F%91%E3%80%81%E9%94%81%E5%AE%9A%E5%92%8C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/" rel="next" title="Whoosh 20 - 并发、锁定和版本控制">
+                  Whoosh 20 - 并发、锁定和版本控制 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

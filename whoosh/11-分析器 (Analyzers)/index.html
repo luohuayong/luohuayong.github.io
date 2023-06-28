@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述分析器 (analyzers) 是一个函数或可调用类（具有 __call__ 方法的类），它接受一个 unicode 字符串并返回一个标记 (tokens) 生成器。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 11 - 分析器 (analyzers)">
+<meta property="og:url" content="http://example.com/whoosh/11-%E5%88%86%E6%9E%90%E5%99%A8%20(Analyzers)/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概述分析器 (analyzers) 是一个函数或可调用类（具有 __call__ 方法的类），它接受一个 unicode 字符串并返回一个标记 (tokens) 生成器。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:37:13.517Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/11-%E5%88%86%E6%9E%90%E5%99%A8%20(Analyzers)/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/11-%E5%88%86%E6%9E%90%E5%99%A8%20(Analyzers)/","path":"whoosh/11-分析器 (Analyzers)/","title":"Whoosh 11 - 分析器 (analyzers)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 11 - 分析器 (analyzers) | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%88%86%E6%9E%90%E5%99%A8"><span class="nav-number">2.</span> <span class="nav-text">使用分析器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%AB%98%E7%BA%A7%E8%A7%A3%E6%9E%90-Analysis"><span class="nav-number">3.</span> <span class="nav-text">高级解析 (Analysis)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0-Token-%E5%AF%B9%E8%B1%A1"><span class="nav-number">3.1.</span> <span class="nav-text">标记 (Token) 对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E8%AE%BE%E7%BD%AE%E5%B1%9E%E6%80%A7"><span class="nav-number">3.2.</span> <span class="nav-text">标记设置属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E4%BF%A1%E6%81%AF%E5%B1%9E%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">标记信息属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E7%B4%A2%E5%BC%95%E5%92%8C%E6%9F%A5%E8%AF%A2%E8%A7%A3%E6%9E%90%E6%89%A7%E8%A1%8C%E4%B8%8D%E5%90%8C%E7%9A%84%E5%88%86%E6%9E%90"><span class="nav-number">3.4.</span> <span class="nav-text">对索引和查询解析执行不同的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2-Stop-%E8%AF%8D"><span class="nav-number">3.5.</span> <span class="nav-text">停止 (Stop) 词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E7%BC%96%E5%8F%B7%E8%AF%8D%E6%9D%A1%E4%BD%8D%E7%BD%AE"><span class="nav-number">3.6.</span> <span class="nav-text">重新编号词条位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E6%88%96%E7%95%99%E4%B8%8B%E5%81%9C%E7%94%A8%E8%AF%8D"><span class="nav-number">3.7.</span> <span class="nav-text">删除或留下停用词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%96%BD%E8%AF%B4%E6%98%8E"><span class="nav-number">3.8.</span> <span class="nav-text">实施说明</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/11-%E5%88%86%E6%9E%90%E5%99%A8%20(Analyzers)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 11 - 分析器 (analyzers) | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 11 - 分析器 (analyzers)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:37:13" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>分析器 (analyzers) 是一个函数或可调用类（具有 <code>__call__</code> 方法的类），它接受一个 unicode 字符串并返回一个标记 (tokens) 生成器。 </p>
+<span id="more"></span>
+
+<p>通常标记 (token) 是一个单词，例如字符串 “Mary had a little lamb” 可能会产生 “Mary”、“had”、“a”、“little” 和 “lamb” 标记。 但是，标记不一定对应于单词。 例如，你可以将中文文本标记为单个字符或二元语法。 标记是索引 (index) 的单位，也就是说，它们是你可以在索引中查找的内容。</p>
+<p>分析器基本上只是一个分词器 (tokenizer) 和 一组过滤器 (filter) 的包装器 (wrapper)。 分析器 (analyzers) 的 <code>__call__</code> 方法会将其参数传递给分词器 (tokenizer)，而分词器通常会被包裹在几个过滤器中。</p>
+<p>分词器是一个可调用的 (callable)，它接受一个 unicode 字符串并产生一系列 <code>analysis.Token</code> 对象。</p>
+<p>例如，内置的正则分词器 (<code>whoosh.analysis.RegexTokenizer</code>) 类实现了一个可定制的、基于正则表达式的分词器，它提取单词并忽略空格和标点符号。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> whoosh.analysis <span class="keyword">import</span> RegexTokenizer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>tokenizer = RegexTokenizer()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> token <span class="keyword">in</span> tokenizer(<span class="string">u&quot;Hello there my friend!&quot;</span>):</span><br><span class="line"><span class="meta">... </span>  <span class="built_in">print</span> <span class="built_in">repr</span>(token.text)</span><br><span class="line"><span class="string">u&#x27;Hello&#x27;</span></span><br><span class="line"><span class="string">u&#x27;there&#x27;</span></span><br><span class="line"><span class="string">u&#x27;my&#x27;</span></span><br><span class="line"><span class="string">u&#x27;friend&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>过滤器 (filter) 是一个可调用对象，它接受标记生成器 (generator of tokens) 或另一个过滤器，然后生成一系列标记。</p>
+<p>例如，内置的小写字母过滤器 (<code>whoosh.analysis.LowercaseFilter()</code>) 通过将文本转换为小写来过滤标记。 其内部实现非常简单：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">LowercaseFilter</span>(<span class="params">tokens</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    使用 lower() 将标记文本小写。例如，标记</span></span><br><span class="line"><span class="string">    &quot;This&quot;,&quot;is&quot;,&quot;a&quot;,&quot;TEST&quot; 转换成 &quot;this&quot;,&quot;is&quot;,&quot;a&quot;,&quot;test&quot;.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> tokens:</span><br><span class="line">        t.text = t.text.lower()</span><br><span class="line">        <span class="keyword">yield</span> t</span><br></pre></td></tr></table></figure>
+
+<p>你可以将过滤器 (filter) 包裹在分词器 (tokenizer) 外以查看其运行情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> whoosh.analysis <span class="keyword">import</span> LowercaseFilter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> token <span class="keyword">in</span> LowercaseFilter(tokenizer(<span class="string">u&quot;These ARE the things I want!&quot;</span>)):</span><br><span class="line"><span class="meta">... </span>  <span class="built_in">print</span> <span class="built_in">repr</span>(token.text)</span><br><span class="line"><span class="string">u&#x27;these&#x27;</span></span><br><span class="line"><span class="string">u&#x27;are&#x27;</span></span><br><span class="line"><span class="string">u&#x27;the&#x27;</span></span><br><span class="line"><span class="string">u&#x27;things&#x27;</span></span><br><span class="line"><span class="string">u&#x27;i&#x27;</span></span><br><span class="line"><span class="string">u&#x27;want&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>分析器只是将分词器和一些过滤器组合到一个包 (package) 中的一种方法。</p>
+<p>你可以将分析器实现为自定义类或函数，或者使用 <code>|</code> 将分词器和过滤器组合在一起。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_analyzer = RegexTokenizer() | LowercaseFilter() | StopFilter()</span><br></pre></td></tr></table></figure>
+
+<p>第一项必须是分词器，其余必须是过滤器（不能先放过滤器，也不能在第一项后放分词器）。 请注意，这仅在分词器是 <code>whoosh.analysis.Composable</code> 的子类时才有效，因为 Whoosh 附带的所有分词器和过滤器都是。</p>
+<p>有关 Whoosh 附带的可用分析器、分词器和过滤器的信息，请参阅 <code>whoosh.analysis</code> 模块。</p>
+<h2 id="使用分析器"><a href="#使用分析器" class="headerlink" title="使用分析器"></a>使用分析器</h2><p>在模式 (schema) 中创建字段时，可以将分析器作为参数传递给字段 (field) 对象：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schema = Schema(content=TEXT(analyzer=StemmingAnalyzer()))</span><br></pre></td></tr></table></figure>
+
+<h2 id="高级解析-Analysis"><a href="#高级解析-Analysis" class="headerlink" title="高级解析 (Analysis)"></a>高级解析 (Analysis)</h2><h3 id="标记-Token-对象"><a href="#标记-Token-对象" class="headerlink" title="标记 (Token) 对象"></a>标记 (Token) 对象</h3><p><code>Token</code> 类没有方法。 它只是一个记录某些属性的地方。 <code>Token</code> 对象实际上有两种属性：记录 <code>Token</code> 对象包含或应该包含什么样的信息的设置，以及关于当前标记 (token) 的信息。</p>
+<h3 id="标记设置属性"><a href="#标记设置属性" class="headerlink" title="标记设置属性"></a>标记设置属性</h3><p>标记对象应始终具有以下属性。 标记器或过滤器可以检查这些属性以查看可用的信息类型和它们应该在标记对象上设置的信息类型。</p>
+<p>这些属性由分词器在创建分词时根据从分析器传递给它的参数设置。</p>
+<p>过滤器不应更改这些属性的值。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>属性名称</th>
+<th>描述</th>
+<th>默认</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>str</td>
+<td>mode</td>
+<td>调用分析器的模式，例如 索引 (indexing) 期间的 索引 (index) 或解析 (parsing) 期间的查询(query)</td>
+<td>‘’</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>positions</td>
+<td>词条 (term) 位置 (position) 是否记录在标记中</td>
+<td>False</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>chars</td>
+<td>标记中是否记录了词条开始和结束字符索引</td>
+<td>False</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>boosts</td>
+<td>每词条的提升 (boosts) 是否被记录在标记中</td>
+<td>False</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>removestops</td>
+<td>是否应该从标记流中删除停用词</td>
+<td>True</td>
+</tr>
+</tbody></table>
+<h3 id="标记信息属性"><a href="#标记信息属性" class="headerlink" title="标记信息属性"></a>标记信息属性</h3><p><code>Token</code> 对象可能具有以下任何属性。 文本 (<code>text</code>) 属性应该始终存在。原文本 (<code>original</code>) 属性可以由分词器设置。 所有其他属性只能根据上述 <code>settings</code> 属性的值进行访问或设置。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>unicode</td>
+<td>text</td>
+<td>标记的文本（这应该始终存在）</td>
+</tr>
+<tr>
+<td>unicode</td>
+<td>original</td>
+<td>标记的原始（过滤前）文本。 分词器可能会记录这一点，过滤器不应该修改它。</td>
+</tr>
+<tr>
+<td>int</td>
+<td>pos</td>
+<td>标记在流中的位置，从 0 开始（仅当 positions 为 True 时设置）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>startchar</td>
+<td>原文本中标记开始的字符索引（仅当 chars 为 True 时设置）</td>
+</tr>
+<tr>
+<td>int</td>
+<td>endchar</td>
+<td>原文本中标记结尾的字符索引（仅当 chars 为 True 时设置）</td>
+</tr>
+<tr>
+<td>float</td>
+<td>boost</td>
+<td>该标记的提升（仅当 boosts 为 True 时设置）</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>stopped</td>
+<td>此标记是否为停止 (stop) 词（仅在 removestops 为 False 时设置）</td>
+</tr>
+</tbody></table>
+<p>那么为什么大部分信息属性都是可选的呢？ 不同的字段格式需要关于每个标记的不同级别的信息。 例如，频率 (<code>Frequency</code>) 格式只需要标记文本。 位置 (<code>Positions</code>) 格式记录了词条位置，因此它需要在 <code>Token</code> 上使用它们。 特征 (<code>Characters</code>) 格式记录词条位置以及每个词条的开始和结束字符索引，因此它需要它们在标记上，等等。</p>
+<p>表示每个字段格式的 <code>Format</code> 对象调用该字段的分析器，并向其传递与其所需信息类型对应的参数，例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">analyzer(unicode_string, positions=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后，分析器可以将该信息传递给分词器，以便分词器在它生成的标记对象上初始化所需的属性。</p>
+<h3 id="对索引和查询解析执行不同的分析"><a href="#对索引和查询解析执行不同的分析" class="headerlink" title="对索引和查询解析执行不同的分析"></a>对索引和查询解析执行不同的分析</h3><p>Whoosh 设置 <code>mode</code> 的设置 (setting) 属性以指示分析器是由索引器 (<code>mode=&#39;index&#39;</code>) 还是查询解析器 (<code>mode=&#39;query&#39;</code>) 调用的。 如果你只想在索引或查询解析中应用转换，这将很有用：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyFilter</span>(<span class="title class_ inherited__">Filter</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, tokens</span>):</span><br><span class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> tokens:</span><br><span class="line">            <span class="keyword">if</span> t.mode == <span class="string">&#x27;query&#x27;</span>:</span><br><span class="line">                ...</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ...</span><br></pre></td></tr></table></figure>
+
+<p><code>whoosh.analysis.MultiFilter</code> 过滤器类允许你根据模式设置指定要使用的不同过滤器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">intraword = MultiFilter(index=IntraWordFilter(mergewords=<span class="literal">True</span>, mergenums=<span class="literal">True</span>),</span><br><span class="line">                        query=IntraWordFilter(mergewords=<span class="literal">False</span>, mergenums=<span class="literal">False</span>))</span><br></pre></td></tr></table></figure>
+
+<h3 id="停止-Stop-词"><a href="#停止-Stop-词" class="headerlink" title="停止 (Stop) 词"></a>停止 (Stop) 词</h3><p>停止 (Stop) 词是非常常见的词，索引它们通常会适得其反，例如 “and”、“or”、“if”等。内置的停止词过滤器 <code>analysis.StopFilter</code> 可让你过滤掉停止词，并包含一个常见停用词的默认列表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> whoosh.analysis <span class="keyword">import</span> StopFilter</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>stopper = StopFilter()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">for</span> token <span class="keyword">in</span> stopper(LowercaseFilter(tokenizer(<span class="string">u&quot;These ARE the things I want!&quot;</span>))):</span><br><span class="line"><span class="meta">... </span>  <span class="built_in">print</span> <span class="built_in">repr</span>(token.text)</span><br><span class="line"><span class="string">u&#x27;these&#x27;</span></span><br><span class="line"><span class="string">u&#x27;things&#x27;</span></span><br><span class="line"><span class="string">u&#x27;want&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>然而，这个看似简单的过滤器想法引发了一些小但略微棘手的问题：重新编号词条位置以及保留或删除停用词。</p>
+<h3 id="重新编号词条位置"><a href="#重新编号词条位置" class="headerlink" title="重新编号词条位置"></a>重新编号词条位置</h3><p>请记住，有时会要求分析器记录标记流中每个标记的位置：</p>
+<table>
+<thead>
+<tr>
+<th>Token.text</th>
+<th>u’Mary’</th>
+<th>u’had’</th>
+<th>u’a’</th>
+<th>u’lamb’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Token.pos</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>那么，如果 <code>StopFilter</code> 从流中删除单词 <code>had</code> 和 <code>a</code>，标记的 <code>pos</code> 属性会发生什么情况？ 它是否应该重新编号位置以假装“停止”的词从未存在过？ 这样：</p>
+<table>
+<thead>
+<tr>
+<th>Token.text</th>
+<th>u’Mary’</th>
+<th>u’lamb’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Token.pos</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>还是应该保留单词的原始位置？ 这样：</p>
+<table>
+<thead>
+<tr>
+<th>Token.text</th>
+<th>u’Mary’</th>
+<th>u’lamb’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Token.pos</td>
+<td>0</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>事实证明，不同的情况需要不同的解决方案，因此提供的 <code>StopFilter</code> 类支持上述两种行为。 重新编号是默认设置，因为这通常是最有用的并且是支持短语搜索所必需的。 但是，你可以在 <code>StopFilter</code> 的构造函数中设置一个参数，告诉它不要对位置重新编号：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stopper = StopFilter(renumber=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除或留下停用词"><a href="#删除或留下停用词" class="headerlink" title="删除或留下停用词"></a>删除或留下停用词</h3><p>使用 <code>StopFilter</code> 的目的是去除停用词，对吧？ 好吧，实际上在某些情况下，你可能希望将标记 (mark) 标记 (token) 为“已停止”，但不想将它们从标记流中删除。</p>
+<p>例如，如果你正在编写自己的查询解析器，则可以通过字段的分析器运行用户的查询，将其分解为标记。 在这种情况下，你可能想知道哪些词被“停止”，以便你可以向最终用户提供有用的反馈,例如“以下词太常见而无法搜索：” (“The following words are too common to search for:”)。</p>
+<p>在其他情况下，你可能希望在流中为某些过滤步骤保留停用词（例如，你可能有一个查看先前标记的步骤，并希望停用标记成为该过程的一部分），然后将其删除之后。</p>
+<p>分析模块提供了一些工具来保留和删除流中的停用词。</p>
+<p>传递给分析器的 <code>__call__</code> 方法（并作为属性复制到 <code>Token</code> 对象）的 <code>removestops</code> 参数指定停用词是从流中删除还是留在流中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> whoosh.analysis <span class="keyword">import</span> StandardAnalyzer</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>analyzer = StandardAnalyzer()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(t.text, t.stopped) <span class="keyword">for</span> t <span class="keyword">in</span> analyzer(<span class="string">u&quot;This is a test&quot;</span>)]</span><br><span class="line">[(<span class="string">u&#x27;test&#x27;</span>, <span class="literal">False</span>)]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[(t.text, t.stopped) <span class="keyword">for</span> t <span class="keyword">in</span> analyzer(<span class="string">u&quot;This is a test&quot;</span>, removestops=<span class="literal">False</span>)]</span><br><span class="line">[(<span class="string">u&#x27;this&#x27;</span>, <span class="literal">True</span>), (<span class="string">u&#x27;is&#x27;</span>, <span class="literal">True</span>), (<span class="string">u&#x27;a&#x27;</span>, <span class="literal">True</span>), (<span class="string">u&#x27;test&#x27;</span>, <span class="literal">False</span>)]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>笔记</p>
+<p>即使你在用于索引的分析器的流中留下停止词，索引器也会忽略停止属性 (<code>stopped</code>) 为 <code>True</code> 的任何标记。</p>
+</blockquote>
+<h3 id="实施说明"><a href="#实施说明" class="headerlink" title="实施说明"></a>实施说明</h3><p>因为在 Python 中创建对象很慢，所以分词器不会为每个标记的对象创建新的 <code>analysis.Token</code> 对象。而是创建一个 <code>Token</code> 对象并一遍又一遍地产生 (yield) 它。 这是一个很好的性能捷径，但如果你的代码试图记住生成器循环之间的标记，则可能会导致奇怪的行为。</p>
+<p>因为分析器只有一个 <code>Token</code> 对象，它会不断更改其属性，如果你保留一份从生成器循环中获得的 <code>Token</code> 的副本，它不应这样做：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">list</span>(tokenizer(<span class="string">u&quot;Hello there my friend&quot;</span>))</span><br><span class="line">[Token(<span class="string">u&quot;friend&quot;</span>), Token(<span class="string">u&quot;friend&quot;</span>), Token(<span class="string">u&quot;friend&quot;</span>), Token(<span class="string">u&quot;friend&quot;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>而是这样做：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[t.text <span class="keyword">for</span> t <span class="keyword">in</span> tokenizer(<span class="string">u&quot;Hello there my friend&quot;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，保存标记对象的属性，而不是保存标记对象。</p>
+<p>如果你将自己的分词器、过滤器或分析器实现为类，则应实现 <code>__eq__</code> 方法。 这对于允许比较模式 (<code>Schema</code>) 对象很重要。</p>
+<p>在 <code>Token</code> 对象上混合 (mixing) 持久设置 (<code>setting</code>) 和瞬态信息 (<code>information</code>) 属性并不是特别优雅。 如果我有更好的想法，我可能会改变它。 ;) 不需要通过调用分词器和过滤器来实现分析器。 分词器和过滤器只是一种构造代码的便捷方式。 你可以随意编写分析器，只要它实现了 <code>__call__</code> 即可。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/12-Stemming/" rel="prev" title="Whoosh 12 - 词干提取 (stemming)、变体 (variations) 和重音折叠 (accent folding)">
+                  <i class="fa fa-chevron-left"></i> Whoosh 12 - 词干提取 (stemming)、变体 (variations) 和重音折叠 (accent folding)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/10-%E6%9F%A5%E8%AF%A2%E5%AF%B9%E8%B1%A1/" rel="next" title="Whoosh 10 - 查询对象">
+                  Whoosh 10 - 查询对象 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

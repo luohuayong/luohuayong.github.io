@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述Whoosh 提供了计算一组文档的“关键术语”的方法。 对于这些方法，“关键术语”基本上是指在给定文档中频繁出现但在整个索引集合中相对不常见的术语。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Whoosh 16 - 查询扩展和关键词提取">
+<meta property="og:url" content="http://example.com/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="概述Whoosh 提供了计算一组文档的“关键术语”的方法。 对于这些方法，“关键术语”基本上是指在给定文档中频繁出现但在整个索引集合中相对不常见的术语。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-20T13:38:18.081Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Whoosh">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/","path":"whoosh/16-查询扩展和关键词提取/","title":"Whoosh 16 - 查询扩展和关键词提取"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Whoosh 16 - 查询扩展和关键词提取 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">扩展模型</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Whoosh 16 - 查询扩展和关键词提取 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Whoosh 16 - 查询扩展和关键词提取
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:38:18" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 提供了计算一组文档的“关键术语”的方法。 对于这些方法，“关键术语”基本上是指在给定文档中频繁出现但在整个索引集合中相对不常见的术语。</p>
+<span id="more"></span>
+
+<p>因为这是一个纯粹的统计操作，而不是自然语言处理或 AI 功能，所以结果的质量会根据内容、文档集合的大小以及您提取关键字的文档数量而有所不同。</p>
+<p>这些方法可用于为用户提供以下功能：</p>
+<ul>
+<li>搜索词扩展。 您可以从查询中提取前 N 个结果的关键术语，并将它们作为附加&#x2F;替代查询术语建议给用户尝试。</li>
+<li>标签建议。 提取单个文档的关键术语可能会为标记文档提供有用的建议。</li>
+<li>“更像这样”。 您可以从查询中提取前十个左右结果的关键术语（并删除原始查询术语），并将这些关键字用作另一个查询的基础，该查询可能会使用用户没有想到的术语找到更多文档。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ul>
+<li><p>获取更多文档，例如某个搜索结果。 这要求您要匹配的字段是矢量或存储的，或者您可以访问原始文本（例如来自数据库）。</p>
+<p>使用 more_like_this()：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">results = mysearcher.search(myquery)</span><br><span class="line">first_hit = results[<span class="number">0</span>]</span><br><span class="line">more_results = first_hit.more_like_this(<span class="string">&quot;content&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在 <code>whoosh.searching.Results</code> 对象中提取前 N 个文档的关键字。 这要求该字段是向量化的或存储的。</p>
+<p>使用 <code>whoosh.searching.Results</code> 对象的 <code>key_terms()</code> 方法从结果集的前 N 个文档中提取关键字。</p>
+<p>例如，要从结果对象的前十个文档的内容字段中提取五个关键术语：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">            <span class="keyword">in</span> results.key_terms(<span class="string">&quot;content&quot;</span>, docs=<span class="number">10</span>, numterms=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>为任意一组文档提取关键字。 这要求该字段是向量化的或存储的。</p>
+<p>使用 <code>whoosh.searching.Searcher</code> 对象的 <code>document_number()</code> 或 <code>document_numbers()</code> 方法获取要从中提取关键字的文档的文档编号。</p>
+<p>给定文档编号列表，使用 <code>whoosh.searching.Searcher</code> 的 <code>key_terms()</code> 方法提取关键字。</p>
+<p>例如，假设您有一个电子邮件索引。 从 <code>emailto</code> 字段包含 <code>matt@whoosh.ca</code> 的电子邮件的内容字段中提取关键术语：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    docnums = s.document_numbers(emailto=<span class="string">u&quot;matt@whoosh.ca&quot;</span>)</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms(docnums, <span class="string">&quot;body&quot;</span>)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>从不在索引中的任意文本中提取关键字。</p>
+<p>给定文本，使用 whoosh.searching.Searcher 的 key_terms_from_text() 方法提取关键字：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms_from_text(<span class="string">&quot;body&quot;</span>, mytext)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展模型"><a href="#扩展模型" class="headerlink" title="扩展模型"></a>扩展模型</h2><p><code>whoosh.classify</code> 模块中的 <code>ExpansionModel</code> 子类对关键词实现了不同的权重函数。 这些模型从 Terrier 中的原始 Java 实现转换为 Python。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/whoosh/17-%E6%9B%B4%E6%AD%A3%E7%94%A8%E6%88%B7%E6%9F%A5%E8%AF%A2%E4%B8%AD%E7%9A%84%E9%94%99%E8%AF%AF./" rel="prev" title="Whoosh 17 - 更正用户查询中的错误 “你的意思... ？”">
+                  <i class="fa fa-chevron-left"></i> Whoosh 17 - 更正用户查询中的错误 “你的意思... ？”
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/whoosh/15-%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA%20(highlighted)%20%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/" rel="next" title="Whoosh 15 - 高亮显示 (highlighted) 搜索结果">
+                  Whoosh 15 - 高亮显示 (highlighted) 搜索结果 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
