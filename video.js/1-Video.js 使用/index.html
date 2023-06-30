@@ -19,28 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="关于 WhooshWhoosh 由 Matt Chaput 创建。 它最初是一个快速而杂乱 (dirty) 的搜索服务器，用于搜索 Houdini 3D 动画软件包的在线文档。 Side Effects Software 慷慨地允许 Matt 开源代码，以防它可能对需要非常灵活或纯 Python 搜索引擎（或两者！）的任何其他人有用。">
+    <meta name="description" content="Video.js 是一个从头开始为 HTML5 世界构建的网络视频播放器。它支持 HTML5 视频和现代流媒体格式，以及 YouTube 和 Vimeo。它支持在桌面和移动设备上播放视频。这是时 Next.js 框架下如何使用 Video.js .">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Whoosh 02 - 简介">
-<meta property="og:url" content="http://example.com/whoosh/02-%E6%A6%82%E8%BF%B0/index.html">
+<meta property="og:title" content="Video.js 01 开始使用">
+<meta property="og:url" content="http://example.com/video.js/1-Video.js%20%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="技术博客">
-<meta property="og:description" content="关于 WhooshWhoosh 由 Matt Chaput 创建。 它最初是一个快速而杂乱 (dirty) 的搜索服务器，用于搜索 Houdini 3D 动画软件包的在线文档。 Side Effects Software 慷慨地允许 Matt 开源代码，以防它可能对需要非常灵活或纯 Python 搜索引擎（或两者！）的任何其他人有用。">
+<meta property="og:description" content="Video.js 是一个从头开始为 HTML5 世界构建的网络视频播放器。它支持 HTML5 视频和现代流媒体格式，以及 YouTube 和 Vimeo。它支持在桌面和移动设备上播放视频。这是时 Next.js 框架下如何使用 Video.js .">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2023-06-20T13:26:55.131Z">
+<meta property="article:published_time" content="2023-06-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-29T10:07:30.822Z">
 <meta property="article:author" content="Leo">
-<meta property="article:tag" content="Whoosh">
+<meta property="article:tag" content="Video.js">
+<meta property="article:tag" content="视频">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/whoosh/02-%E6%A6%82%E8%BF%B0/">
+<link rel="canonical" href="http://example.com/video.js/1-Video.js%20%E4%BD%BF%E7%94%A8/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/02-%E6%A6%82%E8%BF%B0/","path":"whoosh/02-概述/","title":"Whoosh 02 - 简介"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/video.js/1-Video.js%20%E4%BD%BF%E7%94%A8/","path":"video.js/1-Video.js 使用/","title":"Video.js 01 开始使用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Whoosh 02 - 简介 | 技术博客</title>
+<title>Video.js 01 开始使用 | 技术博客</title>
   
 
 
@@ -136,7 +137,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E-Whoosh"><span class="nav-number">1.</span> <span class="nav-text">关于 Whoosh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Whoosh-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">Whoosh 是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Whoosh-%E8%83%BD%E4%B8%BA%E4%BD%A0%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.</span> <span class="nav-text">Whoosh 能为你做什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%BE%97%E6%9C%89%E5%85%B3-Whoosh-%E7%9A%84%E5%B8%AE%E5%8A%A9"><span class="nav-number">4.</span> <span class="nav-text">获得有关 Whoosh 的帮助</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.</span> <span class="nav-text">创建页面</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/02-%E6%A6%82%E8%BF%B0/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/video.js/1-Video.js%20%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -194,12 +195,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Whoosh 02 - 简介 | 技术博客">
+      <meta itemprop="name" content="Video.js 01 开始使用 | 技术博客">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Whoosh 02 - 简介
+          Video.js 01 开始使用
         </h1>
 
         <div class="post-meta-container">
@@ -211,7 +212,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-06-20 00:00:00 / 修改时间：21:26:55" itemprop="dateCreated datePublished" datetime="2023-06-20T00:00:00+08:00">2023-06-20</time>
+      <time title="创建时间：2023-06-29 00:00:00 / 修改时间：18:07:30" itemprop="dateCreated datePublished" datetime="2023-06-29T00:00:00+08:00">2023-06-29</time>
     </span>
 
   
@@ -223,23 +224,16 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="关于-Whoosh"><a href="#关于-Whoosh" class="headerlink" title="关于 Whoosh"></a>关于 Whoosh</h2><p>Whoosh 由 Matt Chaput 创建。 它最初是一个快速而杂乱 (dirty) 的搜索服务器，用于搜索 Houdini 3D 动画软件包的在线文档。 Side Effects Software 慷慨地允许 Matt 开源代码，以防它可能对需要非常灵活或纯 Python 搜索引擎（或两者！）的任何其他人有用。</p>
+    <div class="post-body" itemprop="articleBody"><p>Video.js 是一个从头开始为 HTML5 世界构建的网络视频播放器。它支持 HTML5 视频和现代流媒体格式，以及 YouTube 和 Vimeo。它支持在桌面和移动设备上播放视频。<br>这是时 Next.js 框架下如何使用 Video.js .</p>
 <span id="more"></span>
 
-<ul>
-<li>Whoosh 速度很快，但只使用纯 Python，因此它可以在任何 Python 运行的地方运行，而不需要编译器。</li>
-<li>默认情况下，Whoosh 使用 Okapi BM25F 排名功能，但与大多数东西一样，排名功能可以轻松定制。</li>
-<li>与许多其他搜索库相比，Whoosh 创建的索引相当小。</li>
-<li>Whoosh 中的所有索引文本都必须是 unicode。</li>
-<li>Whoosh 允许你存储带有索引文档的任意 Python 对象。</li>
-</ul>
-<h2 id="Whoosh-是什么？"><a href="#Whoosh-是什么？" class="headerlink" title="Whoosh 是什么？"></a>Whoosh 是什么？</h2><p>Whoosh 是一个快速、纯 Python 的搜索引擎库。</p>
-<p>Whoosh 的主要设计动力是它是纯 Python。 你应该能够在任何可以使用 Python 的地方使用 Whoosh，不需要编译器或 Java。</p>
-<p>与其祖先之一 Lucene 一样，Whoosh 并不是一个真正的搜索引擎，它是一个用于创建搜索引擎的程序员库 [1]。</p>
-<p>实际上，Whoosh 的任何重要行为都不是硬编码的。 文本索引、每个字段中每个词条存储的信息级别、搜索查询的解析、允许的查询类型、评分算法等都是可定制的、可替换的和可扩展的。</p>
-<p>[1] 当然可以在 Whoosh 之上构建交钥匙搜索引擎，就像 Nutch 和 Solr 使用 Lucene 一样。</p>
-<h2 id="Whoosh-能为你做什么？"><a href="#Whoosh-能为你做什么？" class="headerlink" title="Whoosh 能为你做什么？"></a>Whoosh 能为你做什么？</h2><p>Whoosh 让你可以索引自由格式或结构化文本，然后根据简单或复杂的搜索条件快速找到匹配的文档。</p>
-<h2 id="获得有关-Whoosh-的帮助"><a href="#获得有关-Whoosh-的帮助" class="headerlink" title="获得有关 Whoosh 的帮助"></a>获得有关 Whoosh 的帮助</h2><p>你可以在 Whoosh Bitbucket 页面上查看未解决的问题，并在 Whoosh 邮件列表上获得帮助。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add video.js @types/video.js</span><br></pre></td></tr></table></figure>
+
+<p><code>@types/video.js</code> 是 Video.js 的 TypeScript 的类型注释</p>
+<h2 id="创建页面"><a href="#创建页面" class="headerlink" title="创建页面"></a>创建页面</h2><p>页面代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> videojs <span class="keyword">from</span> <span class="string">&#x27;video.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;video.js/dist/video-js.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Test7Page</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;vid1&#x27;</span>, &#123;</span><br><span class="line">      <span class="attr">width</span>: <span class="string">&#x27;300&#x27;</span>,</span><br><span class="line">      <span class="attr">controls</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;);</span><br><span class="line">    player.<span class="title function_">ready</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;video.js read ...&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    player.<span class="title function_">on</span>(<span class="string">&#x27;play&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;video.js play ...&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">&#x27;vid1&#x27;</span> <span class="attr">className</span>=<span class="string">&#x27;video-js&#x27;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&#x27;/videos/4.mp4&#x27;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">video</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Test7Page</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>className=&#39;video-js&#39;</code> 样式加载的是 Video.js 重写的 player(播放器) 样式,并非 <code>&lt;video&gt;</code> 元素的原始样式.<br><code>player.ready(...)</code> 监听 video.js 就绪事件<br><code>player.on(&#39;play&#39;,...)</code> 监听视频播放事件</p>
 
     </div>
 
@@ -249,21 +243,19 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Whoosh/" rel="tag"># Whoosh</a>
+              <a href="/tags/Video-js/" rel="tag"># Video.js</a>
+              <a href="/tags/%E8%A7%86%E9%A2%91/" rel="tag"># 视频</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/whoosh/03-%E8%AF%8D%E6%B1%87%E8%A1%A8/" rel="prev" title="Whoosh 03 - 词汇表">
-                  <i class="fa fa-chevron-left"></i> Whoosh 03 - 词汇表
+                <a href="/video.js/2-Video.js%20%E9%80%89%E9%A1%B9%E5%8F%82%E8%80%83/" rel="prev" title="Video.js 02 选项参考">
+                  <i class="fa fa-chevron-left"></i> Video.js 02 选项参考
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/whoosh/01-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/" rel="next" title="Whoosh 01 - 快速开始">
-                  Whoosh 01 - 快速开始 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Video.js 选项参数包括:  &lt;video&gt; 元素标准选项 Video.js 特定选项 组件选项和技术选项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Video.js 02 选项参考">
+<meta property="og:url" content="http://example.com/video.js/2-Video.js%20%E9%80%89%E9%A1%B9%E5%8F%82%E8%80%83/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="Video.js 选项参数包括:  &lt;video&gt; 元素标准选项 Video.js 特定选项 组件选项和技术选项">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-29T13:12:33.747Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Video.js">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/video.js/2-Video.js%20%E9%80%89%E9%A1%B9%E5%8F%82%E8%80%83/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/video.js/2-Video.js%20%E9%80%89%E9%A1%B9%E5%8F%82%E8%80%83/","path":"video.js/2-Video.js 选项参考/","title":"Video.js 02 选项参考"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Video.js 02 选项参考 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#lt-video-gt-%E5%85%83%E7%B4%A0%E6%A0%87%E5%87%86%E9%80%89%E9%A1%B9"><span class="nav-number">1.</span> <span class="nav-text">&lt;video&gt; 元素标准选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#autoplay"><span class="nav-number">1.1.</span> <span class="nav-text">autoplay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controlBar-remainingTimeDisplay-displayNegative"><span class="nav-number">1.2.</span> <span class="nav-text">controlBar.remainingTimeDisplay.displayNegative</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controls"><span class="nav-number">1.3.</span> <span class="nav-text">controls</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#height"><span class="nav-number">1.4.</span> <span class="nav-text">height</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loop"><span class="nav-number">1.5.</span> <span class="nav-text">loop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#muted"><span class="nav-number">1.6.</span> <span class="nav-text">muted</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#poster"><span class="nav-number">1.7.</span> <span class="nav-text">poster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#preload"><span class="nav-number">1.8.</span> <span class="nav-text">preload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#width"><span class="nav-number">1.9.</span> <span class="nav-text">width</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Video-js-%E7%89%B9%E5%AE%9A%E9%80%89%E9%A1%B9"><span class="nav-number">2.</span> <span class="nav-text">Video.js 特定选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#aspectRatio"><span class="nav-number">2.1.</span> <span class="nav-text">aspectRatio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#audioOnlyMode"><span class="nav-number">2.2.</span> <span class="nav-text">audioOnlyMode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#audioPosterMode"><span class="nav-number">2.3.</span> <span class="nav-text">audioPosterMode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#autoSetup"><span class="nav-number">2.4.</span> <span class="nav-text">autoSetup</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#breakpoints"><span class="nav-number">2.5.</span> <span class="nav-text">breakpoints</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#children"><span class="nav-number">2.6.</span> <span class="nav-text">children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disablePictureInPicture"><span class="nav-number">2.7.</span> <span class="nav-text">disablePictureInPicture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#enableDocumentPictureInPicture"><span class="nav-number">2.8.</span> <span class="nav-text">enableDocumentPictureInPicture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#experimentalSvgIcons"><span class="nav-number">2.9.</span> <span class="nav-text">experimentalSvgIcons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fluid"><span class="nav-number">2.10.</span> <span class="nav-text">fluid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fullscreen"><span class="nav-number">2.11.</span> <span class="nav-text">fullscreen</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#id"><span class="nav-number">2.12.</span> <span class="nav-text">id</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inactivityTimeout"><span class="nav-number">2.13.</span> <span class="nav-text">inactivityTimeout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#language"><span class="nav-number">2.14.</span> <span class="nav-text">language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#languages"><span class="nav-number">2.15.</span> <span class="nav-text">languages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#liveui"><span class="nav-number">2.16.</span> <span class="nav-text">liveui</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#liveTracker-trackingThreshold"><span class="nav-number">2.17.</span> <span class="nav-text">liveTracker.trackingThreshold</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#liveTracker-liveTolerance"><span class="nav-number">2.18.</span> <span class="nav-text">liveTracker.liveTolerance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nativeControlsForTouch"><span class="nav-number">2.19.</span> <span class="nav-text">nativeControlsForTouch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#normalizeAutoplay"><span class="nav-number">2.20.</span> <span class="nav-text">normalizeAutoplay</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#notSupportedMessage"><span class="nav-number">2.21.</span> <span class="nav-text">notSupportedMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#noUITitleAttributes"><span class="nav-number">2.22.</span> <span class="nav-text">noUITitleAttributes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#playbackRates"><span class="nav-number">2.23.</span> <span class="nav-text">playbackRates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plugins"><span class="nav-number">2.24.</span> <span class="nav-text">plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#preferFullWindow"><span class="nav-number">2.25.</span> <span class="nav-text">preferFullWindow</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#responsive"><span class="nav-number">2.26.</span> <span class="nav-text">responsive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#restoreEl"><span class="nav-number">2.27.</span> <span class="nav-text">restoreEl</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skipButtons"><span class="nav-number">2.28.</span> <span class="nav-text">skipButtons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skipButtons-forward"><span class="nav-number">2.29.</span> <span class="nav-text">skipButtons.forward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skipButtons-backward"><span class="nav-number">2.30.</span> <span class="nav-text">skipButtons.backward</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sources"><span class="nav-number">2.31.</span> <span class="nav-text">sources</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#suppressNotSupportedError"><span class="nav-number">2.32.</span> <span class="nav-text">suppressNotSupportedError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#techCanOverridePoster"><span class="nav-number">2.33.</span> <span class="nav-text">techCanOverridePoster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#techOrder"><span class="nav-number">2.34.</span> <span class="nav-text">techOrder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions"><span class="nav-number">2.35.</span> <span class="nav-text">userActions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-click"><span class="nav-number">2.36.</span> <span class="nav-text">userActions.click</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-doubleClick"><span class="nav-number">2.37.</span> <span class="nav-text">userActions.doubleClick</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-hotkeys"><span class="nav-number">2.38.</span> <span class="nav-text">userActions.hotkeys</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-hotkeys-fullscreenKey"><span class="nav-number">2.39.</span> <span class="nav-text">userActions.hotkeys.fullscreenKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-hotkeys-muteKey"><span class="nav-number">2.40.</span> <span class="nav-text">userActions.hotkeys.muteKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#userActions-hotkeys-playPauseKey"><span class="nav-number">2.41.</span> <span class="nav-text">userActions.hotkeys.playPauseKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vtt-js"><span class="nav-number">2.42.</span> <span class="nav-text">vtt.js</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E4%BB%B6%E9%80%89%E9%A1%B9"><span class="nav-number">3.</span> <span class="nav-text">组件选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#children-1"><span class="nav-number">3.1.</span> <span class="nav-text">children</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentName"><span class="nav-number">3.2.</span> <span class="nav-text">${componentName}</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">技术选项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#techName"><span class="nav-number">4.1.</span> <span class="nav-text">${techName}</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html5"><span class="nav-number">4.2.</span> <span class="nav-text">html5</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nativeControlsForTouch-1"><span class="nav-number">4.2.1.</span> <span class="nav-text">nativeControlsForTouch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nativeAudioTracks"><span class="nav-number">4.2.2.</span> <span class="nav-text">nativeAudioTracks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nativeTextTracks"><span class="nav-number">4.2.3.</span> <span class="nav-text">nativeTextTracks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nativeVideoTracks"><span class="nav-number">4.2.4.</span> <span class="nav-text">nativeVideoTracks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#preloadTextTracks"><span class="nav-number">4.2.5.</span> <span class="nav-text">preloadTextTracks</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/video.js/2-Video.js%20%E9%80%89%E9%A1%B9%E5%8F%82%E8%80%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Video.js 02 选项参考 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Video.js 02 选项参考
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-06-29 00:00:00 / 修改时间：21:12:33" itemprop="dateCreated datePublished" datetime="2023-06-29T00:00:00+08:00">2023-06-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Video.js 选项参数包括:</p>
+<ul>
+<li><code>&lt;video&gt;</code> 元素标准选项</li>
+<li>Video.js 特定选项</li>
+<li>组件选项和技术选项</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="lt-video-gt-元素标准选项"><a href="#lt-video-gt-元素标准选项" class="headerlink" title="&lt;video&gt; 元素标准选项"></a><code>&lt;video&gt;</code> 元素标准选项</h2><h3 id="autoplay"><a href="#autoplay" class="headerlink" title="autoplay"></a>autoplay</h3><p>类型: <code>boolean|string</code></p>
+<p>自动播放,有效值包括:</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>flase</code></td>
+<td><code>boolean</code></td>
+<td>与不设置此值含义相同,不自动播放</td>
+</tr>
+<tr>
+<td><code>true</code></td>
+<td><code>boolean</code></td>
+<td>与此元素的原生值含义相同,自动播放</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td><code>boolean</code></td>
+<td>使视频元素静音，然后调用<code>play()</code>,这使自动播放更可能奏效。</td>
+</tr>
+<tr>
+<td><code>play</code></td>
+<td><code>boolean</code></td>
+<td>调用<code>play()</code>,与原生<code>autoplay</code>含义相同</td>
+</tr>
+<tr>
+<td><code>any</code></td>
+<td><code>boolean</code></td>
+<td>先尝试调用<code>play()</code>,如果失败,则静音后再次调用<code>play()</code></td>
+</tr>
+</tbody></table>
+<p>选项设置示例</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;my-video&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">autoplay</span>: <span class="string">&#x27;muted&#x27;</span>,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="controlBar-remainingTimeDisplay-displayNegative"><a href="#controlBar-remainingTimeDisplay-displayNegative" class="headerlink" title="controlBar.remainingTimeDisplay.displayNegative"></a>controlBar.remainingTimeDisplay.displayNegative</h3><p>默认剩余时间显示为负时间。<code>controlBar.remainingTimeDisplay.displayNegative</code> 设置为 <code>false</code> ,不显示负号。</p>
+<h3 id="controls"><a href="#controls" class="headerlink" title="controls"></a>controls</h3><p>类型: <code>boolean</code></p>
+<p>是否显示交互控件。如果没有控件，则只能使用<code>autoplay</code>属性或通过播放器 API 开始播放视频。</p>
+<h3 id="height"><a href="#height" class="headerlink" title="height"></a>height</h3><p>类型: <code>string|number</code></p>
+<p>设置视频播放器的显示高度（以像素为单位）。</p>
+<h3 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h3><p>类型：<code>boolean</code></p>
+<p>使视频在结束时立即重新开始。</p>
+<h3 id="muted"><a href="#muted" class="headerlink" title="muted"></a>muted</h3><p>类型：<code>boolean</code></p>
+<p>静音。</p>
+<h3 id="poster"><a href="#poster" class="headerlink" title="poster"></a>poster</h3><p>类型：<code>string</code></p>
+<p>在视频开始播放之前显示的图像的 URL。这通常是视频的帧或自定义标题屏幕。一旦用户点击“播放”，图像就会消失。</p>
+<h3 id="preload"><a href="#preload" class="headerlink" title="preload"></a>preload</h3><p>类型：<code>string</code></p>
+<p>向浏览器建议是否应在加载 <code>&lt;video&gt;</code> 元素后立即开始下载视频数据。支持的值包括：</p>
+<ul>
+<li><p>‘auto’<br>立即开始加载视频（如果浏览器支持）。某些移动设备不会预加载视频以保护用户的带宽&#x2F;数据使用。这就是为什么该值被称为“自动”而不是像’true’.这往往是最常见和推荐的值，因为它允许浏览器选择最佳行为。</p>
+</li>
+<li><p>‘metadata’<br>仅加载视频的元数据，其中包括视频的持续时间和尺寸等信息。有时，元数据将通过下载几帧视频来加载。</p>
+</li>
+<li><p>‘none’<br>不预加载任何数据。浏览器将等到用户点击“播放”开始下载。</p>
+</li>
+</ul>
+<h3 id="width"><a href="#width" class="headerlink" title="width"></a>width</h3><p>类型：<code>string|number</code></p>
+<p>设置视频播放器的显示宽度（以像素为单位）。</p>
+<h2 id="Video-js-特定选项"><a href="#Video-js-特定选项" class="headerlink" title="Video.js 特定选项"></a>Video.js 特定选项</h2><p>除非另有指定，否则每个选项的默认值都是 <code>undefined</code>。</p>
+<h3 id="aspectRatio"><a href="#aspectRatio" class="headerlink" title="aspectRatio"></a>aspectRatio</h3><p>类型：<code>string</code></p>
+<p>将播放器置于动态模式，并在计算播放器的动态大小时使用该值。该值应表示一个比率 - 两个用冒号分隔的数字（例如 “16:9” 或 “4:3” ）。</p>
+<p>或者，可以将样式类 <code>vjs-16-9</code>,<code>vjs-9-16</code>,<code>vjs-4-3</code> 或 <code>vjs-1-1</code> 添加到播放器中。</p>
+<h3 id="audioOnlyMode"><a href="#audioOnlyMode" class="headerlink" title="audioOnlyMode"></a>audioOnlyMode</h3><p>类型：<code>boolean</code> 默认：<code>false</code></p>
+<p>如果设置为 <code>true</code>，它将异步隐藏除控制栏之外的所有播放器组件，以及仅视频所需的任何特定控件。此选项可以设置为<code>true</code>或<code>false</code>在运行<code>audioOnlyMode([true|false])</code>时调用。当用作二传手时，它返回一个 Promise。当用作 getter 时，它返回一个布尔值。</p>
+<h3 id="audioPosterMode"><a href="#audioPosterMode" class="headerlink" title="audioPosterMode"></a>audioPosterMode</h3><p>类型：<code>boolean</code> 默认：<code>false</code></p>
+<p>如果设置为 <code>true</code>，则通过隐藏视频元素并持久显示海报图像来启用海报查看器体验。此选项可以设置为<code>true</code>或<code>false</code>在运行<code>audioPosterMode([true|false])</code>时调用。</p>
+<h3 id="autoSetup"><a href="#autoSetup" class="headerlink" title="autoSetup"></a>autoSetup</h3><p>类型：<code>boolean</code></p>
+<p>阻止播放器对具有<code>data-setup</code>属性的媒体元素运行自动设置。</p>
+<blockquote>
+<p>注意：这必须在加载 videojs 源的同一刻度中进行全局设置<code>videojs.options.autoSetup = false</code>才能生效。</p>
+</blockquote>
+<h3 id="breakpoints"><a href="#breakpoints" class="headerlink" title="breakpoints"></a>breakpoints</h3><p>类型：<code>Object</code></p>
+<p>与响应选项一起使用时，设置断点，这些断点将配置如何在播放器上切换样式类名，以根据播放器的尺寸调整 UI。</p>
+<h3 id="children"><a href="#children" class="headerlink" title="children"></a>children</h3><p>类型：<code>Array|Object</code></p>
+<p>此选项继承自组件基类。</p>
+<h3 id="disablePictureInPicture"><a href="#disablePictureInPicture" class="headerlink" title="disablePictureInPicture"></a>disablePictureInPicture</h3><p>类型：<code>boolean</code></p>
+<p>如果 <code>true</code>，则禁用将视频元素切换为画中画。默认值为 <code>false</code>。</p>
+<p>这对 Firefox 没有影响，Firefox 实现了专有的画中画模式，该模式没有实现标准的画中画 API。</p>
+<p>这不会禁用允许播放器元素放入 PiP 窗口的文档画中画模式。</p>
+<h3 id="enableDocumentPictureInPicture"><a href="#enableDocumentPictureInPicture" class="headerlink" title="enableDocumentPictureInPicture"></a>enableDocumentPictureInPicture</h3><p>类型：<code>boolean</code></p>
+<p>如果 <code>true</code>，则文档画中画 API 将用于画中画（如果可用）。默认为 <code>false</code>，但当功能已建立时默认为<code>true</code>。</p>
+<p>目前，这在 Chrome 111 +中作为原始试用版可用。</p>
+<p>这是一种与以前可用的画中画模式不同的模式，其中整个播放器元素都是窗口化的，而不仅仅是视频本身。由于在某些情况下，最好在播放器上允许画中画，而不允许仅在视频上允许画中画（例如广告、叠加），因此<code>disablePictureInPicture</code>选项仅禁用视频上的旧式画中画模式。</p>
+<h3 id="experimentalSvgIcons"><a href="#experimentalSvgIcons" class="headerlink" title="experimentalSvgIcons"></a>experimentalSvgIcons</h3><p>类型：<code>boolean</code></p>
+<p>如果设置为 <code>true</code>，则在整个播放器中使用的 <code>videojs/font</code> 图标将被存储在 Video.js 中的 SVG 替换。默认为 <code>false</code>，但当功能已建立时默认为<code>true</code>。</p>
+<p>这些 SVG 是从 Font Awesome 和 Google 的 Material UI 下载的。</p>
+<p>您可以通过将 <code>sandbox/svg-icons.html.example</code> 重命名为 <code>sandbox/svg-icons.html</code>、使用 <code>npm run build</code>构建 Video.js 并在您选择的浏览器中打开<code>sandbox/svg-icons.html</code>来查看所有可用的图标。</p>
+<p>自定义播放器时，应使用 <code>setIcon</code> 方法将图标添加到播放器内部<code>Component</code>。</p>
+<h3 id="fluid"><a href="#fluid" class="headerlink" title="fluid"></a>fluid</h3><p>类型：<code>boolean</code></p>
+<p>当 <code>true</code> 时，Video.js 播放器将具有流体大小。换句话说，它将以视频的固有纵横比或指定的纵横比缩放以适应其容器。<br>此外，如果<code>&lt;video&gt;</code>元素具有 “vjs-fluid”，则此选项会自动设置为 <code>true</code>。</p>
+<h3 id="fullscreen"><a href="#fullscreen" class="headerlink" title="fullscreen"></a>fullscreen</h3><p>类型：<code>Object</code> 默认：<code>&#123;options: &#123;navigationUI: &#39;hide&#39;&#125;</code></p>
+<p><code>fullscreen.options</code> 可以设置为传入特定的全屏选项。在某些时候，它将通过<code>element</code> 和 <code>handler</code> 进行功能增强。</p>
+<p>有关更多详细信息，请参阅全屏 API 规范。</p>
+<h3 id="id"><a href="#id" class="headerlink" title="id"></a>id</h3><p>类型：<code>string</code></p>
+<p>如果提供，并且该元素还没有 <code>id</code>，则此值用作播放器元素的 <code>id</code>。</p>
+<h3 id="inactivityTimeout"><a href="#inactivityTimeout" class="headerlink" title="inactivityTimeout"></a>inactivityTimeout</h3><p>类型：<code>number</code></p>
+<p>Video.js 表示用户通过 <code>&quot;vjs-user-active&quot;</code> 和 <code>&quot;vjs-user-inactive&quot;</code> 样式类和 <code>&quot;useractive&quot;</code> 事件与播放器进行交互。</p>
+<p><code>inactivityTimeout</code> 确定在声明用户处于非活动状态之前需要多少毫秒的非活动时间。值 <code>0</code> 表示没有 <code>inactivityTimeout</code> 并且用户永远不会被视为非活动状态。</p>
+<h3 id="language"><a href="#language" class="headerlink" title="language"></a>language</h3><p>类型：<code>string</code>，默认：浏览器默认或 <code>&#39;en&#39;</code></p>
+<p>与播放器中的可用语言之一匹配的语言代码。这将设置玩家的初始语言，但始终可以更改。</p>
+<p>如需详细了解，请参阅 video.js 语言。</p>
+<h3 id="languages"><a href="#languages" class="headerlink" title="languages"></a>languages</h3><p>类型：<code>Object</code></p>
+<p>自定义播放器中可用的语言。此对象的键将是语言代码，值将是具有英语键和翻译值的对象。</p>
+<p>如需详细了解，请参阅 video.js 语言。</p>
+<p>注意：通常，此选项不是必需的，最好将您的自定义语言传递给 <code>videojs.addLanguage()</code>，以便它们在所有播放器中可用！</p>
+<h3 id="liveui"><a href="#liveui" class="headerlink" title="liveui"></a>liveui</h3><p>类型：<code>boolean</code> 默认：<code>false</code></p>
+<p>允许玩家使用新的实时 UI，其中包括：</p>
+<ul>
+<li>用于在实时窗口中查找的进度条</li>
+<li>可以单击该按钮以查找活动边缘，并带有一个圆圈，指示您是否在活动边缘。</li>
+</ul>
+<h3 id="liveTracker-trackingThreshold"><a href="#liveTracker-trackingThreshold" class="headerlink" title="liveTracker.trackingThreshold"></a>liveTracker.trackingThreshold</h3><p>类型：<code>number</code> 默认：<code>20</code></p>
+<p>播放器的实时跟踪器组件的一个选项，用于控制何时显示 liveui。默认情况下，如果流在搜索栏上的时间少于 20 秒，那么即使设置了 liveui 选项，我们也不会显示新的 liveui。</p>
+<h3 id="liveTracker-liveTolerance"><a href="#liveTracker-liveTolerance" class="headerlink" title="liveTracker.liveTolerance"></a>liveTracker.liveTolerance</h3><p>类型：<code>number</code> 默认：<code>15</code></p>
+<p>播放器的 liveTracker 组件的一个选项，用于控制距可搜索终点的距离，应被视为实时播放。默认情况下，距离实时可寻道边超过 15 秒的任何内容都被视为实时，其他所有内容都被视为实时。任何向后搜索的用户交互都将忽略此值，正如用户所期望的那样。</p>
+<h3 id="nativeControlsForTouch"><a href="#nativeControlsForTouch" class="headerlink" title="nativeControlsForTouch"></a>nativeControlsForTouch</h3><p>类型：<code>boolean</code></p>
+<p>显式设置关联技术选项的默认值。</p>
+<h3 id="normalizeAutoplay"><a href="#normalizeAutoplay" class="headerlink" title="normalizeAutoplay"></a>normalizeAutoplay</h3><p>类型：<code>boolean</code></p>
+<p>指定是否应将 set <code>autoplay: true</code>和 <code>&lt;video autoplay&gt;</code> 视为与 <code>autoplay: &#39;play&#39;</code>相同，即应从<code>autoplay</code>视频元素中删除（或不添加到）该属性，并由 Video.js 手动启动 <code>play()</code> 而不是浏览器。</p>
+<h3 id="notSupportedMessage"><a href="#notSupportedMessage" class="headerlink" title="notSupportedMessage"></a>notSupportedMessage</h3><p>类型：<code>string</code></p>
+<p>允许覆盖当 video.js 无法播放媒体源时显示的默认消息。</p>
+<h3 id="noUITitleAttributes"><a href="#noUITitleAttributes" class="headerlink" title="noUITitleAttributes"></a>noUITitleAttributes</h3><p>类型：<code>boolean</code> 默认：<code>false</code></p>
+<p>控制 UI 元素是否具有<code>title</code>属性。<code>title</code>属性显示在鼠标悬停时，这有助于提高可用性，但对辅助功能有缺点。设置<code>noUITitleAttributes</code>为<code>true</code>防止将<code>title</code>属性添加到 UI 元素，从而允许插件或外部框架将更易于访问的工具提示添加到控件中。</p>
+<h3 id="playbackRates"><a href="#playbackRates" class="headerlink" title="playbackRates"></a>playbackRates</h3><p>类型：<code>Array</code></p>
+<p>严格大于 0 的数字数组，其中 1 表示常规速度 （100%），0.5 表示半速（50%），2 表示双速（200%）等。 如果指定，video.js 将显示一个控件（<code>vjs-playback-rate</code>y 样式类） 允许用户从一系列选择中选择播放速度。 选项按指定顺序从下到上显示。</p>
+<p>例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">playbackRates</span>: [<span class="number">0.5</span>, <span class="number">1</span>, <span class="number">1.5</span>, <span class="number">2</span>],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="plugins"><a href="#plugins" class="headerlink" title="plugins"></a>plugins</h3><p>类型：<code>Object</code></p>
+<p>这支持在播放器初始化时使用自定义选项自动初始化插件 - 而不是要求您手动初始化它们。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">plugins</span>: &#123;</span><br><span class="line">    <span class="attr">foo</span>: &#123; <span class="attr">bar</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">    <span class="attr">boo</span>: &#123; <span class="attr">baz</span>: <span class="literal">false</span> &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>以上大致相当于：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>);</span><br><span class="line"></span><br><span class="line">player.<span class="title function_">foo</span>(&#123; <span class="attr">bar</span>: <span class="literal">true</span> &#125;);</span><br><span class="line">player.<span class="title function_">boo</span>(&#123; <span class="attr">baz</span>: <span class="literal">false</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>虽然，由于<code>plugins</code>选项是一个对象，因此无法保证初始化顺序！</p>
+<p>有关 video.js 插件的更多信息，请参阅插件指南。</p>
+<h3 id="preferFullWindow"><a href="#preferFullWindow" class="headerlink" title="preferFullWindow"></a>preferFullWindow</h3><p>类型：<code>boolean</code>， 默认值：<code>false</code></p>
+<p>将此项设置为 <code>true</code> 将更改不支持 HTML5 全屏 API 但支持视频元素全屏的设备（即 iPhone）上的全屏行为。播放器不会被全屏显示，而是拉伸播放器以填满浏览器窗口。</p>
+<h3 id="responsive"><a href="#responsive" class="headerlink" title="responsive"></a>responsive</h3><p>类型：<code>boolean</code>，默认值：<code>false</code></p>
+<p>将此选项设置为 <code>true</code> 将导致播放器根据响应断点自定义自身（请参阅：断点选项）。</p>
+<p>当此选项为 <code>false</code>（默认值） 时，将忽略响应断点。</p>
+<p>请注意，这是关于播放器内控件的响应能力，而不是播放器本身的响应大小。为此，请参阅流体。</p>
+<h3 id="restoreEl"><a href="#restoreEl" class="headerlink" title="restoreEl"></a>restoreEl</h3><p>类型: <code>boolean|Element</code>，默认值：<code>false</code></p>
+<p>如果设置为 <code>true</code>，将在启动播放器之前创建占位符元素的副本。如果播放器被释放，副本将放回玩家位置的 DOM 中。</p>
+<p>如果设置为 HTML 元素，则该元素将替换已释放的播放器。</p>
+<h3 id="skipButtons"><a href="#skipButtons" class="headerlink" title="skipButtons"></a>skipButtons</h3><p>类型：<code>Object</code></p>
+<h3 id="skipButtons-forward"><a href="#skipButtons-forward" class="headerlink" title="skipButtons.forward"></a>skipButtons.forward</h3><p>类型：<code>number</code></p>
+<p>如果指定，Video.js 将显示一个控件，允许 用户在视频中向前跳转指定的秒数。</p>
+<p>以下值有效：<strong>5 | 10 | 30</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">controlBar</span>: &#123;</span><br><span class="line">    <span class="attr">skipButtons</span>: &#123;</span><br><span class="line">      <span class="attr">forward</span>: <span class="number">5</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="skipButtons-backward"><a href="#skipButtons-backward" class="headerlink" title="skipButtons.backward"></a>skipButtons.backward</h3><p>类型：<code>number</code></p>
+<p>如果指定，Video.js 将显示一个控件，允许 用户在视频中按指定的秒数跳回。</p>
+<p>以下值有效：<strong>5 | 10 | 30</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">controlBar</span>: &#123;</span><br><span class="line">    <span class="attr">skipButtons</span>: &#123;</span><br><span class="line">      <span class="attr">backward</span>: <span class="number">10</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="sources"><a href="#sources" class="headerlink" title="sources"></a>sources</h3><p>类型：<code>Array</code></p>
+<p>一个对象数组，这些对象反映原生 <code>&lt;video&gt;</code> 元素具有一系列<code>&lt;source&gt;</code>子元素的功能。这应该是具有 <code>src</code> 与 <code>type</code> 属性的对象数组。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">sources</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">src</span>: <span class="string">&#x27;//path/to/video.mp4&#x27;</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;video/mp4&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">src</span>: <span class="string">&#x27;//path/to/video.webm&#x27;</span>,</span><br><span class="line">      <span class="attr">type</span>: <span class="string">&#x27;video/webm&#x27;</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>&lt;source&gt;</code> 元素将具有相同的效果：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">...</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;//path/to/video.mp4&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/mp4&quot;</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">&quot;//path/to/video.webm&quot;</span> <span class="attr">type</span>=<span class="string">&quot;video/webm&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="suppressNotSupportedError"><a href="#suppressNotSupportedError" class="headerlink" title="suppressNotSupportedError"></a>suppressNotSupportedError</h3><p>类型：<code>boolean</code></p>
+<p>如果设置为 <code>true</code>，则不会立即触发“无兼容源”错误，而是在第一次用户交互时发生。这对于 Google 的“移动友好”测试工具很有用，该工具无法播放视频，但您可能不希望看到显示的错误。</p>
+<h3 id="techCanOverridePoster"><a href="#techCanOverridePoster" class="headerlink" title="techCanOverridePoster"></a>techCanOverridePoster</h3><p>类型：<code>boolean</code></p>
+<p>让技术人员可以覆盖播放器的海报 并整合到播放器的海报生命周期中。 当使用多个播放器并且每个技术人员都必须设置自己的海报时，这可能很有用 每当播放新源时。</p>
+<h3 id="techOrder"><a href="#techOrder" class="headerlink" title="techOrder"></a>techOrder</h3><p>类型：<code>Array</code>，默认值：<code>[&#39;html5&#39;]</code></p>
+<p>定义首选 video.js 技术的顺序。默认情况下，这意味着 <code>Html5</code> 技术是首选。其他注册技术人员将按照注册顺序添加到此技术之后。</p>
+<h3 id="userActions"><a href="#userActions" class="headerlink" title="userActions"></a>userActions</h3><p>类型：<code>Object</code></p>
+<h3 id="userActions-click"><a href="#userActions-click" class="headerlink" title="userActions.click"></a>userActions.click</h3><p>类型：<code>boolean|function</code></p>
+<p>控制点击播放器&#x2F;技术的操作方式。如果设置为 <code>false</code>，则单击将被禁用，并且不再导致播放器在暂停和播放之间切换。如果使用 <code>controls: false</code> 禁用控件，则不会调用处理程序函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">userActions</span>: &#123;</span><br><span class="line">    <span class="attr">click</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如果未定义或设置为 <code>true</code>，则启用单击并在暂停和播放之间切换播放器。要覆盖默认的点击处理，请设置 <code>userActions.click</code> 为接受 <code>click</code> 事件的函数(在本例中，它将请求全屏，与 <code>userActions.doubleClick</code> 相似)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myClickHandler</span>(<span class="params">event</span>) = &#123;</span><br><span class="line">  <span class="comment">// `this` is the player in this context</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">this</span>.<span class="title function_">isFullscreen</span>()) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">exitFullscreen</span>();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">requestFullscreen</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">userActions</span>: &#123;</span><br><span class="line">    <span class="attr">click</span>: myClickHandler</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="userActions-doubleClick"><a href="#userActions-doubleClick" class="headerlink" title="userActions.doubleClick"></a>userActions.doubleClick</h3><p>类型：<code>boolean|function</code></p>
+<p>控制双击玩家&#x2F;技术的操作方式。如果设置为 <code>false</code>，则禁用双击。如果未定义或设置为 <code>true</code>，则启用双击并切换全屏模式。要覆盖默认的双击处理，请设置 <code>userActions.doubleClick</code> 为接受事件的 <code>dblclick</code> 函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">myDoubleClickHandler</span>(<span class="params">event</span>) = &#123;</span><br><span class="line">  <span class="comment">// `this` is the player in this context</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">pause</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">userActions</span>: &#123;</span><br><span class="line">    <span class="attr">doubleClick</span>: myDoubleClickHandler</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="userActions-hotkeys"><a href="#userActions-hotkeys" class="headerlink" title="userActions.hotkeys"></a>userActions.hotkeys</h3><p>类型：<code>boolean|function|object</code></p>
+<p>控制播放器范围的热键的操作方式。如果设置为 <code>false</code> 或 <code>undefined</code>，则禁用热键。如果设置为 <code>true</code> 或者对象（以允许在下面定义 <code>fullscreenKey</code> 等.），则按如下所述启用热键。若要覆盖默认热键处理，请设置 <code>userActions.hotkeys</code> 为接受事件的函数。如果使用 <code>keydowncontrols: false</code> 禁用控件，则不会调用处理程序函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">userActions</span>: &#123;</span><br><span class="line">    <span class="attr">hotkeys</span>: <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">      <span class="comment">// `this` is the player in this context</span></span><br><span class="line"></span><br><span class="line">      <span class="comment">// `x` key = pause</span></span><br><span class="line">      <span class="keyword">if</span> (event.<span class="property">which</span> === <span class="number">88</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">pause</span>();</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// `y` key = play</span></span><br><span class="line">      <span class="keyword">if</span> (event.<span class="property">which</span> === <span class="number">89</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">play</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>默认热键处理为：</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>动作</th>
+<th>启用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>f</td>
+<td>切换全屏</td>
+<td>仅当控制栏中存在全屏按钮时才启用</td>
+</tr>
+<tr>
+<td>m</td>
+<td>切换静音</td>
+<td>始终启用，即使不存在控制栏</td>
+</tr>
+<tr>
+<td>k</td>
+<td>切换播放&#x2F;暂停</td>
+<td>始终启用，即使不存在控制栏</td>
+</tr>
+<tr>
+<td>Space</td>
+<td>切换播放&#x2F;暂停</td>
+<td>始终启用，即使不存在控制栏</td>
+</tr>
+</tbody></table>
+<p>热键首先需要播放器获取焦点。请注意，如果 <code>Space</code> 按钮和菜单等控件具有键盘焦点，则该键将激活该控件。无论播放器中的哪个控件具有焦点，其他热键都有效。</p>
+<h3 id="userActions-hotkeys-fullscreenKey"><a href="#userActions-hotkeys-fullscreenKey" class="headerlink" title="userActions.hotkeys.fullscreenKey"></a>userActions.hotkeys.fullscreenKey</h3><p>类型：<code>function</code></p>
+<p>覆盖全屏键定义。如果设置了此选项，则函数接收<code>keydown</code>事件;如果函数返回 <code>true</code>，则执行全屏切换操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">userActions</span>: &#123;</span><br><span class="line">    <span class="attr">hotkeys</span>: &#123;</span><br><span class="line">      <span class="attr">muteKey</span>: <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">        <span class="comment">// 禁用静音按键</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">fullscreenKey</span>: <span class="keyword">function</span> (<span class="params">event</span>) &#123;</span><br><span class="line">        <span class="comment">// 当按 v 键时切换到全屏</span></span><br><span class="line">        <span class="keyword">return</span> event.<span class="property">which</span> === <span class="number">86</span>;</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="userActions-hotkeys-muteKey"><a href="#userActions-hotkeys-muteKey" class="headerlink" title="userActions.hotkeys.muteKey"></a>userActions.hotkeys.muteKey</h3><p>类型：<code>function</code></p>
+<p>覆盖静音键定义。如果设置了此选项，则函数接收 <code>keydown</code> 事件;如果函数返回 <code>true</code>，则执行静音切换操作。</p>
+<h3 id="userActions-hotkeys-playPauseKey"><a href="#userActions-hotkeys-playPauseKey" class="headerlink" title="userActions.hotkeys.playPauseKey"></a>userActions.hotkeys.playPauseKey</h3><p>类型：<code>function</code></p>
+<p>覆盖播放&#x2F;暂停键定义。如果设置了此选项，则函数接收 <code>keydown</code> 事件;如果函数返回 <code>true</code>，则执行播放&#x2F;暂停切换操作。</p>
+<h3 id="vtt-js"><a href="#vtt-js" class="headerlink" title="vtt.js"></a>vtt.js</h3><p>类型：<code>string</code></p>
+<p>允许将默认 URL 覆盖到 vtt.js，该 URL 可以异步加载以填充对 <code>WebVTT</code> 的填充代码支持 。</p>
+<p>此选项将用于视频的“novtt”构建.js（即 <code>video.novtt.js</code>）。否则，vtt.js 与 Video.js 捆绑在一起。</p>
+<h2 id="组件选项"><a href="#组件选项" class="headerlink" title="组件选项"></a>组件选项</h2><p>Video.js 播放器是一个组件。与所有组件一样，您可以定义它包含哪些子组件、它们出现的顺序以及传递给它们的选项。</p>
+<p>这是一个快速参考;因此，有关 Video.js 中组件的更多详细信息，请查看组件指南。</p>
+<h3 id="children-1"><a href="#children-1" class="headerlink" title="children"></a>children</h3><p>类型：<code>Array|Object</code></p>
+<p>如果值为 <code>Array</code> - 这是默认值 - 这用于确定在播放器（或其他组件）上创建哪些子项（按组件名称）以及创建它们的顺序：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// The following code creates a player with ONLY bigPlayButton and</span></span><br><span class="line"><span class="comment">// controlBar child components.</span></span><br><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">children</span>: [<span class="string">&#x27;bigPlayButton&#x27;</span>, <span class="string">&#x27;controlBar&#x27;</span>],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这些 <code>children</code> 选项也可以作为 <code>Object</code>.在这种情况下，它用于为任何&#x2F;所有子组件提供 <code>options</code> 服务，包括通过 <code>false</code> 方式禁用它们：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This player&#x27;s ONLY child will be the controlBar. Clearly, this is not the</span></span><br><span class="line"><span class="comment">// ideal method for disabling a grandchild!</span></span><br><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">children</span>: &#123;</span><br><span class="line">    <span class="attr">controlBar</span>: &#123;</span><br><span class="line">      <span class="attr">fullscreenToggle</span>: <span class="literal">false</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="componentName"><a href="#componentName" class="headerlink" title="${componentName}"></a>${componentName}</h3><p>类型：<code>Object</code></p>
+<p>可以通过组件名称的小驼峰大小写变体为组件提供自定义选项（例如 <code>ControlBar</code> 为 <code>controlBar</code> ）。这些可以嵌套在孙子关系的表示形式中。例如，要禁用全屏控件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;my-player&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">controlBar</span>: &#123;</span><br><span class="line">    <span class="attr">fullscreenToggle</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="技术选项"><a href="#技术选项" class="headerlink" title="技术选项"></a>技术选项</h2><h3 id="techName"><a href="#techName" class="headerlink" title="${techName}"></a>${techName}</h3><p>类型：<code>Object</code></p>
+<p>Video.js 播放技术（”techs”）可以作为传递给 <code>videojs</code> 函数的选项的一部分提供自定义选项。它们应该在技术名称的小写变体下传递（例如 “html5”）。</p>
+<h3 id="html5"><a href="#html5" class="headerlink" title="html5"></a>html5</h3><h4 id="nativeControlsForTouch-1"><a href="#nativeControlsForTouch-1" class="headerlink" title="nativeControlsForTouch"></a>nativeControlsForTouch</h4><p>类型：<code>boolean</code></p>
+<p>仅受 <code>Html5</code> 技术支持，此选项可以设置为 <code>true</code> 强制触摸设备的本机控件。</p>
+<h4 id="nativeAudioTracks"><a href="#nativeAudioTracks" class="headerlink" title="nativeAudioTracks"></a>nativeAudioTracks</h4><p>类型：<code>boolean</code></p>
+<p>可以设置为 <code>false</code> 以禁用本机音轨支持。最常与 videojs-contrib-hls 一起使用。</p>
+<h4 id="nativeTextTracks"><a href="#nativeTextTracks" class="headerlink" title="nativeTextTracks"></a>nativeTextTracks</h4><p>类型：<code>boolean</code></p>
+<p>可以设置为 <code>false</code> 强制模拟文本轨道而不是本机支持。<code>nativeCaptions</code> 选项也存在，但只是 <code>nativeTextTracks</code> 的别名。</p>
+<h4 id="nativeVideoTracks"><a href="#nativeVideoTracks" class="headerlink" title="nativeVideoTracks"></a>nativeVideoTracks</h4><p>类型：<code>boolean</code></p>
+<p>可以设置为 <code>false</code> 以禁用本机视频轨道支持。最常与 videojs-contrib-hls 一起使用。</p>
+<h4 id="preloadTextTracks"><a href="#preloadTextTracks" class="headerlink" title="preloadTextTracks"></a>preloadTextTracks</h4><p>类型：<code>boolean</code></p>
+<p>可以设置为 <code>false</code> 延迟加载非活动文本轨道，直到使用。这可能会导致切换字幕时出现短暂的延迟，在此期间可能会缺少字幕。</p>
+<p>默认行为是预加载所有文本轨道。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Video-js/" rel="tag"># Video.js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/video.js/Video.js%20%E5%9C%A8%20React%20%E4%B8%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/" rel="prev" title="Video.js 在 React 下的使用示例">
+                  <i class="fa fa-chevron-left"></i> Video.js 在 React 下的使用示例
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/video.js/1-Video.js%20%E4%BD%BF%E7%94%A8/" rel="next" title="Video.js 01 开始使用">
+                  Video.js 01 开始使用 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
