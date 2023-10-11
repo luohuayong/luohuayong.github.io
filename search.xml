@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>使用 Github 和 Hexo 搭建博客网站</title>
+    <url>/%E4%BD%BF%E7%94%A8%20Github%20%E5%92%8C%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/</url>
+    <content><![CDATA[<p>通过 Github Pages 和 Hexo 系统搭建博客网站.</p>
+<span id="more"></span>
+
+<h2 id="Github-创建仓库"><a href="#Github-创建仓库" class="headerlink" title="Github 创建仓库"></a>Github 创建仓库</h2><p>仓库名，格式必须为 <code>&lt;用户名&gt;.github.io</code></p>
+<h2 id="创建-Hexo-项目"><a href="#创建-Hexo-项目" class="headerlink" title="创建 Hexo 项目"></a>创建 Hexo 项目</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装 hexo</span></span><br><span class="line">npm install -g hexo-cli</span><br><span class="line"><span class="comment"># 查看版本,确认安装成功</span></span><br><span class="line">hexo -v</span><br><span class="line"><span class="comment"># 创建博客项目 myblog</span></span><br><span class="line">hexo init myblog</span><br><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br><span class="line"><span class="comment"># 本地启动</span></span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+
+<h2 id="更换-next-主题"><a href="#更换-next-主题" class="headerlink" title="更换 next 主题"></a>更换 next 主题</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/next-theme/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布到-GitHub-Pages"><a href="#发布到-GitHub-Pages" class="headerlink" title="发布到 GitHub Pages"></a>发布到 GitHub Pages</h2><p>安装 <code>hexo-deployer-git</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>修改根目录下的 <code>\_config.yml</code>，配置发布参数</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:&lt;用户名&gt;/&lt;用户名&gt;.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<p>部署到 GitHub</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Github</tag>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Capacitor 快速入门</title>
     <url>/capacitor/1-Capacitor%20%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/</url>
     <content><![CDATA[<p>Capacitor 是一个跨平台的本机运行时，它可以使用现代 Web 工具在 iOS、Android 等设备上构建高性能移动应用程序。Capacitor 代表了混合应用程序的下一次发展，它创建了 <strong>Web 原生应用程序</strong>，为希望构建 Web 优先的团队提供了一种现代本机容器方法，并且保留了对本机 SDK 的完全访问权限。</p>
@@ -78,8 +103,239 @@
       </tags>
   </entry>
   <entry>
+    <title>Cordova 从入门到放弃</title>
+    <url>/cordova/cordova/</url>
+    <content><![CDATA[<p>Cordova 是 Apache 基金会下的一个开源的移动开发框架。它允许你使用标准 Web 技术 - HTML5、CSS3 和 JavaScript 用于跨平台开发。应用程序在每个平台对应的包装器中执行，并依靠设备的标准 API 来访问设备的功能，例如传感器、数据、网络状态等。</p>
+<span id="more"></span>
+
+<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装 Cordova</span></span><br><span class="line">npm install -g cordova</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建项目</span></span><br><span class="line">cordova create MyApp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加平台</span></span><br><span class="line"><span class="built_in">cd</span> MyApp</span><br><span class="line">cordova platform add browser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行app</span></span><br><span class="line">cordova run browser</span><br></pre></td></tr></table></figure>
+
+<p>若要生成和运行应用，需要为对应的平台安装 SDK。浏览器开发，则不需要任何平台 SDK。</p>
+<h2 id="安卓平台"><a href="#安卓平台" class="headerlink" title="安卓平台"></a>安卓平台</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查平台依赖</span></span><br><span class="line">cordova requirements android</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意: cordova-android 10 以上版本必须安装 JDK 11 , 使用 JDK 8 构建 android 客户端时会失败.</p>
+</blockquote>
+<h3 id="安装-Android-Studio"><a href="#安装-Android-Studio" class="headerlink" title="安装 Android Studio"></a>安装 Android Studio</h3><p>官方下载地址</p>
+<p><a href="https://developer.android.com/studio">https://developer.android.com/studio</a></p>
+<h3 id="安装-Java-JDK"><a href="#安装-Java-JDK" class="headerlink" title="安装 Java JDK"></a>安装 Java JDK</h3><p>甲骨文官方下载需要注册用户,太繁琐. 直接在第三方下载 JDK 安装包</p>
+<p><a href="http://www.codebaoku.com/jdk/jdk-index.html">http://www.codebaoku.com/jdk/jdk-index.html</a></p>
+<p>配置 Java 开发环境</p>
+<p><a href="https://www.runoob.com/java/java-environment-setup.html">https://www.runoob.com/java/java-environment-setup.html</a></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证 Java JDK 安装成功</span></span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装-Gradle"><a href="#安装-Gradle" class="headerlink" title="安装 Gradle"></a>安装 Gradle</h3><p>Gradle 是一个开源的自动化构建工具. 官网地址</p>
+<p><a href="https://gradle.org/">https://gradle.org/</a></p>
+<ul>
+<li>下载最新版 zip 文件</li>
+<li>解压后放在 <code>C:\Gradle\</code> 下</li>
+<li>配置环境变量,在 <code>Path</code> 下添加路径 <code>C:\Gradle\gradle-8.2.1\bin</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证 Gradle 安装成功</span></span><br><span class="line">gradle -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看平台情况</span></span><br><span class="line">cordova platform list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 android app</span></span><br><span class="line">cordova build android</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 android app</span></span><br><span class="line"><span class="comment"># 运行前要先开启 android 模拟器</span></span><br><span class="line">cordova run android</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 electron app</span></span><br><span class="line">cordova build electron</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 electron app</span></span><br><span class="line">cordova run electron</span><br></pre></td></tr></table></figure>
+
+<p>生成的 android apk 文件路径<br><code>&lt;MyApp&gt;\platforms\android\app\build\outputs\apk\debug\app-debug.apk</code></p>
+<p>生成的 electron 文件路径<br><code>&lt;MyApp&gt;\platforms\electron\build\HelloCordova Setup 1.0.0.exe</code></p>
+<h2 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h2><p>Windows 下开发, Cordova 可以生成 android &#x2F; windows &#x2F; electron 应用, 不能生成 iOS &#x2F; OSX 应用.<br>Mac 下开发, Cordova 可以生成 android &#x2F; iOS &#x2F; OSX &#x2F; electron 应用, 不能生成 windows 应用.</p>
+<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件是将本地组件包装为 JavaScript 接口,以允许应用访问本机设备功能。</p>
+<table>
+<thead>
+<tr>
+<th>组件名</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>cordova-plugin-battery-status</td>
+<td>电池状态</td>
+</tr>
+<tr>
+<td>cordova-plugin-camera</td>
+<td>照相机</td>
+</tr>
+<tr>
+<td>cordova-plugin-device</td>
+<td>设备</td>
+</tr>
+<tr>
+<td>cordova-plugin-dialogs</td>
+<td>对话框</td>
+</tr>
+<tr>
+<td>cordova-plugin-file</td>
+<td>文件</td>
+</tr>
+<tr>
+<td>cordova-plugin-geolocation</td>
+<td>地理位置</td>
+</tr>
+<tr>
+<td>cordova-plugin-inappbrowser</td>
+<td>应用内浏览器</td>
+</tr>
+<tr>
+<td>cordova-plugin-media</td>
+<td>媒体</td>
+</tr>
+<tr>
+<td>cordova-plugin-media-capture</td>
+<td>媒体捕获</td>
+</tr>
+<tr>
+<td>cordova-plugin-network-information</td>
+<td>网络信息</td>
+</tr>
+<tr>
+<td>cordova-plugin-screen-orientation</td>
+<td>屏幕方向</td>
+</tr>
+<tr>
+<td>cordova-plugin-splashscreen</td>
+<td>初始屏幕</td>
+</tr>
+<tr>
+<td>cordova-plugin-statusbar</td>
+<td>状态栏</td>
+</tr>
+<tr>
+<td>cordova-plugin-vibration</td>
+<td>振动</td>
+</tr>
+</tbody></table>
+<h2 id="关联框架"><a href="#关联框架" class="headerlink" title="关联框架"></a>关联框架</h2><p>Capacitor 和 Cordova 都管理 Web 视图，并提供一种结构化的方式来向 Web 代码公开本机功能。<br>Capacitor 被认为是 Cordova 的修改版本, Capacitor 支持现代渐进式 Web 应用（PWA）程序开发。这使用户的应用程序与不断发展的 Web 平台保持一致，同时在支持它的平台上启用强大的本机设备功能。</p>
+]]></content>
+      <tags>
+        <tag>Android</tag>
+        <tag>iOS</tag>
+        <tag>客户端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next.js 使用 GTM 和 GA4 做统计分析</title>
+    <url>/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20GTM%20%E5%92%8C%20GA4%20%E5%81%9A%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/</url>
+    <content><![CDATA[<p>GTM 全称是 Google Tag Manager（谷歌标签管理器）, GA4 是 Google Analytics（谷歌分析）的最新版本.<br>这两个都是由 Google 提供的免费统计分析工具.</p>
+<span id="more"></span>
+
+<p>Google Analytics 用于分析和报告网站数据，而 Google Tag Manager 用于管理和部署各种标签和代码，包括 Google Analytics 跟踪代码。</p>
+<h2 id="GTM-账号"><a href="#GTM-账号" class="headerlink" title="GTM 账号"></a>GTM 账号</h2><p>GA 的访问地址 <a href="https://tagmanager.google.com/">https://analytics.google.com/</a><br>GTM 访问地址 <a href="https://tagmanager.google.com/">https://tagmanager.google.com/</a></p>
+<p>谷歌账号登陆后,可以直接使用.</p>
+<p>现在 GA 中创建<code>媒体资源</code>,媒体资源下创建<code>数据流</code>,在管理界面能查看到媒体资源的<code>衡量 ID</code>,这个就是 GA id<br>然后在 GTM 中创建<code>账号</code>,账号下创建<code>容器</code>,容器类型选择<code>Google 代码</code>,代码 ID 配置为前面的 GA id 触发条件选择<code>All Page</code>,在账号列表下能看到<code>容器 ID</code>, 这个容器 ID 就是 GTM id</p>
+<h2 id="Next-js-中使用-GTM"><a href="#Next-js-中使用-GTM" class="headerlink" title="Next.js 中使用 GTM"></a>Next.js 中使用 GTM</h2><p>在 Next.js 中使用 GTM 可以通过 <code>react-gtm-module</code> 包进行配置.<br>首先安装 <code>react-gtm-module</code> 包</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add react-gtm-module</span><br><span class="line">yarn add @types/react-gtm-module</span><br></pre></td></tr></table></figure>
+
+<p>然后在 <code>\_app.tsx</code> 中进行配置,注意将 <code>gtmId</code> 更换为自己的 GTM id</p>
+<figure class="highlight tsx"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">TagManager</span> <span class="keyword">from</span> <span class="string">&#x27;react-gtm-module&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params">&#123; Component, pageProps &#125;</span>) &#123;</span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title class_">TagManager</span>.<span class="title function_">initialize</span>(&#123; <span class="attr">gtmId</span>: <span class="string">&#x27;GTM-XXXXX&#x27;</span> &#125;);</span><br><span class="line">  &#125;, []);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Component</span> &#123;<span class="attr">...pageProps</span>&#125; /&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Next.js</tag>
+        <tag>GTM</tag>
+        <tag>GA4</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Next.js 使用 docker-compose 部署最佳方式</title>
+    <url>/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20docker-compose%20%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<p>当我希望通过 Dockerfile 和 docker-compose 部署 Next.js 项目时，我希望有一个解决方案, 既可以用在生产环境，又可以在开发时进行热重载。</p>
+<span id="more"></span>
+
+<h2 id="创建-Dockerfile"><a href="#创建-Dockerfile" class="headerlink" title="创建 Dockerfile"></a>创建 Dockerfile</h2><p>多阶段构建是创建优质且灵活的 Dockerfile 的最佳方式。简而言之，它允许您将配置映像所需步骤进行分离。通过创建命名的映像作为中间过程，并在后续配置中对其调用。</p>
+<h3 id="创建基础映像-base-amp-包含依赖的映像-deps"><a href="#创建基础映像-base-amp-包含依赖的映像-deps" class="headerlink" title="创建基础映像(base) &amp; 包含依赖的映像(deps)"></a>创建基础映像(<code>base</code>) &amp; 包含依赖的映像(<code>deps</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine AS base</span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> base as deps</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache libc6-compat</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json yarn.lock ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn install --frozen-lockfile</span></span><br></pre></td></tr></table></figure>
+
+<p>首先，我们将使用 <code>node:18-alpine</code> 作为基础映像,并将其命名为 <code>base</code>.也可以使用最新的 Alpine 版本，但我这里这样做的原因是，最新版本可能会太臃肿。</p>
+<p>然后以 <code>base</code> 映像为基础创建新映像 <code>FROM base as deps</code>,并将新映像命名为 <code>deps</code></p>
+<p>接下来的一行 <code>RUN apk add --no-cache libc6-compat</code>，用于修复 Alpine 可能发生的 Bug。Vercel 在 Next 的官方映像中也是这样使用的。</p>
+<p>然后是创建工作目录 <code>WORKDIR /app</code>, 并将项目的依赖项配置文件拷贝至工作目录中 <code>COPY package.json yarn.lock ./</code>. 最后是安装依赖项 <code>RUN yarn install --frozen-lockfile</code></p>
+<h3 id="开发映像-dev"><a href="#开发映像-dev" class="headerlink" title="开发映像(dev)"></a>开发映像(<code>dev</code>)</h3><p>开发映像非常简单。如果不需要热重载，则可以不包含此段。</p>
+<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS dev</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br></pre></td></tr></table></figure>
+
+<p>我们以 <code>base</code> 映像为基础创建一个新映像 <code>FROM base AS dev</code>, 命名为 <code>dev</code></p>
+<p>从 <code>deps</code> 映像复制已安装的依赖包到 <code>dev</code> 映像的工作目录 <code>COPY --from=deps /app/node_modules ./node_modules</code> .</p>
+<p>并将本地项目的源码复制到 <code>dev</code> 映像中 <code>COPY . .</code>。</p>
+<p>这里会存在一个问题, 本地项目的 <code>node_modules</code> 目录会覆盖我们刚刚安装到映像中的 <code>node_modules</code> 依赖包目录。为了确保不会发生这种情况，我们需要在本地项目根目录创建 <code>.dockerignore</code> 文件,并在其中写入:</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">.next</span><br><span class="line">node_modules</span><br><span class="line">next-env.d.ts</span><br></pre></td></tr></table></figure>
+
+<p><code>.dockerignore</code> 文件的用途是让 docker 忽略指定的目录. 根据项目的具体情况，您可能需要向此文件添加更多内容。</p>
+<h3 id="添加构建映像-builder"><a href="#添加构建映像-builder" class="headerlink" title="添加构建映像(builder)"></a>添加构建映像(<code>builder</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn build</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，我们进入第二阶段,进行 Next.js 项目的构建。首先，像以前一样设置工作目录，然后复制我们在 <code>deps</code> 阶段安装的依赖包,以及拷贝项目源码 。</p>
+<p>最后对项目进行构建 <code>RUN yarn build</code>。</p>
+<h3 id="添加运行映像-runner"><a href="#添加运行映像-runner" class="headerlink" title="添加运行映像(runner)"></a>添加运行映像(<code>runner</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS runner</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup --system --gid 1001 nodejs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> adduser --system --uid 1001 nextjs</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/public ./public</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/standalone ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/static ./.next/static</span></span><br><span class="line"><span class="keyword">USER</span> nextjs</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;node&quot;</span>, <span class="string">&quot;server.js&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<p>我们按照与之前相同的配置步骤来获取所有必要的文件。然后我们将创建一个组 <code>RUN addgroup --system --gid 1001 nodejs</code> 和用户 <code>RUN adduser --system --uid 1001 nextjs</code> 来控制权限。如果您想了解有关这些 Ubuntu 命令的更多信息，请查看<a href="https://manpages.ubuntu.com/manpages/kinetic/man8/addgroup.8.html">此内容</a>。</p>
+<p>现在我们将构建阶段生成的 <code>public</code>, <code>build</code> 和 <code>static</code> 目录拷贝至 <code>runner</code> 映像的工作目录下。并将用户设置为我们刚刚创建的用户。</p>
+<p>最后，我们启动生产服务器 <code>CMD [&quot;node&quot;, &quot;server.js&quot;]</code>, 这个命令与我们通常使用的 <code>yarn start</code> 等效</p>
+<p>这里也有一个问题,就是我们复制的 <code>/app/.next/standalone</code> 目录根本不存在, 因此需要修改 <code>next.config.js</code> 文件:</p>
+<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@type</span> &#123;<span class="type">import(&#x27;next&#x27;).NextConfig</span>&#125; */</span></span><br><span class="line"><span class="keyword">const</span> nextConfig = &#123;</span><br><span class="line">  <span class="comment">/// ...</span></span><br><span class="line">  <span class="attr">output</span>: <span class="string">&#x27;standalone&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = nextConfig;</span><br></pre></td></tr></table></figure>
+
+<p>这里指定将构建文件放入 <code>.next/standalone</code> 目录</p>
+<h3 id="完整的-Dockerfile-文件内容"><a href="#完整的-Dockerfile-文件内容" class="headerlink" title="完整的 Dockerfile 文件内容"></a>完整的 Dockerfile 文件内容</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine AS base</span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> base as deps</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache libc6-compat</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json yarn.lock ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn install --frozen-lockfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发环境映像</span></span><br><span class="line"><span class="keyword">FROM</span> base AS dev</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当需要时,重新编译源码</span></span><br><span class="line"><span class="keyword">FROM</span> base AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成环境映像</span></span><br><span class="line"><span class="keyword">FROM</span> base AS runner</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup --system --gid 1001 nodejs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> adduser --system --uid 1001 nextjs</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/public ./public</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/standalone ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/static ./.next/static</span></span><br><span class="line"><span class="keyword">USER</span> nextjs</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;node&quot;</span>, <span class="string">&quot;server.js&quot;</span>]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="设置-Docker-Compose-和热重载"><a href="#设置-Docker-Compose-和热重载" class="headerlink" title="设置 Docker-Compose 和热重载"></a>设置 Docker-Compose 和热重载</h2><h3 id="开发环境-docker-compose-配置"><a href="#开发环境-docker-compose-配置" class="headerlink" title="开发环境 docker-compose 配置"></a>开发环境 docker-compose 配置</h3><p>项目根目录下创建 <code>docker-compose.yml</code> 作为开发环境的 docker-compose 配置文件,也是默认配置文件, 文件内容为:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">      <span class="attr">target:</span> <span class="string">dev</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">MyApp-dev</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">.:/app</span> <span class="comment"># 项目代码</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/node_modules</span> <span class="comment">#匿名卷</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/.next</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NODE_ENV=development</span></span><br><span class="line">    <span class="comment"># env_file:</span></span><br><span class="line">    <span class="comment">#   - ./.env # 使用环境变量文件</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">yarn</span> <span class="string">dev</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>通过命令 <code>docker compose up -d --build</code> 启动容器,并在后台运行.</p>
+<p><code>target: dev</code> 设置让我们在容器中运行 <code>dev</code> 映像, 而不是默认的 <code>runner</code> 映像, 并且容器内的启动命令 <code>CMD [&quot;node&quot;, &quot;server.js&quot;]</code> 因为运行于默认的 <code>runner</code> 映像中,也不会生效。</p>
+<p>通过 <code>command: yarn dev</code> 配置让容器启动后,运行 <code>yarn dev</code> 命令, 这与本地开发中运行的命令一样.</p>
+<p>在 <code>volumes:</code> 配置中,<code>- .:/app</code> 将本地的项目目录装载到容器中,以保证容器中能获取到项目源码的修改, 而 <code>- /app/node_modules</code> 与 <code>- /app/.next</code> 则通过匿名卷, 让容器中的依赖包和生成文件与本地保持隔离.</p>
+<h3 id="生产环境-docker-compose-配置"><a href="#生产环境-docker-compose-配置" class="headerlink" title="生产环境 docker-compose 配置"></a>生产环境 docker-compose 配置</h3><p>生产环境的 docker-compose 配置更容易。项目根目录下创建 <code>docker-compose.prod.yml</code> 作为生产环境的 docker-compose 配置文件, 文件内容为:</p>
+<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">MyApp-prod</span></span><br><span class="line">    <span class="comment"># command: yarn dev</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NODE_ENV=prod</span></span><br><span class="line">    <span class="comment"># env_file:</span></span><br><span class="line">    <span class="comment">#   - ./.env # 使用环境变量文件</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
+
+<p>通过命令 <code>docker compose -f &quot;docker-compose.prod.yml&quot; up -d --build</code> 启动容器,并在后台运行. <code>--build</code> 保证当项目源码修改后, Docker 会重新生成映像并启动新的容器.</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile">Next.js 官方映像</a></li>
+<li><a href="https://medium.com/@elifront/best-next-js-docker-compose-hot-reload-production-ready-docker-setup-28a9125ba1dc">Best Next.js docker-compose hot-reload production-ready Docker setup</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Capacitor</tag>
+        <tag>Android</tag>
+        <tag>Next.js</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python 中的异常日志处理</title>
+    <url>/python/Python%20%E4%B8%AD%E7%9A%84%E5%BC%82%E5%B8%B8%E6%97%A5%E5%BF%97%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<p>下面的代码中，包含 3 种使用日志记录代码异常的方式（当然还有更多方法，但这篇文章的重点是对比下面三种方式）</p>
+<span id="more"></span>
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建 logger 实例</span></span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 日志配置</span></span><br><span class="line">log_format = logging.Formatter(<span class="string">&#x27;%(asctime)-15s %(levelname)-2s %(message)s&#x27;</span>)</span><br><span class="line">sh = logging.StreamHandler()</span><br><span class="line">sh.setFormatter(log_format)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加日志处理器</span></span><br><span class="line">logger.addHandler(sh)</span><br><span class="line">logger.setLevel(logging.INFO)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">do_something</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">call_do_something</span>():</span><br><span class="line">    <span class="comment"># 这里将抛出异常</span></span><br><span class="line">    <span class="keyword">return</span> do_something() + <span class="number">4</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 logger.error() 记录异常日志</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    call_do_something()</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    logger.error(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 logger.error() 记录异常日志并包含完整回溯信息</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    call_do_something()</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    logger.error(e, stack_info=<span class="literal">True</span>, exc_info=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 logger.exception() 记录异常日志并包含完整回溯信息</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    call_do_something()</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    logger.exception(e)</span><br></pre></td></tr></table></figure>
+
+<h2 id="logger-error-e"><a href="#logger-error-e" class="headerlink" title="logger.error(e)"></a><code>logger.error(e)</code></h2><p><code>logger.error(e)</code> 会按给定格式输出错误日志, 但是默认不包含回溯信息.</p>
+<p><img src="/../../images/python/python-exception-1.webp" alt="异常信息1"></p>
+<h2 id="logger-error-e-stack-info-True-exc-info-True"><a href="#logger-error-e-stack-info-True-exc-info-True" class="headerlink" title="logger.error(e,stack_info=True,exc_info=True)"></a><code>logger.error(e,stack_info=True,exc_info=True)</code></h2><p><code>logger.error(e,stack_info=True,exc_info=True)</code> 除了按格式输出了错误日志外，还包含回溯和堆栈信息。</p>
+<p><img src="/../../images/python/python-exception-2.webp" alt="异常信息2"></p>
+<h2 id="logger-exception-e"><a href="#logger-exception-e" class="headerlink" title="logger.exception (e)"></a><code>logger.exception (e)</code></h2><p>最后 <code>logger.exception (e)</code> 将给出该异常所在行和回溯信息，而无需设置任何标志。它不会给出堆栈信息，除非在参数中设置 <code>stack_info=True</code>。</p>
+<p><img src="/../../images/python/python-exception-3.webp" alt="异常信息2"></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://medium.com/@rahulkumar_33287/logger-error-versus-logger-exception-4113b39beb4b">Python Logging — logger.error vs. logger.exception</a></li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Python</tag>
+        <tag>Exception</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 网络</title>
+    <url>/proxy/Linux%20%E7%BD%91%E7%BB%9C/</url>
+    <content><![CDATA[<p>Linux 网络相关知识笔记</p>
+<span id="more"></span>
+
+<h2 id="Linux-网络接口"><a href="#Linux-网络接口" class="headerlink" title="Linux 网络接口"></a>Linux 网络接口</h2><ul>
+<li>eth0 位第一个接口(以太网卡), eth1 为第二个</li>
+<li>lo 为本地回环接口 127.0.0.1</li>
+<li>enp0s3 en 表示以太网卡,p0s3 代表物理位置 p 表示 pci,s 表示 slot(插槽)</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Network 网络</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Next SEO 插件</title>
-    <url>/Next-SEO-%E6%8F%92%E4%BB%B6/</url>
+    <url>/nextjs/Next-SEO-%E6%8F%92%E4%BB%B6/</url>
     <content><![CDATA[<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p><code>NextSeo</code> 的工作原理是将其包含在您希望添加 SEO 属性的页面上。一旦包含在页面上，您就可以向它传递一个具有页面 SEO 属性的配置对象。这可以在页面级别动态生成，或者在某些情况下，您的 API 可能会返回一个 SEO 对象。</p>
 <span id="more"></span>
 
@@ -2365,172 +2621,254 @@
       </tags>
   </entry>
   <entry>
-    <title>Cordova 从入门到放弃</title>
-    <url>/cordova/cordova/</url>
-    <content><![CDATA[<p>Cordova 是 Apache 基金会下的一个开源的移动开发框架。它允许你使用标准 Web 技术 - HTML5、CSS3 和 JavaScript 用于跨平台开发。应用程序在每个平台对应的包装器中执行，并依靠设备的标准 API 来访问设备的功能，例如传感器、数据、网络状态等。</p>
+    <title>gost 实战</title>
+    <url>/proxy/gost%20%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<p>gost 实战代码分析</p>
 <span id="more"></span>
 
-<h2 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装 Cordova</span></span><br><span class="line">npm install -g cordova</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建项目</span></span><br><span class="line">cordova create MyApp</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加平台</span></span><br><span class="line"><span class="built_in">cd</span> MyApp</span><br><span class="line">cordova platform add browser</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行app</span></span><br><span class="line">cordova run browser</span><br></pre></td></tr></table></figure>
+<h2 id="下载-gost"><a href="#下载-gost" class="headerlink" title="下载 gost"></a>下载 gost</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">mkdir</span> gost</span><br><span class="line"><span class="built_in">cd</span> gost</span><br><span class="line"><span class="comment"># 下载 gost</span></span><br><span class="line">wget https://github.com/go-gost/gost/releases/download/v3.0.0-rc8/gost_3.0.0-rc8_linux_amd64.tar.gz</span><br><span class="line"><span class="comment"># 解压</span></span><br><span class="line">tar -xzvf gost_3.0.0-rc8_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
 
-<p>若要生成和运行应用，需要为对应的平台安装 SDK。浏览器开发，则不需要任何平台 SDK。</p>
-<h2 id="安卓平台"><a href="#安卓平台" class="headerlink" title="安卓平台"></a>安卓平台</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查平台依赖</span></span><br><span class="line">cordova requirements android</span><br></pre></td></tr></table></figure>
+<h2 id="开启一个-HTTP-代理服务"><a href="#开启一个-HTTP-代理服务" class="headerlink" title="开启一个 HTTP 代理服务"></a>开启一个 HTTP 代理服务</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># http 处理器, 8080 端口</span></span><br><span class="line">./gost -L http://:8080</span><br></pre></td></tr></table></figure>
 
-<blockquote>
-<p>注意: cordova-android 10 以上版本必须安装 JDK 11 , 使用 JDK 8 构建 android 客户端时会失败.</p>
-</blockquote>
-<h3 id="安装-Android-Studio"><a href="#安装-Android-Studio" class="headerlink" title="安装 Android Studio"></a>安装 Android Studio</h3><p>官方下载地址</p>
-<p><a href="https://developer.android.com/studio">https://developer.android.com/studio</a></p>
-<h3 id="安装-Java-JDK"><a href="#安装-Java-JDK" class="headerlink" title="安装 Java JDK"></a>安装 Java JDK</h3><p>甲骨文官方下载需要注册用户,太繁琐. 直接在第三方下载 JDK 安装包</p>
-<p><a href="http://www.codebaoku.com/jdk/jdk-index.html">http://www.codebaoku.com/jdk/jdk-index.html</a></p>
-<p>配置 Java 开发环境</p>
-<p><a href="https://www.runoob.com/java/java-environment-setup.html">https://www.runoob.com/java/java-environment-setup.html</a></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证 Java JDK 安装成功</span></span><br><span class="line">javac -version</span><br></pre></td></tr></table></figure>
+<p>输出</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;handler&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;info&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listener&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;listening on [::]:8080/tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service-0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;time&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2023-09-13T05:15:04.221Z&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="安装-Gradle"><a href="#安装-Gradle" class="headerlink" title="安装 Gradle"></a>安装 Gradle</h3><p>Gradle 是一个开源的自动化构建工具. 官网地址</p>
-<p><a href="https://gradle.org/">https://gradle.org/</a></p>
+<p>新窗口并输入</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 通过代理访问 http://ipinfo.io</span></span><br><span class="line">curl -x http://localhost:8080 http://ipinfo.io</span><br></pre></td></tr></table></figure>
+
+<p>gosh 命令窗口输出 4 条日志</p>
 <ul>
-<li>下载最新版 zip 文件</li>
-<li>解压后放在 <code>C:\Gradle\</code> 下</li>
-<li>配置环境变量,在 <code>Path</code> 下添加路径 <code>C:\Gradle\gradle-8.2.1\bin</code></li>
+<li>源向代理发送请求 <code>127.0.0.1:36268 &lt;&gt; 127.0.0.1:8080</code></li>
+<li>代理向 ipinfo.io:80 发送请求 <code>127.0.0.1:36268 &lt;-&gt; ipinfo.io:80</code></li>
+<li>ipinfo.io:80 给代理返回响应 <code>127.0.0.1:36268 &gt;-&lt; ipinfo.io:80</code></li>
+<li>代理向源返回响应 <code>127.0.0.1:36268 &gt;&lt; 127.0.0.1:8080</code></li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 验证 Gradle 安装成功</span></span><br><span class="line">gradle -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;handler&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;handler&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;info&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listener&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;local&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268 &lt;&gt; 127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;remote&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service-0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;time&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2023-09-13T05:31:28.915Z&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查看平台情况</span></span><br><span class="line">cordova platform list</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 android app</span></span><br><span class="line">cordova build android</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 android app</span></span><br><span class="line"><span class="comment"># 运行前要先开启 android 模拟器</span></span><br><span class="line">cordova run android</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建 electron app</span></span><br><span class="line">cordova build electron</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行 electron app</span></span><br><span class="line">cordova run electron</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dst&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ipinfo.io:80&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;handler&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;handler&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;info&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listener&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;local&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268 &lt;-&gt; ipinfo.io:80&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;remote&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service-0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;time&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2023-09-13T05:31:28.959Z&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>生成的 android apk 文件路径<br><code>&lt;MyApp&gt;\platforms\android\app\build\outputs\apk\debug\app-debug.apk</code></p>
-<p>生成的 electron 文件路径<br><code>&lt;MyApp&gt;\platforms\electron\build\HelloCordova Setup 1.0.0.exe</code></p>
-<h2 id="平台支持"><a href="#平台支持" class="headerlink" title="平台支持"></a>平台支持</h2><p>Windows 下开发, Cordova 可以生成 android &#x2F; windows &#x2F; electron 应用, 不能生成 iOS &#x2F; OSX 应用.<br>Mac 下开发, Cordova 可以生成 android &#x2F; iOS &#x2F; OSX &#x2F; electron 应用, 不能生成 windows 应用.</p>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>插件是将本地组件包装为 JavaScript 接口,以允许应用访问本机设备功能。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dst&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ipinfo.io:80&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;duration&quot;</span><span class="punctuation">:</span> <span class="number">44867037</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;handler&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;handler&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;info&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listener&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;local&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268 &gt;-&lt; ipinfo.io:80&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;remote&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service-0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;time&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2023-09-13T05:31:29.004Z&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;duration&quot;</span><span class="punctuation">:</span> <span class="number">89501017</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;handler&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;handler&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;level&quot;</span><span class="punctuation">:</span> <span class="string">&quot;info&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;listener&quot;</span><span class="punctuation">:</span> <span class="string">&quot;tcp&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;local&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;msg&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268 &gt;&lt; 127.0.0.1:8080&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;remote&quot;</span><span class="punctuation">:</span> <span class="string">&quot;127.0.0.1:36268&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;service&quot;</span><span class="punctuation">:</span> <span class="string">&quot;service-0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;time&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2023-09-13T05:31:29.004Z&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>gost</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gost</title>
+    <url>/proxy/gost/</url>
+    <content><![CDATA[<p>Gost 是一个多功能的安全隧道工具，Gost 是开源软件,使用 go 语言编写</p>
+<span id="more"></span>
+
+<h2 id="命令行参数"><a href="#命令行参数" class="headerlink" title="命令行参数"></a>命令行参数</h2><ul>
+<li>-L 指定本地服务，可设置多个。</li>
+<li>-F 指定转发服务，可设置多个，构成转发链。</li>
+<li>-C 指定外部配置文件。</li>
+<li>-O 指定配置输出格式，目前支持 yaml 或 json</li>
+<li>-D 开启 Debug 模式，更详细的日志输出。</li>
+<li>-V 查看版本，显示当前运行的 GOST 版本号。</li>
+<li>-api 指定 WebAPI 地址。</li>
+<li>-metrics 指定 prometheus metrics API 地址。</li>
+</ul>
+<p>服务参数格式</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#</span></span><br><span class="line">[scheme://][username:password@host]:port[?key1=value1&amp;key2=value2]</span><br><span class="line"><span class="comment"># 端口转发模式</span></span><br><span class="line">scheme://[bind_address]:port/[host]:hostport[?key1=value1&amp;key2=value2]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>gost</tag>
+        <tag>Proxy 代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ip 地址知识</title>
+    <url>/proxy/ip%20%E5%9C%B0%E5%9D%80%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<p>ip 地址知识笔记</p>
+<span id="more"></span>
+
+<h2 id="0-0-0-0-x2F-8"><a href="#0-0-0-0-x2F-8" class="headerlink" title="0.0.0.0&#x2F;8"></a>0.0.0.0&#x2F;8</h2><p>在网络编程和路由中，0.0.0.0 通常用作特殊的地址。在某些情况下，它可以表示”任意地址”或”未知地址”。0.0.0.0&#x2F;8 中的数字 8 表示前缀长度为 8 位，即前 8 位是网络标识位，后 24 位用于标识主机。这意味着 0.0.0.0&#x2F;8 表示从 0.0.0.0 到 0.255.255.255 的所有 IP 地址都属于同一个网络。</p>
+<p>0.0.0.0&#x2F;8 是一个 IP 地址块，它表示从 0.0.0.0 到 0.255.255.255 的所有 IP 地址。这个地址块被称为”全零地址块”或”未分配地址块”。它是保留的特殊地址块，没有被分配给任何特定的网络或设备。</p>
+<p>另外，0.0.0.0&#x2F;8 还被用作默认路由或默认网关的表示。默认路由是当一个主机或路由器需要发送数据包到一个目标地址，但没有更具体的路由规则匹配时所使用的路由。在这种情况下，0.0.0.0&#x2F;8 表示所有未知目标地址。</p>
+<p>0.0.0.0&#x2F;8 是一个保留地址段,用于广播信息到当前主机。 <a href="https://zh.wikipedia.org/zh-hans/%E4%BF%9D%E7%95%99IP%E5%9C%B0%E5%9D%80">参见 wikipedia</a></p>
+]]></content>
+      <tags>
+        <tag>Network</tag>
+        <tag>ip</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iptables 学习笔记</title>
+    <url>/proxy/iptables%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>netfilter&#x2F;iptables 包过滤系统由两个组件 netfilter 和 iptables 。</p>
+<span id="more"></span>
+
+<p>netfilter 组件也称为内核空间（kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则集。</p>
+<p>iptables 组件是一种工具，也称为用户空间（userspace），它使插入、修改和除去信息包过滤表中的规则变得容易。</p>
+<p><img src="/../../images/proxy/iptable1.jpg" alt="iptable1"></p>
+<ol>
+<li><p>一个数据包进入网卡时，它首先进入 PREROUTING 链，内核根据数据包目的 IP 判断是否需要转发出去。</p>
+</li>
+<li><p>如果数据包就是进入本机的，它就会沿着图向下移动，到达 INPUT 链。数据包到了 INPUT 链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过 OUTPUT 链，然后到达 POSTROUTING 链输出。</p>
+</li>
+<li><p>如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过 FORWARD 链，然后到达 POSTROUTING 链输出。</p>
+</li>
+</ol>
+<h3 id="规则、表和链"><a href="#规则、表和链" class="headerlink" title="规则、表和链"></a>规则、表和链</h3><ol>
+<li><p>规则（rules）<br>规则（rules）其实就是网络管理员预定义的条件，规则一般的定义为“如果数据包头符合这样的条件，就这样处理这个数据包”。规则存储在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输协议（如 TCP、UDP、ICMP）和服务类型（如 HTTP、FTP 和 SMTP）等。当数据包与规则匹配时，iptables 就根据规则所定义的方法来处理这些数据包，如放行（accept）、拒绝（reject）和丢弃（drop）等。配置防火墙的主要工作就是添加、修改和删除这些规则。</p>
+</li>
+<li><p>链（chains）<br>链（chains）是数据包传播的路径，每一条链其实就是众多规则中的一个检查清单，每一条链中可以有一条或数条规则。当一个数据包到达一个链时，iptables 就会从链中第一条规则开始检查，看该数据包是否满足规则所定义的条件。如果满足，系统就会根据该条规则所定义的方法处理该数据包；否则 iptables 将继续检查下一条规则，如果该数据包不符合链中任一条规则，iptables 就会根据该链预先定义的默认策略来处理数据包。</p>
+</li>
+<li><p>表（tables）<br>表（tables）提供特定的功能，iptables 内置了 4 个表，即 raw 表、filter 表、nat 表和 mangle 表，分别用于实现包过滤，网络地址转换和包重构的功能。<br><img src="/../../images/proxy/iptable2.jpg" alt="iptable2"></p>
+<ol>
+<li><p>raw 表<br>只使用在 PREROUTING 链和 OUTPUT 链上,因为优先级最高，从而可以对收到的数据包在连接跟踪前进行处理。一但用户使用了 RAW 表,在 某个链上,RAW 表处理完后,将跳过 NAT 表和 ip_conntrack 处理,即不再做地址转换和数据包的链接跟踪处理了.</p>
+</li>
+<li><p>filter 表<br>主要用于过滤数据包，该表根据系统管理员预定义的一组规则过滤符合条件的数据包。对于防火墙而言，主要利用在 filter 表中指定的规则来实现对数据包的过滤。Filter 表是默认的表，如果没有指定哪个表，iptables 就默认使用 filter 表来执行所有命令，filter 表包含了 INPUT 链（处理进入的数据包），RORWARD 链（处理转发的数据包），OUTPUT 链（处理本地生成的数据包）在 filter 表中只能允许对数据包进行接受，丢弃的操作，而无法对数据包进行更改</p>
+</li>
+<li><p>nat 表<br>主要用于网络地址转换 NAT，该表可以实现一对一，一对多，多对多等 NAT 工作，iptables 就是使用该表实现共享上网的，NAT 表包含了 PREROUTING 链（修改即将到来的数据包），POSTROUTING 链（修改即将出去的数据包），OUTPUT 链（修改路由之前本地生成的数据包）</p>
+</li>
+<li><p>mangle 表<br>主要用于对指定数据包进行更改，在内核版本 2.4.18 后的 linux 版本中该表包含的链为：INPUT 链（处理进入的数据包），RORWARD 链（处理转发的数据包），OUTPUT 链（处理本地生成的数据包）POSTROUTING 链（修改即将出去的数据包），PREROUTING 链（修改即将到来的数据包）</p>
+</li>
+<li><p>规则表之间的优先顺序：<br>raw——mangle——nat——filter</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="iptables-命令格式"><a href="#iptables-命令格式" class="headerlink" title="iptables 命令格式"></a>iptables 命令格式</h3><p>iptables 命令一般的格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables [-t 表] -命令 匹配 操作</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>-t 表<br>表选项用于指定命令应用于哪个 iptables 内置表。</p>
+</li>
+<li><p>命令<br> 命令选项用于指定 iptables 的执行方式，包括插入规则，删除规则和添加规则，如下表所示</p>
 <table>
 <thead>
 <tr>
-<th>组件名</th>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-A –append &lt;链名&gt;</td>
+<td align="left">在规则列表的最后增加 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-D –delete &lt;链名&gt;</td>
+<td align="left">从规则列表中删除 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-E –rename-chain &lt;链名&gt;</td>
+<td align="left">修改自订规则链的名称</td>
+</tr>
+<tr>
+<td align="left">-F –flush &lt;链名&gt;</td>
+<td align="left">删除表中所有规则</td>
+</tr>
+<tr>
+<td align="left">-I –insert &lt;链名&gt;</td>
+<td align="left">在指定的位置插入 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-L –list &lt;链名&gt;</td>
+<td align="left">查看 iptables 规则列表</td>
+</tr>
+<tr>
+<td align="left">-N –new-chain &lt;链名&gt;</td>
+<td align="left">定义新的自订规则链</td>
+</tr>
+<tr>
+<td align="left">-P –policy &lt;链名&gt;</td>
+<td align="left">定义默认策略</td>
+</tr>
+<tr>
+<td align="left">-R –replace &lt;链名&gt;</td>
+<td align="left">替换规则列表中的某条规则</td>
+</tr>
+<tr>
+<td align="left">-Z –zero &lt;链名&gt;</td>
+<td align="left">将表中数据包计数器和流量计数器归零</td>
+</tr>
+<tr>
+<td align="left">-X –delete-chain &lt;链名&gt;</td>
+<td align="left">删除自定义链</td>
+</tr>
+<tr>
+<td align="left">-v –verbose &lt;链名&gt;</td>
+<td align="left">与 -L 命令一起使用显示更多更详细的信息</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>匹配规则<br> 匹配选项指定数据包与规则匹配所具有的特征，包括源地址，目的地址，传输协议和端口号，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th>匹配</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>cordova-plugin-battery-status</td>
-<td>电池状态</td>
+<td>-i –in-interface &lt;网络接口名&gt;</td>
+<td>指定数据包从哪个网络接口进入</td>
 </tr>
 <tr>
-<td>cordova-plugin-camera</td>
-<td>照相机</td>
+<td>-o –out-interface &lt;网络接口名&gt;</td>
+<td>指定数据包从哪个网络接口输出</td>
 </tr>
 <tr>
-<td>cordova-plugin-device</td>
-<td>设备</td>
+<td>-p —proto &lt;协议类型&gt;</td>
+<td>指定数据包匹配的协议，如 TCP、UDP 和 ICMP 等</td>
 </tr>
 <tr>
-<td>cordova-plugin-dialogs</td>
-<td>对话框</td>
+<td>-s –source &lt;源地址或子网&gt;</td>
+<td>指定数据包匹配的源地址</td>
 </tr>
 <tr>
-<td>cordova-plugin-file</td>
-<td>文件</td>
+<td>–sport &lt;源端口号&gt;</td>
+<td>指定数据包匹配的源端口号</td>
 </tr>
 <tr>
-<td>cordova-plugin-geolocation</td>
-<td>地理位置</td>
+<td>–dport &lt;目的端口号&gt;</td>
+<td>指定数据包匹配的目的端口号</td>
 </tr>
 <tr>
-<td>cordova-plugin-inappbrowser</td>
-<td>应用内浏览器</td>
-</tr>
-<tr>
-<td>cordova-plugin-media</td>
-<td>媒体</td>
-</tr>
-<tr>
-<td>cordova-plugin-media-capture</td>
-<td>媒体捕获</td>
-</tr>
-<tr>
-<td>cordova-plugin-network-information</td>
-<td>网络信息</td>
-</tr>
-<tr>
-<td>cordova-plugin-screen-orientation</td>
-<td>屏幕方向</td>
-</tr>
-<tr>
-<td>cordova-plugin-splashscreen</td>
-<td>初始屏幕</td>
-</tr>
-<tr>
-<td>cordova-plugin-statusbar</td>
-<td>状态栏</td>
-</tr>
-<tr>
-<td>cordova-plugin-vibration</td>
-<td>振动</td>
+<td>-m –match &lt;匹配的模块&gt;</td>
+<td>指定数据包规则所使用的过滤模块</td>
 </tr>
 </tbody></table>
-<h2 id="关联框架"><a href="#关联框架" class="headerlink" title="关联框架"></a>关联框架</h2><p>Capacitor 和 Cordova 都管理 Web 视图，并提供一种结构化的方式来向 Web 代码公开本机功能。<br>Capacitor 被认为是 Cordova 的修改版本, Capacitor 支持现代渐进式 Web 应用（PWA）程序开发。这使用户的应用程序与不断发展的 Web 平台保持一致，同时在支持它的平台上启用强大的本机设备功能。</p>
-]]></content>
-      <tags>
-        <tag>Android</tag>
-        <tag>iOS</tag>
-        <tag>客户端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Next.js 使用 docker-compose 部署最佳方式</title>
-    <url>/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20docker-compose%20%E9%83%A8%E7%BD%B2%E6%9C%80%E4%BD%B3%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<p>当我希望通过 Dockerfile 和 docker-compose 部署 Next.js 项目时，我希望有一个解决方案, 既可以用在生产环境，又可以在开发时进行热重载。</p>
-<span id="more"></span>
-
-<h2 id="创建-Dockerfile"><a href="#创建-Dockerfile" class="headerlink" title="创建 Dockerfile"></a>创建 Dockerfile</h2><p>多阶段构建是创建优质且灵活的 Dockerfile 的最佳方式。简而言之，它允许您将配置映像所需步骤进行分离。通过创建命名的映像作为中间过程，并在后续配置中对其调用。</p>
-<h3 id="创建基础映像-base-amp-包含依赖的映像-deps"><a href="#创建基础映像-base-amp-包含依赖的映像-deps" class="headerlink" title="创建基础映像(base) &amp; 包含依赖的映像(deps)"></a>创建基础映像(<code>base</code>) &amp; 包含依赖的映像(<code>deps</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine AS base</span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> base as deps</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache libc6-compat</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json yarn.lock ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn install --frozen-lockfile</span></span><br></pre></td></tr></table></figure>
-
-<p>首先，我们将使用 <code>node:18-alpine</code> 作为基础映像,并将其命名为 <code>base</code>.也可以使用最新的 Alpine 版本，但我这里这样做的原因是，最新版本可能会太臃肿。</p>
-<p>然后以 <code>base</code> 映像为基础创建新映像 <code>FROM base as deps</code>,并将新映像命名为 <code>deps</code></p>
-<p>接下来的一行 <code>RUN apk add --no-cache libc6-compat</code>，用于修复 Alpine 可能发生的 Bug。Vercel 在 Next 的官方映像中也是这样使用的。</p>
-<p>然后是创建工作目录 <code>WORKDIR /app</code>, 并将项目的依赖项配置文件拷贝至工作目录中 <code>COPY package.json yarn.lock ./</code>. 最后是安装依赖项 <code>RUN yarn install --frozen-lockfile</code></p>
-<h3 id="开发映像-dev"><a href="#开发映像-dev" class="headerlink" title="开发映像(dev)"></a>开发映像(<code>dev</code>)</h3><p>开发映像非常简单。如果不需要热重载，则可以不包含此段。</p>
-<figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS dev</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br></pre></td></tr></table></figure>
-
-<p>我们以 <code>base</code> 映像为基础创建一个新映像 <code>FROM base AS dev</code>, 命名为 <code>dev</code></p>
-<p>从 <code>deps</code> 映像复制已安装的依赖包到 <code>dev</code> 映像的工作目录 <code>COPY --from=deps /app/node_modules ./node_modules</code> .</p>
-<p>并将本地项目的源码复制到 <code>dev</code> 映像中 <code>COPY . .</code>。</p>
-<p>这里会存在一个问题, 本地项目的 <code>node_modules</code> 目录会覆盖我们刚刚安装到映像中的 <code>node_modules</code> 依赖包目录。为了确保不会发生这种情况，我们需要在本地项目根目录创建 <code>.dockerignore</code> 文件,并在其中写入:</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">.next</span><br><span class="line">node_modules</span><br><span class="line">next-env.d.ts</span><br></pre></td></tr></table></figure>
-
-<p><code>.dockerignore</code> 文件的用途是让 docker 忽略指定的目录. 根据项目的具体情况，您可能需要向此文件添加更多内容。</p>
-<h3 id="添加构建映像-builder"><a href="#添加构建映像-builder" class="headerlink" title="添加构建映像(builder)"></a>添加构建映像(<code>builder</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn build</span></span><br></pre></td></tr></table></figure>
-
-<p>然后，我们进入第二阶段,进行 Next.js 项目的构建。首先，像以前一样设置工作目录，然后复制我们在 <code>deps</code> 阶段安装的依赖包,以及拷贝项目源码 。</p>
-<p>最后对项目进行构建 <code>RUN yarn build</code>。</p>
-<h3 id="添加运行映像-runner"><a href="#添加运行映像-runner" class="headerlink" title="添加运行映像(runner)"></a>添加运行映像(<code>runner</code>)</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> base AS runner</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup --system --gid 1001 nodejs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> adduser --system --uid 1001 nextjs</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/public ./public</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/standalone ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/static ./.next/static</span></span><br><span class="line"><span class="keyword">USER</span> nextjs</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;node&quot;</span>, <span class="string">&quot;server.js&quot;</span>]</span></span><br></pre></td></tr></table></figure>
-
-<p>我们按照与之前相同的配置步骤来获取所有必要的文件。然后我们将创建一个组 <code>RUN addgroup --system --gid 1001 nodejs</code> 和用户 <code>RUN adduser --system --uid 1001 nextjs</code> 来控制权限。如果您想了解有关这些 Ubuntu 命令的更多信息，请查看<a href="https://manpages.ubuntu.com/manpages/kinetic/man8/addgroup.8.html">此内容</a>。</p>
-<p>现在我们将构建阶段生成的 <code>public</code>, <code>build</code> 和 <code>static</code> 目录拷贝至 <code>runner</code> 映像的工作目录下。并将用户设置为我们刚刚创建的用户。</p>
-<p>最后，我们启动生产服务器 <code>CMD [&quot;node&quot;, &quot;server.js&quot;]</code>, 这个命令与我们通常使用的 <code>yarn start</code> 等效</p>
-<p>这里也有一个问题,就是我们复制的 <code>/app/.next/standalone</code> 目录根本不存在, 因此需要修改 <code>next.config.js</code> 文件:</p>
-<figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="comment">/** <span class="doctag">@type</span> &#123;<span class="type">import(&#x27;next&#x27;).NextConfig</span>&#125; */</span></span><br><span class="line"><span class="keyword">const</span> nextConfig = &#123;</span><br><span class="line">  <span class="comment">/// ...</span></span><br><span class="line">  <span class="attr">output</span>: <span class="string">&#x27;standalone&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = nextConfig;</span><br></pre></td></tr></table></figure>
-
-<p>这里指定将构建文件放入 <code>.next/standalone</code> 目录</p>
-<h3 id="完整的-Dockerfile-文件内容"><a href="#完整的-Dockerfile-文件内容" class="headerlink" title="完整的 Dockerfile 文件内容"></a>完整的 Dockerfile 文件内容</h3><figure class="highlight dockerfile"><table><tr><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine AS base</span><br><span class="line"></span><br><span class="line"><span class="keyword">FROM</span> base as deps</span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> apk add --no-cache libc6-compat</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package.json yarn.lock ./</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn install --frozen-lockfile</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 开发环境映像</span></span><br><span class="line"><span class="keyword">FROM</span> base AS dev</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当需要时,重新编译源码</span></span><br><span class="line"><span class="keyword">FROM</span> base AS builder</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=deps /app/node_modules ./node_modules</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> yarn build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成环境映像</span></span><br><span class="line"><span class="keyword">FROM</span> base AS runner</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> addgroup --system --gid 1001 nodejs</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> adduser --system --uid 1001 nextjs</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/public ./public</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/standalone ./</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder --<span class="built_in">chown</span>=nextjs:nodejs /app/.next/static ./.next/static</span></span><br><span class="line"><span class="keyword">USER</span> nextjs</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;node&quot;</span>, <span class="string">&quot;server.js&quot;</span>]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="设置-Docker-Compose-和热重载"><a href="#设置-Docker-Compose-和热重载" class="headerlink" title="设置 Docker-Compose 和热重载"></a>设置 Docker-Compose 和热重载</h2><h3 id="开发环境-docker-compose-配置"><a href="#开发环境-docker-compose-配置" class="headerlink" title="开发环境 docker-compose 配置"></a>开发环境 docker-compose 配置</h3><p>项目根目录下创建 <code>docker-compose.yml</code> 作为开发环境的 docker-compose 配置文件,也是默认配置文件, 文件内容为:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">.</span></span><br><span class="line">      <span class="attr">target:</span> <span class="string">dev</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">MyApp-dev</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">.:/app</span> <span class="comment"># 项目代码</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/node_modules</span> <span class="comment">#匿名卷</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/.next</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NODE_ENV=development</span></span><br><span class="line">    <span class="comment"># env_file:</span></span><br><span class="line">    <span class="comment">#   - ./.env # 使用环境变量文件</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">yarn</span> <span class="string">dev</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
-
-<p>通过命令 <code>docker compose up -d --build</code> 启动容器,并在后台运行.</p>
-<p><code>target: dev</code> 设置让我们在容器中运行 <code>dev</code> 映像, 而不是默认的 <code>runner</code> 映像, 并且容器内的启动命令 <code>CMD [&quot;node&quot;, &quot;server.js&quot;]</code> 因为运行于默认的 <code>runner</code> 映像中,也不会生效。</p>
-<p>通过 <code>command: yarn dev</code> 配置让容器启动后,运行 <code>yarn dev</code> 命令, 这与本地开发中运行的命令一样.</p>
-<p>在 <code>volumes:</code> 配置中,<code>- .:/app</code> 将本地的项目目录装载到容器中,以保证容器中能获取到项目源码的修改, 而 <code>- /app/node_modules</code> 与 <code>- /app/.next</code> 则通过匿名卷, 让容器中的依赖包和生成文件与本地保持隔离.</p>
-<h3 id="生产环境-docker-compose-配置"><a href="#生产环境-docker-compose-配置" class="headerlink" title="生产环境 docker-compose 配置"></a>生产环境 docker-compose 配置</h3><p>生产环境的 docker-compose 配置更容易。项目根目录下创建 <code>docker-compose.prod.yml</code> 作为生产环境的 docker-compose 配置文件, 文件内容为:</p>
-<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">.</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">MyApp-prod</span></span><br><span class="line">    <span class="comment"># command: yarn dev</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="number">3000</span><span class="string">:3000</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NODE_ENV=prod</span></span><br><span class="line">    <span class="comment"># env_file:</span></span><br><span class="line">    <span class="comment">#   - ./.env # 使用环境变量文件</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br></pre></td></tr></table></figure>
-
-<p>通过命令 <code>docker compose -f &quot;docker-compose.prod.yml&quot; up -d --build</code> 启动容器,并在后台运行. <code>--build</code> 保证当项目源码修改后, Docker 会重新生成映像并启动新的容器.</p>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
-<li><a href="https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile">Next.js 官方映像</a></li>
-<li><a href="https://medium.com/@elifront/best-next-js-docker-compose-hot-reload-production-ready-docker-setup-28a9125ba1dc">Best Next.js docker-compose hot-reload production-ready Docker setup</a></li>
+</li>
+</ol>
+<h3 id="iptables-规则的动作"><a href="#iptables-规则的动作" class="headerlink" title="iptables 规则的动作"></a>iptables 规则的动作</h3><ul>
+<li><p>REJECT<br>拦阻该数据包，并返回数据包通知对方，可以返回的数据包有几个选择：ICMP port-unreachable、ICMP echo-reply 或是 tcp-reset（这个数据包包会要求对方关闭联机），进行完此处理动作后，将不再比对其它规则，直接中断过滤程序。 范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -A  INPUT -p TCP --dport 22 -j REJECT --reject-with ICMP echo-reply</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DROP<br>丢弃数据包不予处理，进行完此处理动作后，将不再比对其它规则，直接中断过滤程序。</p>
+</li>
+<li><p>REDIRECT<br>将封包重新导向到另一个端口（PNAT），进行完此处理动作后，将会继续比对其它规则。这个功能可以用来实作透明代理 或用来保护 web 服务器。例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8081</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MASQUERADE<br>改写封包来源 IP 为防火墙的 IP，可以指定 port 对应的范围，进行完此处理动作后，直接跳往下一个规则链（mangle:postrouting）。这个功能与 SNAT 略有不同，当进行 IP 伪装时，不需指定要伪装成哪个 IP，IP 会从网卡直接读取，当使用拨接连线时，IP 通常是由 ISP 公司的 DHCP 服务器指派的，这个时候 MASQUERADE 特别有用。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -p TCP -j MASQUERADE --to-ports 21000-31000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>LOG<br>将数据包相关信息纪录在 &#x2F;var&#x2F;log 中，详细位置请查阅 &#x2F;etc&#x2F;syslog.conf 配置文件，进行完此处理动作后，将会继续比对其它规则。例如：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -j LOG --log-prefix <span class="string">&quot;input packet&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SNAT<br>改写封包来源 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将直接跳往下一个规则炼（mangle:postrouting）。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -p tcp-o eth0 -j SNAT --to-source 192.168.10.15-192.168.10.160:2100-3200</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DNAT<br>改写数据包包目的地 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将会直接跳往下一个规则链（filter:input 或 filter:forward）。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.10.1-192.168.10.10:80-100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MIRROR<br>镜像数据包，也就是将来源 IP 与目的地 IP 对调后，将数据包返回，进行完此处理动作后，将会中断过滤程序。</p>
+</li>
+<li><p>QUEUE<br>中断过滤程序，将封包放入队列，交给其它程序处理。透过自行开发的处理程序，可以进行其它应用，例如：计算联机费用…….等。</p>
+</li>
+<li><p>RETURN<br>结束在目前规则链中的过滤程序，返回主规则链继续过滤，如果把自订规则链看成是一个子程序，那么这个动作，就相当于提早结束子程序并返回到主程序中。</p>
+</li>
+<li><p>MARK<br>将封包标上某个代号，以便提供作为后续过滤的条件判断依据，进行完此处理动作后，将会继续比对其它规则。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 22</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <tags>
-        <tag>Capacitor</tag>
-        <tag>Android</tag>
-        <tag>Next.js</tag>
+        <tag>Proxy 代理</tag>
+        <tag>iptables</tag>
       </tags>
   </entry>
   <entry>
@@ -2545,7 +2883,7 @@
 <p>静态访问密钥中 “@” 和 “:” 符号之间的部分就是 “服务器”</p>
 <p>ss:&#x2F;&#x2F;Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1UkVmeFRqbHR6Mkw@<strong>outline-server.example.com</strong>:17178&#x2F;?outline&#x3D;1</p>
 <p>服务器端口<br>静态访问密钥中 第二个“:”符号和后面的“&#x2F;”符号之间的部分就是 “服务器端口”</p>
-<p>ss:&#x2F;&#x2F;<a href="mailto:&#89;&#50;&#x68;&#x68;&#x59;&#x32;&#x68;&#104;&#x4d;&#106;&#x41;&#x74;&#97;&#x57;&#x56;&#x30;&#x5a;&#x69;&#49;&#119;&#x62;&#50;&#x78;&#x35;&#77;&#84;&#x4d;&#119;&#x4e;&#84;&#111;&#49;&#x55;&#x6b;&#x56;&#x6d;&#101;&#70;&#x52;&#113;&#x62;&#x48;&#82;&#54;&#77;&#107;&#x77;&#64;&#x6f;&#117;&#x74;&#x6c;&#105;&#110;&#x65;&#45;&#x73;&#x65;&#114;&#118;&#x65;&#114;&#x2e;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#x6d;">&#89;&#50;&#x68;&#x68;&#x59;&#x32;&#x68;&#104;&#x4d;&#106;&#x41;&#x74;&#97;&#x57;&#x56;&#x30;&#x5a;&#x69;&#49;&#119;&#x62;&#50;&#x78;&#x35;&#77;&#84;&#x4d;&#119;&#x4e;&#84;&#111;&#49;&#x55;&#x6b;&#x56;&#x6d;&#101;&#70;&#x52;&#113;&#x62;&#x48;&#82;&#54;&#77;&#107;&#x77;&#64;&#x6f;&#117;&#x74;&#x6c;&#105;&#110;&#x65;&#45;&#x73;&#x65;&#114;&#118;&#x65;&#114;&#x2e;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#99;&#x6f;&#x6d;</a>:<strong>17178</strong>&#x2F;?outline&#x3D;1</p>
+<p>ss:&#x2F;&#x2F;<a href="mailto:&#89;&#50;&#104;&#x68;&#89;&#x32;&#104;&#104;&#x4d;&#106;&#65;&#116;&#97;&#87;&#86;&#48;&#90;&#105;&#49;&#119;&#98;&#x32;&#120;&#53;&#x4d;&#84;&#77;&#119;&#x4e;&#x54;&#x6f;&#x31;&#x55;&#107;&#86;&#109;&#x65;&#70;&#x52;&#x71;&#98;&#72;&#82;&#x36;&#x4d;&#107;&#x77;&#64;&#x6f;&#117;&#116;&#108;&#x69;&#x6e;&#x65;&#x2d;&#115;&#101;&#114;&#118;&#x65;&#x72;&#46;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;">&#89;&#50;&#104;&#x68;&#89;&#x32;&#104;&#104;&#x4d;&#106;&#65;&#116;&#97;&#87;&#86;&#48;&#90;&#105;&#49;&#119;&#98;&#x32;&#120;&#53;&#x4d;&#84;&#77;&#119;&#x4e;&#x54;&#x6f;&#x31;&#x55;&#107;&#86;&#109;&#x65;&#70;&#x52;&#x71;&#98;&#72;&#82;&#x36;&#x4d;&#107;&#x77;&#64;&#x6f;&#117;&#116;&#108;&#x69;&#x6e;&#x65;&#x2d;&#115;&#101;&#114;&#118;&#x65;&#x72;&#46;&#x65;&#120;&#97;&#x6d;&#112;&#x6c;&#x65;&#x2e;&#99;&#x6f;&#x6d;</a>:<strong>17178</strong>&#x2F;?outline&#x3D;1</p>
 <p>密码<br>这里会有些复杂。静态访问密钥中 介于 “ss:&#x2F;&#x2F;” 和 “@”之间的部分就是以 base64 格式编码的 “密码”。</p>
 <p>ss:&#x2F;&#x2F;<strong>Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo1UkVmeFRqbHR6Mkw</strong>@outline-server.example.com:17178&#x2F;?outline&#x3D;1</p>
 <p>在我们的例子中，当我们对密钥的这一部分进行解码时，我们得到下面的结果:</p>
@@ -2559,6 +2897,118 @@
       <tags>
         <tag>outline vpn</tag>
         <tag>密钥</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>iptables 实战</title>
+    <url>/proxy/iptables%20%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<p>iptables 实战代码分析</p>
+<span id="more"></span>
+
+<h2 id="透明代理规则"><a href="#透明代理规则" class="headerlink" title="透明代理规则"></a>透明代理规则</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 nat 表中,创建自定义链 &#x27;NO_PROXY&#x27;, nat 表为地址转换表</span></span><br><span class="line">iptables -N NO_PROXY -t nat</span><br><span class="line"><span class="comment"># 在自定义链 &#x27;NO_PROXY&#x27; 中添加规则, 目的地址 0.0.0.0/8 , 动作为 ACCEPT(响应)</span></span><br><span class="line"><span class="comment"># 后面都是一些保留用作特殊用途的地址段,参考 https://zh.wikipedia.org/zh-hans/%E4%BF%9D%E7%95%99IP%E5%9C%B0%E5%9D%80</span></span><br><span class="line">iptables -A NO_PROXY -t nat -d 0.0.0.0/8 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 10.0.0.0/8 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 127.0.0.0/8 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 169.254.0.0/16 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 172.16.0.0/12 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 192.168.0.0/16 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 224.0.0.0/4 -j ACCEPT</span><br><span class="line">iptables -A NO_PROXY -t nat -d 240.0.0.0/4 -j ACCEPT</span><br><span class="line"><span class="comment"># 结束自定义链 &#x27;NO_PROXY&#x27; 的规则匹配,并返回主链</span></span><br><span class="line">iptables -A NO_PROXY -t nat -j RETURN</span><br><span class="line"><span class="comment"># 在默认链 &#x27;PREROUTING&#x27; 的 nat 表中,添加规则</span></span><br><span class="line"><span class="comment"># tcp 协议,目的地址为 80, 动作为转移到自定义链 `NO_PROXY` 处理</span></span><br><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 80 -j NO_PROXY</span><br><span class="line"><span class="comment"># tcp 协议,目的地址为 80, 动作为 REDIRECT(导向另一个端口) 3129</span></span><br><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 80 -j REDIRECT --to-port 3129</span><br><span class="line"><span class="comment"># tcp 协议,目的地址为 443, 动作为转移到自定义链 `NO_PROXY` 处理</span></span><br><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 443 -j NO_PROXY</span><br><span class="line"><span class="comment"># tcp 协议,目的地址为 443, 动作为 REDIRECT(导向另一个端口) 3130</span></span><br><span class="line">iptables -A PREROUTING -t nat -p tcp --dport 443 -j REDIRECT --to-ports 3130</span><br></pre></td></tr></table></figure>
+
+<p>这段 iptables 命令,首先自定义了一个 ‘NO_PROXY’ 链,这个链的用途是’不代理’, 就是对一些保留地址的包不转发到代理端口,而是按默认路由处理.<br>然后对所有’PREROUTING’ 链上目标端口为 80(http)&#x2F;443(https) 的 tcp 流量, 先使用 ‘NO_PROXY’ 进行过滤, 保证特殊流量包不会转发到代理.<br>然后将 80(http) 端口流量,转发至 3129 端口,443(https) 端口流量,转发至 3130 端口</p>
+<h2 id="处理标记-mark-流量"><a href="#处理标记-mark-流量" class="headerlink" title="处理标记(mark)流量"></a>处理标记(mark)流量</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在 nat 表中,创建自定义链 &#x27;GOST&#x27;</span></span><br><span class="line">iptables -t nat -N GOST</span><br><span class="line"><span class="comment"># 忽略局域网流量，请根据实际网络环境进行调整</span></span><br><span class="line">iptables -t nat -A GOST -d 192.168.0.0/16 -j RETURN</span><br><span class="line"><span class="comment"># 将已标记为 100 的 tcp 流量放行</span></span><br><span class="line">iptables -t nat -A GOST -p tcp -m mark --mark 100 -j RETURN</span><br><span class="line"><span class="comment"># 非局域网流量/非标记为100的流量,重定向TCP流量到12345端口</span></span><br><span class="line">iptables -t nat -A GOST -p tcp -j REDIRECT --to-ports 12345</span><br><span class="line"><span class="comment"># 在默认链 &#x27;PREROUTING&#x27; 的 nat 表中,拦截 tcp 流量,交给 &#x27;GOST&#x27; 链处理</span></span><br><span class="line">iptables -t nat -A PREROUTING -p tcp -j GOST</span><br><span class="line"><span class="comment"># 在默认链 &#x27;OUTPUT&#x27; 的 nat 表中,拦截 tcp 流量,交给 &#x27;GOST&#x27; 链处理</span></span><br><span class="line">iptables -t nat -A OUTPUT -p tcp -j GOST</span><br></pre></td></tr></table></figure>
+
+<p><code>-m mark --mark 100</code> 使用匹配模块（module）mark，并匹配标记（mark）字段的值为 100 的数据包。这是一个自定义的标记，用于识别特定的数据包。</p>
+<p>这段 iptables 命令,首先定义了一个 ‘GOST’ 链, 这个链的用途是放行保留地址的流量, 放行特殊标记的流量 (标记为 100), 其余的流量转发到指定端口(12345).</p>
+<p>然后在入站链(PREROUTING)和出站链(OUTPUT)上匹配所有 tcp 流量,并交给’GOST’ 链处理.</p>
+<h2 id="转发链"><a href="#转发链" class="headerlink" title="转发链"></a>转发链</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加一条IP规则，当数据包的标记字段为1时，使用路由表100进行路由选择。</span></span><br><span class="line">ip rule add fwmark 1 lookup 100</span><br><span class="line"><span class="comment"># 添加一条本地路由规则，将目标网络地址为0.0.0.0/0的数据包转发到回环接口，</span></span><br><span class="line"><span class="comment"># 并使用路由表100进行路由选择。</span></span><br><span class="line">ip route add <span class="built_in">local</span> 0.0.0.0/0 dev lo table 100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 mangle 表中,创建自定义链 &#x27;DIVERT&#x27;</span></span><br><span class="line"><span class="comment"># mangle 表,用于对数据包进行修改</span></span><br><span class="line">iptables -t mangle -N DIVERT</span><br><span class="line"><span class="comment"># 流量设置标志 1</span></span><br><span class="line">iptables -t mangle -A DIVERT -j MARK --set-mark 1</span><br><span class="line">iptables -t mangle -A DIVERT -j ACCEPT</span><br><span class="line"><span class="comment"># 在 &#x27;PREROUTING&#x27; 链拦截 tcp 流量,交给 &#x27;DIVERT&#x27; 链处理</span></span><br><span class="line">iptables -t mangle -A PREROUTING -p tcp -m socket -j DIVERT</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 mangle 表中,创建自定义链 &#x27;GOST&#x27;</span></span><br><span class="line">iptables -t mangle -N GOST</span><br><span class="line"><span class="comment"># &#x27;GOST&#x27; 链中放行局域网tcp流量</span></span><br><span class="line">iptables -t mangle -A GOST -p tcp -d 127.0.0.0/8 -j RETURN</span><br><span class="line">iptables -t mangle -A GOST -p tcp -d 192.168.0.0/16 -j RETURN</span><br><span class="line"><span class="comment"># &#x27;GOST&#x27; 链中放行标记为 100 的tcp流量</span></span><br><span class="line">iptables -t mangle -A GOST -p tcp -m mark --mark 100 -j RETURN</span><br><span class="line"><span class="comment"># &#x27;GOST&#x27; 链中其它的tcp 流量使用 TPROXY 透明代理转发流量到本机(127.0.0.1) 12345端口,</span></span><br><span class="line"><span class="comment"># 并给流量设置转发标记（tproxy mark）为0x1</span></span><br><span class="line">iptables -t mangle -A GOST -p tcp -j TPROXY --tproxy-mark 0x1/0x1 --on-ip 127.0.0.1 --on-port 12345</span><br><span class="line"><span class="comment"># 在 &#x27;PREROUTING&#x27; 入站链拦截 tcp 流量,交给 &#x27;GOST&#x27; 链处理</span></span><br><span class="line">iptables -t mangle -A PREROUTING -p tcp -j GOST</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在 mangle 表中,创建自定义链 &#x27;GOST_LOCAL&#x27;</span></span><br><span class="line">iptables -t mangle -N GOST_LOCAL</span><br><span class="line"><span class="comment"># &#x27;GOST_LOCAL&#x27; 链中放行局域网tcp流量</span></span><br><span class="line">iptables -t mangle -A GOST_LOCAL -p tcp -d 127.0.0.0/8 -j RETURN</span><br><span class="line">iptables -t mangle -A GOST_LOCAL -p tcp -d 255.255.255.255/32 -j RETURN</span><br><span class="line">iptables -t mangle -A GOST_LOCAL -p tcp -d 192.168.0.0/16 -j RETURN</span><br><span class="line"><span class="comment"># &#x27;GOST_LOCAL&#x27; 链中放行标记为 100 的tcp流量</span></span><br><span class="line">iptables -t mangle -A GOST_LOCAL -p tcp -m mark --mark 100 -j RETURN</span><br><span class="line"><span class="comment"># &#x27;GOST_LOCAL&#x27; 链中给剩余的流量设置标志 1</span></span><br><span class="line">iptables -t mangle -A GOST_LOCAL -p tcp -j MARK --set-mark 1</span><br><span class="line"><span class="comment"># 在 &#x27;OUTPUT&#x27; 出站链拦截 tcp 流量,交给 &#x27;GOST_LOCAL&#x27; 链处理</span></span><br><span class="line">iptables -t mangle -A OUTPUT -p tcp -j GOST_LOCAL</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>入站 tcp 流量,匹配 socket 模块的,设置标志位 1.<br>入站 tcp 流量非局域网&#x2F;非 100 标志的流量设置标志 1 ,并转发到 12345 端口的本机透明代理.<br>出站 tcp 流量非局域网&#x2F;非 100 标志的流量设置标志 1.</p>
+]]></content>
+      <tags>
+        <tag>Proxy 代理</tag>
+        <tag>Network</tag>
+        <tag>iptables</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>代理服务器笔记</title>
+    <url>/proxy/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>学习代理服务器相关知识笔记</p>
+<span id="more"></span>
+
+<h2 id="透明代理"><a href="#透明代理" class="headerlink" title="透明代理"></a>透明代理</h2><p>在透明代理中，”REDIRECT” 和 “TPROXY” 是两种常见的方式用于实现数据包的重定向和转发。</p>
+<ol>
+<li>REDIRECT 是一种基于 iptables 的方式，用于在内核层面实现数据包重定向。它通过修改数据包的目标 IP 地址和端口，将数据包重定向到代理服务器。当使用 REDIRECT 方式时，代理服务器必须在与客户端在同一主机上，并且代理服务器监听的端口是客户端请求的目标端口。</li>
+<li>TPROXY 是一种高级的透明代理方式，也是基于 iptables 的。与 REDIRECT 不同，TPROXY 可以在内核层面将数据包重定向到任意 IP 地址和端口，而不限制于与客户端在同一主机上。TPROXY 可以在代理服务器和客户端之间建立一个透明的代理通道，同时保持客户端和服务器之间的原始源 IP 地址和端口信息。</li>
+</ol>
+]]></content>
+      <tags>
+        <tag>Proxy 代理</tag>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网络模型</title>
+    <url>/proxy/%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>学习网络相关知识笔记</p>
+<span id="more"></span>
+
+<h2 id="OSI-七层模型"><a href="#OSI-七层模型" class="headerlink" title="OSI 七层模型"></a>OSI 七层模型</h2><h3 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h3><ul>
+<li>网卡</li>
+<li>网线</li>
+<li>比特 Bit</li>
+</ul>
+<h3 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h3><ul>
+<li>MAC 地址</li>
+<li>帧 Frame</li>
+</ul>
+<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><ul>
+<li>IP 地址</li>
+<li>分组 Packet</li>
+</ul>
+<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><ul>
+<li>TCP&#x2F;UDP 协议</li>
+<li>段 Segment</li>
+</ul>
+<h3 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h3><h3 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h3><h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><ul>
+<li>http&#x2F;ftp 协议</li>
+<li>报文 Message</li>
+</ul>
+<h2 id="TCP-x2F-IP-四层模型"><a href="#TCP-x2F-IP-四层模型" class="headerlink" title="TCP&#x2F;IP 四层模型"></a>TCP&#x2F;IP 四层模型</h2><h3 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h3><ul>
+<li>对应物理层&#x2F;数据链路层</li>
+<li>MAC 地址</li>
+</ul>
+<h3 id="网际层"><a href="#网际层" class="headerlink" title="网际层"></a>网际层</h3><ul>
+<li>对应网络层</li>
+<li>IP 地址</li>
+</ul>
+<h3 id="运输层"><a href="#运输层" class="headerlink" title="运输层"></a>运输层</h3><ul>
+<li>对应运输层</li>
+<li>TCP&#x2F;UDP</li>
+</ul>
+<h3 id="应用层-1"><a href="#应用层-1" class="headerlink" title="应用层"></a>应用层</h3><ul>
+<li>对应会话层&#x2F;表示层&#x2F;应用层</li>
+<li>http&#x2F;ftp&#x2F;telnet 协议</li>
+<li>端口</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Network 网络</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Linux 系统下查看目录占用空间</title>
+    <url>/ubuntu/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4/</url>
+    <content><![CDATA[<p>在 Linux 系统中,我们可以使用 <code>du</code> 命令来查看目录的占用空间.</p>
+<span id="more"></span>
+
+<p><code>du</code> 命令使用格式为: <code>du [选项] [目录]</code></p>
+<p>其中, 常用选项包括:</p>
+<ul>
+<li>-h: 以可读的方式显示尺寸,会自动以合适的单位显示尺寸 (G&#x2F;M&#x2F;K)</li>
+<li>-B: 以指定单位显示尺寸, 比如 <code>-BK</code> <code>-BM</code> <code>-BG</code></li>
+<li>-d: 目录深度, 默认递归所以目录 <code>-d 1</code> 只统计一级子目录</li>
+</ul>
+<p>如果不指定目录, 则统计当前目录.</p>
+<p>示例:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 统计当前目录,包含一级子目录,以合适单位显示</span></span><br><span class="line">sudo <span class="built_in">du</span> -h -d 1</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Linux</tag>
+        <tag>Ubuntu</tag>
       </tags>
   </entry>
   <entry>
@@ -2868,6 +3318,103 @@
       </tags>
   </entry>
   <entry>
+    <title>Video.js 在 React 下的使用示例</title>
+    <url>/video.js/Video.js%20%E5%9C%A8%20React%20%E4%B8%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/</url>
+    <content><![CDATA[<p>这些是几个 React 和 Video .js 播放器实现和示例。</p>
+<p>不要忘记包括 Video.js CSS，文件位于 <code>video.js/dist/video-js.css</code></p>
+<span id="more"></span>
+
+<h2 id="React-函数组件和-useEffect-示例"><a href="#React-函数组件和-useEffect-示例" class="headerlink" title="React 函数组件和 useEffect 示例"></a>React 函数组件和 <code>useEffect</code> 示例</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> videojs <span class="keyword">from</span> <span class="string">&#x27;video.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;video.js/dist/video-js.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">VideoJS</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> videoRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> playerRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> &#123; options, onReady &#125; = props;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 确保 Video.js 播发器仅初始化一次</span></span><br><span class="line">    <span class="keyword">if</span> (!playerRef.<span class="property">current</span>) &#123;</span><br><span class="line">      <span class="comment">// Video.js 播放器需要位于 React 18 严格模式的 el 组件内部。</span></span><br><span class="line">      <span class="keyword">const</span> videoElement = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;video-js&#x27;</span>);</span><br><span class="line"></span><br><span class="line">      videoElement.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;vjs-big-play-centered&#x27;</span>);</span><br><span class="line">      videoRef.<span class="property">current</span>.<span class="title function_">appendChild</span>(videoElement);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> player = (playerRef.<span class="property">current</span> = <span class="title function_">videojs</span>(videoElement, options, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        videojs.<span class="title function_">log</span>(<span class="string">&#x27;player is ready&#x27;</span>);</span><br><span class="line">        onReady &amp;&amp; <span class="title function_">onReady</span>(player);</span><br><span class="line">      &#125;));</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 您可以在 `else` 块中更新现有播发器关于 prop 的更改，例如：</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> player = playerRef.<span class="property">current</span>;</span><br><span class="line"></span><br><span class="line">      player.<span class="title function_">autoplay</span>(options.<span class="property">autoplay</span>);</span><br><span class="line">      player.<span class="title function_">src</span>(options.<span class="property">sources</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [options, videoRef]);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数组件卸载时销毁 Video.js 播放器</span></span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> player = playerRef.<span class="property">current</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (player &amp;&amp; !player.<span class="title function_">isDisposed</span>()) &#123;</span><br><span class="line">        player.<span class="title function_">dispose</span>();</span><br><span class="line">        playerRef.<span class="property">current</span> = <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, [playerRef]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-vjs-player</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;videoRef&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">VideoJS</span>;</span><br></pre></td></tr></table></figure>
+
+<p>最后，像这样使用组件（请参阅 <a href="https://videojs.com/guides/options">Video.js 选项参考</a>）：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这将从之前的示例中导入函数组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VideoJS</span> <span class="keyword">from</span> <span class="string">&#x27;./VideoJS&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> playerRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> videoJsOptions = &#123;</span><br><span class="line">    <span class="attr">autoplay</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">controls</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">responsive</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">fluid</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">sources</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">src</span>: <span class="string">&#x27;/path/to/video.mp4&#x27;</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;video/mp4&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handlePlayerReady</span> = (<span class="params">player</span>) =&gt; &#123;</span><br><span class="line">    playerRef.<span class="property">current</span> = player;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里可以处理播放器事件,例如:</span></span><br><span class="line">    player.<span class="title function_">on</span>(<span class="string">&#x27;waiting&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;player is waiting&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    player.<span class="title function_">on</span>(<span class="string">&#x27;dispose&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;player will dispose&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>Rest of app here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">VideoJS</span> <span class="attr">options</span>=<span class="string">&#123;videoJsOptions&#125;</span> <span class="attr">onReady</span>=<span class="string">&#123;handlePlayerReady&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>Rest of app here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="在-Video-js-组件中使用-React-组件"><a href="#在-Video-js-组件中使用-React-组件" class="headerlink" title="在 Video.js 组件中使用 React 组件"></a>在 Video.js 组件中使用 React 组件</h2><p>此示例演示了在 Video.js 播放器中的 Video 组件中使用 React 组件。通过这种方法，开发人员可以通过 React 管理他们的自定义 Video.js 组件。</p>
+<p>首先，创建一个普通的 React 组件：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ExampleReactComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.props.text&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此组件中，<code>vjsBridgeComponent</code> 在其 <code>props</code> 上可用。 通过该对象，可以使用<code>vjsBridgeComponent</code> 的方法。</p>
+<p>Video.js 播放器可以通过相同的方式在此 React 组件中引用：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> player = <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">vjsBridgeComponent</span>.<span class="title function_">player</span>();</span><br></pre></td></tr></table></figure>
+
+<p>接下来，创建一个 Video.js 组件。</p>
+<p>此组件将 React 组件呈现为自身。基本上，Video.js 组件充当 Video.js 播放器和 React 组件之间的桥梁：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">ExampleReactComponent</span> <span class="keyword">from</span> <span class="string">&#x27;./example-react-component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> videojs <span class="keyword">from</span> <span class="string">&#x27;video.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">VjsComponent</span> = videojs.<span class="title function_">getComponent</span>(<span class="string">&#x27;Component&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExampleVjsBridgeComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">VjsComponent</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">player, options</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(player, options);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将当前类上下文绑定到 mountReactComponent 方法</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">mountReactComponent</span> = <span class="variable language_">this</span>.<span class="property">mountReactComponent</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当播放器准备好时，调用方法来挂载 React 组件</span></span><br><span class="line">    player.<span class="title function_">ready</span>(<span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">mountReactComponent</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当该组件被销毁时，删除 React root</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">on</span>(<span class="string">&#x27;dispose&#x27;</span>, <span class="function">() =&gt;</span> <span class="title class_">ReactDOM</span>.<span class="title function_">unmountComponentAtNode</span>(<span class="variable language_">this</span>.<span class="title function_">el</span>()));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 此方法将 ExampleReactComponent 渲染到 Video.js 组件 `this.el()` 的 DOM 元素中。</span></span><br><span class="line">  <span class="title function_">mountReactComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">ExampleReactComponent</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">vjsBridgeComponent</span>=<span class="string">&#123;this&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">text</span>=<span class="string">&#x27;Example React Component&#x27;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      /&gt;</span></span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">el</span>()</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确保注册 Video.js 组件，以便 Video.js 知道它存在</span></span><br><span class="line">videojs.<span class="title function_">registerComponent</span>(</span><br><span class="line">  <span class="string">&#x27;exampleVjsBridgeComponent&#x27;</span>,</span><br><span class="line">  <span class="title class_">ExampleVjsBridgeComponent</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">ExampleVjsBridgeComponent</span>;</span><br></pre></td></tr></table></figure>
+
+<p>最后，可以将 Video.js 桥接组件添加到播放器中，如下所示：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 组件安装时实例化 Video.js 播放器</span></span><br><span class="line">  <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">player</span> = <span class="title function_">videojs</span>(<span class="variable language_">this</span>.<span class="property">videoNode</span>, <span class="variable language_">this</span>.<span class="property">props</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;onPlayerReady&#x27;</span>, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 ExampleVjsBridgeComponent 添加为播放器的子级（或播放器内的另一个组件，例如控制栏）。</span></span><br><span class="line">    <span class="comment">// 您可以使用此方法的第二个参数将选项传递给桥接组件。</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">player</span>.<span class="title function_">addChild</span>(<span class="string">&#x27;exampleVjsBridgeComponent&#x27;</span>, &#123;&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Video.js</tag>
+        <tag>React</tag>
+        <tag>示例</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Video.js 进行视频自动播放的最佳实践</title>
+    <url>/video.js/%E4%BD%BF%E7%94%A8%20Video.js%20%E8%BF%9B%E8%A1%8C%E8%A7%86%E9%A2%91%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<ul>
+<li>永远不要假设自动播放会起作用。</li>
+<li>使用 <code>muted</code> 属性&#x2F;选项将提高自动播放成功的机会。</li>
+<li>更喜欢通过 <code>player.play()</code> 方法进行编程自动播放，避免使用 <code>autoplay</code> 属性&#x2F;选项。</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>最近有很多关于自动播放的讨论，我们想花几分钟时间分享一些在 video.js 中使用自动播放时的最佳实践。</p>
+<p>这篇文章旨在作为信息来源 - 而不是关于自动播放视频的社论或立场声明。许多用户讨厌自动播放，因为它很烦人或消耗宝贵的带宽。许多免费提供内容的发布商依靠自动播放来制作为其业务提供资金的预贴片广告。浏览器供应商（和开源库作者）必须根据其用户、网络上的发布商和他们自己的业务的兴趣来权衡这些问题。用户必须选择最能反映其偏好的浏览器。</p>
+<p>这篇文章不是关于规避自动播放政策的方法。这是不可能的，没有人应该浪费时间尝试它。我们认为，主动规避浏览器的内置用户体验或用户偏好是有害的，这是没有争议的。</p>
+<h2 id="大型浏览器中的自动播放策略"><a href="#大型浏览器中的自动播放策略" class="headerlink" title="大型浏览器中的自动播放策略"></a>大型浏览器中的自动播放策略</h2><p>我不打算详尽地介绍每个浏览器的特定算法，因为它们可能会发生变化，并且会破坏这篇文章的核心观点：<strong>永远不要假设自动播放会起作用</strong>。</p>
+<h3 id="Safari"><a href="#Safari" class="headerlink" title="Safari"></a>Safari</h3><p>从 2017 年 9 月发售的 Safari 11 开始，Apple 已更新其自动播放政策，以防止在大多数网站上自动播放声音。</p>
+<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p>早在 2017 年 9 月，Google 就宣布 Chrome 的自动播放政策将于 2018 年 4 月 的 Chrome 66 版本中发生变化，但须遵守一系列规则。</p>
+<h3 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h3><p>对于 Firefox，Mozilla 采取了暂时没有固定的自动播放政策的立场。这种情况将来可能会改变。也就是说，今天的 Firefox 确实允许用户通过一些配置更改来禁用自动播放。</p>
+<h3 id="IE11-和-Edge"><a href="#IE11-和-Edge" class="headerlink" title="IE11 和 Edge"></a>IE11 和 Edge</h3><p>Microsoft 的浏览器没有特定&#x2F;已知的自动播放策略 - 在撰写本文时，自动播放仅适用于 IE11 和 Edge。</p>
+<h2 id="回顾如何在-Video-js-中请求自动播放"><a href="#回顾如何在-Video-js-中请求自动播放" class="headerlink" title="回顾如何在 Video.js 中请求自动播放"></a>回顾如何在 Video.js 中请求自动播放</h2><p>请注意本节的标题如何使用“请求”一词。这是有意为之，因为它应该被视为请求。请记住，<strong>永远不要假设自动播放会起作用</strong>。</p>
+<p>Video.js 的优势之一是它是围绕<code>&lt;video&gt;</code>元素进行界面设计的; 因此，它将遵循底层播放技术（在大多数情况下，HTML5 视频）和浏览器。换句话说，浏览器允许的 Video.js 就允许。</p>
+<p>使用 Video.js 时，有两种方法可以启用自动播放：</p>
+<ol>
+<li><p>对 <code>&lt;video&gt;</code> 元素或新的 <code>&lt;video-js&gt;</code> 元素使用 <code>autoplay</code> 属性。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video-js</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 <code>autoplay</code> 选项：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;player&#x27;</span>, &#123; <span class="attr">autoplay</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="推荐做法"><a href="#推荐做法" class="headerlink" title="推荐做法"></a>推荐做法</h2><p>默认情况下，您可以遵从 Video.js 中的默认行为。如果自动播放成功，Video.js 播放器将开始播放。如果自动播放失败，Video.js 播放器的行为就像自动播放已关闭一样 - 即它将在海报图像（或黑框）上显示“大播放按钮”组件。</p>
+<p>如果这对您有用，那么您的工作就完成了！</p>
+<blockquote>
+<p>提示：如果你希望提高自动播放的成功机会，请使用 <code>muted</code> 属性（或带有 <code>muted</code> 选项的 Video.js ）。</p>
+</blockquote>
+<p>除此之外，还有一些常规做法在处理自动播放时可能很有用：检测是否支持自动播放，或检测自动播放是成功还是失败。</p>
+<h3 id="检测自动播放支持"><a href="#检测自动播放支持" class="headerlink" title="检测自动播放支持"></a>检测自动播放支持</h3><p>与检测自动播放请求的成功或失败类似，在创建播放器之前在浏览器上执行自动播放功能检测可能很有用。在这些情况下， <a href="https://github.com/video-dev/can-autoplay">can-autoplay</a> 库是最佳解决方案。它提供了与本机方法 <code>player.play()</code> 类似的基于 <code>Promise</code> 的 API：</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">canAutoplay.<span class="title function_">video</span>().<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.<span class="property">result</span> === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// Can autoplay</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Can not autoplay</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="编程实现自动播放和成功-x2F-失败检测"><a href="#编程实现自动播放和成功-x2F-失败检测" class="headerlink" title="编程实现自动播放和成功&#x2F;失败检测"></a>编程实现自动播放和成功&#x2F;失败检测</h3><p>对于那些关心自动播放请求是否成功的人，谷歌和苹果都建议采用同样的做法来检测自动播放成功或拒绝：侦听 <code>player.play()</code> 方法返回的 <code>Promise</code>（在支持它的浏览器中）以确定自动播放是否成功。</p>
+<p>这可以与 <code>autoplay</code> 属性&#x2F;选项结合使用，也可以通过调用 <code>player.play()</code> 以编程方式执行，但我们建议完全避免使用 <code>autoplay</code> 属性&#x2F;选项，并以编程方式请求自动播放：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video-js</span> <span class="attr">id</span>=<span class="string">&quot;player&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;player&#x27;</span>);</span><br><span class="line"></span><br><span class="line">player.<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> promise = player.<span class="title function_">play</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (promise !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    promise</span><br><span class="line">      .<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// Autoplay started!</span></span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">catch</span>(<span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">        <span class="comment">// Autoplay was prevented.</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：请务必了解，使用此方法，Video.js 的 <code>player.autoplay()</code> 方法将返回 <code>undefined</code> 或 <code>false</code>。如果您希望用户或集成商依赖此方法，请考虑以下部分。</p>
+</blockquote>
+<h3 id="使用-autoplay-属性-x2F-选项进行编程实现自动播放"><a href="#使用-autoplay-属性-x2F-选项进行编程实现自动播放" class="headerlink" title="使用 autoplay 属性&#x2F;选项进行编程实现自动播放"></a>使用 <code>autoplay</code> 属性&#x2F;选项进行编程实现自动播放</h3><p>构建供其他人使用的播放器时，您可能并不总是能够控制您的用户是否在其播放器实例中包含 <code>autoplay</code> 属性&#x2F;选项。值得庆幸的是，将其与编程自动播放相结合似乎不会对播放行为产生重大影响。</p>
+<p>根据我们的实验，即使浏览器处理了实际的自动播放操作，在开始播放（或播放失败）后调用 <code>player.play()</code> 似乎也不会导致当前浏览器在 Chrome 或 Firefox 中触发额外的”播放”事件。似乎每次调用 <code>player.play()</code> 并且自动播放失败时，Safari 11.1 确实会触发“播放”和“暂停”事件。</p>
+<p>不过，如果您具有完全控制权，<strong>我们建议您完全避免使用自动播放属性&#x2F;选项，并以编程方式请求自动播放。</strong></p>
+<blockquote>
+<p>注意：即使将 <code>autoplay</code> 属性&#x2F;选项与 <code>player.autoplay()</code> 编程自动播放一起使用，该方法也会返回 <code>undefined</code>，直到玩家准备就绪。</p>
+</blockquote>
+<h3 id="示例用例"><a href="#示例用例" class="headerlink" title="示例用例"></a>示例用例</h3><p>在 Brightcove，我们为改善基于 Video.js 的播放器的用户体验所做的一件事是隐藏请求自动播放的玩家的“大播放按钮”，直到自动播放成功或失败。这可以防止在自动播放启动之前“大播放按钮”在播放器上闪烁片刻的周期性情况。</p>
+<p>虽然由于播放器的具体情况，我们的实际实现更加复杂，但它的要点与这个<a href="https://jsbin.com/quqodek/edit?html,js,output">函数式 JSBin 演示</a> 相同。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>代码中可能存在与自动播放是否成功相关的决策点;然而，现实是，在此之前的所有段落都归结为一个基本的概念：</p>
+<p><strong>切勿假设您的自动播放请求会成功</strong>。</p>
+<p>记住这一点，你就是金子。即使浏览器完全停止允许自动播放，我们也希望推荐这种方法在某种程度上是面向未来的。</p>
+]]></content>
+      <tags>
+        <tag>Video.js</tag>
+        <tag>视频</tag>
+        <tag>自动播放</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Whoosh 01 - 快速开始</title>
     <url>/whoosh/01-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</url>
     <content><![CDATA[<p>Whoosh 是一个用于索引文本然后搜索索引的一组类和函数。它允许你为你的内容开发自定义搜索引擎。 例如，如果你正在创建博客软件，你可以使用 Whoosh 添加搜索功能以允许用户搜索博客条目。</p>
@@ -2943,103 +3490,6 @@
 ]]></content>
       <tags>
         <tag>Whoosh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Video.js 进行视频自动播放的最佳实践</title>
-    <url>/video.js/%E4%BD%BF%E7%94%A8%20Video.js%20%E8%BF%9B%E8%A1%8C%E8%A7%86%E9%A2%91%E8%87%AA%E5%8A%A8%E6%92%AD%E6%94%BE%E7%9A%84%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<ul>
-<li>永远不要假设自动播放会起作用。</li>
-<li>使用 <code>muted</code> 属性&#x2F;选项将提高自动播放成功的机会。</li>
-<li>更喜欢通过 <code>player.play()</code> 方法进行编程自动播放，避免使用 <code>autoplay</code> 属性&#x2F;选项。</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>最近有很多关于自动播放的讨论，我们想花几分钟时间分享一些在 video.js 中使用自动播放时的最佳实践。</p>
-<p>这篇文章旨在作为信息来源 - 而不是关于自动播放视频的社论或立场声明。许多用户讨厌自动播放，因为它很烦人或消耗宝贵的带宽。许多免费提供内容的发布商依靠自动播放来制作为其业务提供资金的预贴片广告。浏览器供应商（和开源库作者）必须根据其用户、网络上的发布商和他们自己的业务的兴趣来权衡这些问题。用户必须选择最能反映其偏好的浏览器。</p>
-<p>这篇文章不是关于规避自动播放政策的方法。这是不可能的，没有人应该浪费时间尝试它。我们认为，主动规避浏览器的内置用户体验或用户偏好是有害的，这是没有争议的。</p>
-<h2 id="大型浏览器中的自动播放策略"><a href="#大型浏览器中的自动播放策略" class="headerlink" title="大型浏览器中的自动播放策略"></a>大型浏览器中的自动播放策略</h2><p>我不打算详尽地介绍每个浏览器的特定算法，因为它们可能会发生变化，并且会破坏这篇文章的核心观点：<strong>永远不要假设自动播放会起作用</strong>。</p>
-<h3 id="Safari"><a href="#Safari" class="headerlink" title="Safari"></a>Safari</h3><p>从 2017 年 9 月发售的 Safari 11 开始，Apple 已更新其自动播放政策，以防止在大多数网站上自动播放声音。</p>
-<h3 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h3><p>早在 2017 年 9 月，Google 就宣布 Chrome 的自动播放政策将于 2018 年 4 月 的 Chrome 66 版本中发生变化，但须遵守一系列规则。</p>
-<h3 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h3><p>对于 Firefox，Mozilla 采取了暂时没有固定的自动播放政策的立场。这种情况将来可能会改变。也就是说，今天的 Firefox 确实允许用户通过一些配置更改来禁用自动播放。</p>
-<h3 id="IE11-和-Edge"><a href="#IE11-和-Edge" class="headerlink" title="IE11 和 Edge"></a>IE11 和 Edge</h3><p>Microsoft 的浏览器没有特定&#x2F;已知的自动播放策略 - 在撰写本文时，自动播放仅适用于 IE11 和 Edge。</p>
-<h2 id="回顾如何在-Video-js-中请求自动播放"><a href="#回顾如何在-Video-js-中请求自动播放" class="headerlink" title="回顾如何在 Video.js 中请求自动播放"></a>回顾如何在 Video.js 中请求自动播放</h2><p>请注意本节的标题如何使用“请求”一词。这是有意为之，因为它应该被视为请求。请记住，<strong>永远不要假设自动播放会起作用</strong>。</p>
-<p>Video.js 的优势之一是它是围绕<code>&lt;video&gt;</code>元素进行界面设计的; 因此，它将遵循底层播放技术（在大多数情况下，HTML5 视频）和浏览器。换句话说，浏览器允许的 Video.js 就允许。</p>
-<p>使用 Video.js 时，有两种方法可以启用自动播放：</p>
-<ol>
-<li><p>对 <code>&lt;video&gt;</code> 元素或新的 <code>&lt;video-js&gt;</code> 元素使用 <code>autoplay</code> 属性。</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">video-js</span> <span class="attr">autoplay</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用 <code>autoplay</code> 选项：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">videojs</span>(<span class="string">&#x27;player&#x27;</span>, &#123; <span class="attr">autoplay</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="推荐做法"><a href="#推荐做法" class="headerlink" title="推荐做法"></a>推荐做法</h2><p>默认情况下，您可以遵从 Video.js 中的默认行为。如果自动播放成功，Video.js 播放器将开始播放。如果自动播放失败，Video.js 播放器的行为就像自动播放已关闭一样 - 即它将在海报图像（或黑框）上显示“大播放按钮”组件。</p>
-<p>如果这对您有用，那么您的工作就完成了！</p>
-<blockquote>
-<p>提示：如果你希望提高自动播放的成功机会，请使用 <code>muted</code> 属性（或带有 <code>muted</code> 选项的 Video.js ）。</p>
-</blockquote>
-<p>除此之外，还有一些常规做法在处理自动播放时可能很有用：检测是否支持自动播放，或检测自动播放是成功还是失败。</p>
-<h3 id="检测自动播放支持"><a href="#检测自动播放支持" class="headerlink" title="检测自动播放支持"></a>检测自动播放支持</h3><p>与检测自动播放请求的成功或失败类似，在创建播放器之前在浏览器上执行自动播放功能检测可能很有用。在这些情况下， <a href="https://github.com/video-dev/can-autoplay">can-autoplay</a> 库是最佳解决方案。它提供了与本机方法 <code>player.play()</code> 类似的基于 <code>Promise</code> 的 API：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">canAutoplay.<span class="title function_">video</span>().<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params">obj</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (obj.<span class="property">result</span> === <span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="comment">// Can autoplay</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Can not autoplay</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h3 id="编程实现自动播放和成功-x2F-失败检测"><a href="#编程实现自动播放和成功-x2F-失败检测" class="headerlink" title="编程实现自动播放和成功&#x2F;失败检测"></a>编程实现自动播放和成功&#x2F;失败检测</h3><p>对于那些关心自动播放请求是否成功的人，谷歌和苹果都建议采用同样的做法来检测自动播放成功或拒绝：侦听 <code>player.play()</code> 方法返回的 <code>Promise</code>（在支持它的浏览器中）以确定自动播放是否成功。</p>
-<p>这可以与 <code>autoplay</code> 属性&#x2F;选项结合使用，也可以通过调用 <code>player.play()</code> 以编程方式执行，但我们建议完全避免使用 <code>autoplay</code> 属性&#x2F;选项，并以编程方式请求自动播放：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video-js</span> <span class="attr">id</span>=<span class="string">&quot;player&quot;</span> <span class="attr">src</span>=<span class="string">&quot;https://path/to/source.mp4&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">video-js</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> player = <span class="title function_">videojs</span>(<span class="string">&#x27;player&#x27;</span>);</span><br><span class="line"></span><br><span class="line">player.<span class="title function_">ready</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> promise = player.<span class="title function_">play</span>();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (promise !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">    promise</span><br><span class="line">      .<span class="title function_">then</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">        <span class="comment">// Autoplay started!</span></span><br><span class="line">      &#125;)</span><br><span class="line">      .<span class="title function_">catch</span>(<span class="keyword">function</span> (<span class="params">error</span>) &#123;</span><br><span class="line">        <span class="comment">// Autoplay was prevented.</span></span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：请务必了解，使用此方法，Video.js 的 <code>player.autoplay()</code> 方法将返回 <code>undefined</code> 或 <code>false</code>。如果您希望用户或集成商依赖此方法，请考虑以下部分。</p>
-</blockquote>
-<h3 id="使用-autoplay-属性-x2F-选项进行编程实现自动播放"><a href="#使用-autoplay-属性-x2F-选项进行编程实现自动播放" class="headerlink" title="使用 autoplay 属性&#x2F;选项进行编程实现自动播放"></a>使用 <code>autoplay</code> 属性&#x2F;选项进行编程实现自动播放</h3><p>构建供其他人使用的播放器时，您可能并不总是能够控制您的用户是否在其播放器实例中包含 <code>autoplay</code> 属性&#x2F;选项。值得庆幸的是，将其与编程自动播放相结合似乎不会对播放行为产生重大影响。</p>
-<p>根据我们的实验，即使浏览器处理了实际的自动播放操作，在开始播放（或播放失败）后调用 <code>player.play()</code> 似乎也不会导致当前浏览器在 Chrome 或 Firefox 中触发额外的”播放”事件。似乎每次调用 <code>player.play()</code> 并且自动播放失败时，Safari 11.1 确实会触发“播放”和“暂停”事件。</p>
-<p>不过，如果您具有完全控制权，<strong>我们建议您完全避免使用自动播放属性&#x2F;选项，并以编程方式请求自动播放。</strong></p>
-<blockquote>
-<p>注意：即使将 <code>autoplay</code> 属性&#x2F;选项与 <code>player.autoplay()</code> 编程自动播放一起使用，该方法也会返回 <code>undefined</code>，直到玩家准备就绪。</p>
-</blockquote>
-<h3 id="示例用例"><a href="#示例用例" class="headerlink" title="示例用例"></a>示例用例</h3><p>在 Brightcove，我们为改善基于 Video.js 的播放器的用户体验所做的一件事是隐藏请求自动播放的玩家的“大播放按钮”，直到自动播放成功或失败。这可以防止在自动播放启动之前“大播放按钮”在播放器上闪烁片刻的周期性情况。</p>
-<p>虽然由于播放器的具体情况，我们的实际实现更加复杂，但它的要点与这个<a href="https://jsbin.com/quqodek/edit?html,js,output">函数式 JSBin 演示</a> 相同。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>代码中可能存在与自动播放是否成功相关的决策点;然而，现实是，在此之前的所有段落都归结为一个基本的概念：</p>
-<p><strong>切勿假设您的自动播放请求会成功</strong>。</p>
-<p>记住这一点，你就是金子。即使浏览器完全停止允许自动播放，我们也希望推荐这种方法在某种程度上是面向未来的。</p>
-]]></content>
-      <tags>
-        <tag>Video.js</tag>
-        <tag>视频</tag>
-        <tag>自动播放</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Video.js 在 React 下的使用示例</title>
-    <url>/video.js/Video.js%20%E5%9C%A8%20React%20%E4%B8%8B%E7%9A%84%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B/</url>
-    <content><![CDATA[<p>这些是几个 React 和 Video .js 播放器实现和示例。</p>
-<p>不要忘记包括 Video.js CSS，文件位于 <code>video.js/dist/video-js.css</code></p>
-<span id="more"></span>
-
-<h2 id="React-函数组件和-useEffect-示例"><a href="#React-函数组件和-useEffect-示例" class="headerlink" title="React 函数组件和 useEffect 示例"></a>React 函数组件和 <code>useEffect</code> 示例</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> videojs <span class="keyword">from</span> <span class="string">&#x27;video.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;video.js/dist/video-js.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">VideoJS</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> videoRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> playerRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">const</span> &#123; options, onReady &#125; = props;</span><br><span class="line"></span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 确保 Video.js 播发器仅初始化一次</span></span><br><span class="line">    <span class="keyword">if</span> (!playerRef.<span class="property">current</span>) &#123;</span><br><span class="line">      <span class="comment">// Video.js 播放器需要位于 React 18 严格模式的 el 组件内部。</span></span><br><span class="line">      <span class="keyword">const</span> videoElement = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;video-js&#x27;</span>);</span><br><span class="line"></span><br><span class="line">      videoElement.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;vjs-big-play-centered&#x27;</span>);</span><br><span class="line">      videoRef.<span class="property">current</span>.<span class="title function_">appendChild</span>(videoElement);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> player = (playerRef.<span class="property">current</span> = <span class="title function_">videojs</span>(videoElement, options, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        videojs.<span class="title function_">log</span>(<span class="string">&#x27;player is ready&#x27;</span>);</span><br><span class="line">        onReady &amp;&amp; <span class="title function_">onReady</span>(player);</span><br><span class="line">      &#125;));</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 您可以在 `else` 块中更新现有播发器关于 prop 的更改，例如：</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> player = playerRef.<span class="property">current</span>;</span><br><span class="line"></span><br><span class="line">      player.<span class="title function_">autoplay</span>(options.<span class="property">autoplay</span>);</span><br><span class="line">      player.<span class="title function_">src</span>(options.<span class="property">sources</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [options, videoRef]);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数组件卸载时销毁 Video.js 播放器</span></span><br><span class="line">  <span class="title class_">React</span>.<span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> player = playerRef.<span class="property">current</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (player &amp;&amp; !player.<span class="title function_">isDisposed</span>()) &#123;</span><br><span class="line">        player.<span class="title function_">dispose</span>();</span><br><span class="line">        playerRef.<span class="property">current</span> = <span class="literal">null</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, [playerRef]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-vjs-player</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">ref</span>=<span class="string">&#123;videoRef&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">VideoJS</span>;</span><br></pre></td></tr></table></figure>
-
-<p>最后，像这样使用组件（请参阅 <a href="https://videojs.com/guides/options">Video.js 选项参考</a>）：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span> <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这将从之前的示例中导入函数组件</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">VideoJS</span> <span class="keyword">from</span> <span class="string">&#x27;./VideoJS&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">App</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> playerRef = <span class="title class_">React</span>.<span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> videoJsOptions = &#123;</span><br><span class="line">    <span class="attr">autoplay</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">controls</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">responsive</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">fluid</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">sources</span>: [</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">src</span>: <span class="string">&#x27;/path/to/video.mp4&#x27;</span>,</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&#x27;video/mp4&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handlePlayerReady</span> = (<span class="params">player</span>) =&gt; &#123;</span><br><span class="line">    playerRef.<span class="property">current</span> = player;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 这里可以处理播放器事件,例如:</span></span><br><span class="line">    player.<span class="title function_">on</span>(<span class="string">&#x27;waiting&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;player is waiting&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    player.<span class="title function_">on</span>(<span class="string">&#x27;dispose&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;player will dispose&#x27;</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>Rest of app here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">VideoJS</span> <span class="attr">options</span>=<span class="string">&#123;videoJsOptions&#125;</span> <span class="attr">onReady</span>=<span class="string">&#123;handlePlayerReady&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>Rest of app here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="在-Video-js-组件中使用-React-组件"><a href="#在-Video-js-组件中使用-React-组件" class="headerlink" title="在 Video.js 组件中使用 React 组件"></a>在 Video.js 组件中使用 React 组件</h2><p>此示例演示了在 Video.js 播放器中的 Video 组件中使用 React 组件。通过这种方法，开发人员可以通过 React 管理他们的自定义 Video.js 组件。</p>
-<p>首先，创建一个普通的 React 组件：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Component</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">ExampleReactComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Component</span> &#123;</span><br><span class="line">  <span class="title function_">render</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.props.text&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在此组件中，<code>vjsBridgeComponent</code> 在其 <code>props</code> 上可用。 通过该对象，可以使用<code>vjsBridgeComponent</code> 的方法。</p>
-<p>Video.js 播放器可以通过相同的方式在此 React 组件中引用：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> player = <span class="variable language_">this</span>.<span class="property">props</span>.<span class="property">vjsBridgeComponent</span>.<span class="title function_">player</span>();</span><br></pre></td></tr></table></figure>
-
-<p>接下来，创建一个 Video.js 组件。</p>
-<p>此组件将 React 组件呈现为自身。基本上，Video.js 组件充当 Video.js 播放器和 React 组件之间的桥梁：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">ExampleReactComponent</span> <span class="keyword">from</span> <span class="string">&#x27;./example-react-component&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">ReactDOM</span> <span class="keyword">from</span> <span class="string">&#x27;react-dom&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> videojs <span class="keyword">from</span> <span class="string">&#x27;video.js&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">VjsComponent</span> = videojs.<span class="title function_">getComponent</span>(<span class="string">&#x27;Component&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ExampleVjsBridgeComponent</span> <span class="keyword">extends</span> <span class="title class_ inherited__">VjsComponent</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">player, options</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(player, options);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将当前类上下文绑定到 mountReactComponent 方法</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">mountReactComponent</span> = <span class="variable language_">this</span>.<span class="property">mountReactComponent</span>.<span class="title function_">bind</span>(<span class="variable language_">this</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当播放器准备好时，调用方法来挂载 React 组件</span></span><br><span class="line">    player.<span class="title function_">ready</span>(<span class="function">() =&gt;</span> <span class="variable language_">this</span>.<span class="title function_">mountReactComponent</span>());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当该组件被销毁时，删除 React root</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">on</span>(<span class="string">&#x27;dispose&#x27;</span>, <span class="function">() =&gt;</span> <span class="title class_">ReactDOM</span>.<span class="title function_">unmountComponentAtNode</span>(<span class="variable language_">this</span>.<span class="title function_">el</span>()));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 此方法将 ExampleReactComponent 渲染到 Video.js 组件 `this.el()` 的 DOM 元素中。</span></span><br><span class="line">  <span class="title function_">mountReactComponent</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title class_">ReactDOM</span>.<span class="title function_">render</span>(</span><br><span class="line">      <span class="language-xml"><span class="tag">&lt;<span class="name">ExampleReactComponent</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">vjsBridgeComponent</span>=<span class="string">&#123;this&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">text</span>=<span class="string">&#x27;Example React Component&#x27;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      /&gt;</span></span>,</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">el</span>()</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 确保注册 Video.js 组件，以便 Video.js 知道它存在</span></span><br><span class="line">videojs.<span class="title function_">registerComponent</span>(</span><br><span class="line">  <span class="string">&#x27;exampleVjsBridgeComponent&#x27;</span>,</span><br><span class="line">  <span class="title class_">ExampleVjsBridgeComponent</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">ExampleVjsBridgeComponent</span>;</span><br></pre></td></tr></table></figure>
-
-<p>最后，可以将 Video.js 桥接组件添加到播放器中，如下所示：</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 组件安装时实例化 Video.js 播放器</span></span><br><span class="line">  <span class="title function_">componentDidMount</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">player</span> = <span class="title function_">videojs</span>(<span class="variable language_">this</span>.<span class="property">videoNode</span>, <span class="variable language_">this</span>.<span class="property">props</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      videojs.<span class="title function_">log</span>(<span class="string">&#x27;onPlayerReady&#x27;</span>, <span class="variable language_">this</span>);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 ExampleVjsBridgeComponent 添加为播放器的子级（或播放器内的另一个组件，例如控制栏）。</span></span><br><span class="line">    <span class="comment">// 您可以使用此方法的第二个参数将选项传递给桥接组件。</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">player</span>.<span class="title function_">addChild</span>(<span class="string">&#x27;exampleVjsBridgeComponent&#x27;</span>, &#123;&#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Video.js</tag>
-        <tag>React</tag>
-        <tag>示例</tag>
       </tags>
   </entry>
   <entry>
@@ -3863,6 +4313,14 @@
       </tags>
   </entry>
   <entry>
+    <title>Whoosh 10 - 查询对象</title>
+    <url>/whoosh/10-%E6%9F%A5%E8%AF%A2%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>Whoosh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Whoosh 11 - 分析器 (analyzers)</title>
     <url>/whoosh/11-%E5%88%86%E6%9E%90%E5%99%A8%20(Analyzers)/</url>
     <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>分析器 (analyzers) 是一个函数或可调用类（具有 <code>__call__</code> 方法的类），它接受一个 unicode 字符串并返回一个标记 (tokens) 生成器。 </p>
@@ -4068,14 +4526,6 @@
 <p>如果你将自己的分词器、过滤器或分析器实现为类，则应实现 <code>__eq__</code> 方法。 这对于允许比较模式 (<code>Schema</code>) 对象很重要。</p>
 <p>在 <code>Token</code> 对象上混合 (mixing) 持久设置 (<code>setting</code>) 和瞬态信息 (<code>information</code>) 属性并不是特别优雅。 如果我有更好的想法，我可能会改变它。 ;) 不需要通过调用分词器和过滤器来实现分析器。 分词器和过滤器只是一种构造代码的便捷方式。 你可以随意编写分析器，只要它实现了 <code>__call__</code> 即可。</p>
 ]]></content>
-      <tags>
-        <tag>Whoosh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Whoosh 10 - 查询对象</title>
-    <url>/whoosh/10-%E6%9F%A5%E8%AF%A2%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[]]></content>
       <tags>
         <tag>Whoosh</tag>
       </tags>
@@ -4397,56 +4847,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Whoosh 16 - 查询扩展和关键词提取</title>
-    <url>/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 提供了计算一组文档的“关键术语”的方法。 对于这些方法，“关键术语”基本上是指在给定文档中频繁出现但在整个索引集合中相对不常见的术语。</p>
-<span id="more"></span>
-
-<p>因为这是一个纯粹的统计操作，而不是自然语言处理或 AI 功能，所以结果的质量会根据内容、文档集合的大小以及您提取关键字的文档数量而有所不同。</p>
-<p>这些方法可用于为用户提供以下功能：</p>
-<ul>
-<li>搜索词扩展。 您可以从查询中提取前 N 个结果的关键术语，并将它们作为附加&#x2F;替代查询术语建议给用户尝试。</li>
-<li>标签建议。 提取单个文档的关键术语可能会为标记文档提供有用的建议。</li>
-<li>“更像这样”。 您可以从查询中提取前十个左右结果的关键术语（并删除原始查询术语），并将这些关键字用作另一个查询的基础，该查询可能会使用用户没有想到的术语找到更多文档。</li>
-</ul>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ul>
-<li><p>获取更多文档，例如某个搜索结果。 这要求您要匹配的字段是矢量或存储的，或者您可以访问原始文本（例如来自数据库）。</p>
-<p>使用 more_like_this()：</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">results = mysearcher.search(myquery)</span><br><span class="line">first_hit = results[<span class="number">0</span>]</span><br><span class="line">more_results = first_hit.more_like_this(<span class="string">&quot;content&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>在 <code>whoosh.searching.Results</code> 对象中提取前 N 个文档的关键字。 这要求该字段是向量化的或存储的。</p>
-<p>使用 <code>whoosh.searching.Results</code> 对象的 <code>key_terms()</code> 方法从结果集的前 N 个文档中提取关键字。</p>
-<p>例如，要从结果对象的前十个文档的内容字段中提取五个关键术语：</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">            <span class="keyword">in</span> results.key_terms(<span class="string">&quot;content&quot;</span>, docs=<span class="number">10</span>, numterms=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>为任意一组文档提取关键字。 这要求该字段是向量化的或存储的。</p>
-<p>使用 <code>whoosh.searching.Searcher</code> 对象的 <code>document_number()</code> 或 <code>document_numbers()</code> 方法获取要从中提取关键字的文档的文档编号。</p>
-<p>给定文档编号列表，使用 <code>whoosh.searching.Searcher</code> 的 <code>key_terms()</code> 方法提取关键字。</p>
-<p>例如，假设您有一个电子邮件索引。 从 <code>emailto</code> 字段包含 <code>matt@whoosh.ca</code> 的电子邮件的内容字段中提取关键术语：</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    docnums = s.document_numbers(emailto=<span class="string">u&quot;matt@whoosh.ca&quot;</span>)</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms(docnums, <span class="string">&quot;body&quot;</span>)]</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>从不在索引中的任意文本中提取关键字。</p>
-<p>给定文本，使用 whoosh.searching.Searcher 的 key_terms_from_text() 方法提取关键字：</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms_from_text(<span class="string">&quot;body&quot;</span>, mytext)]</span><br></pre></td></tr></table></figure>
-
-<h2 id="扩展模型"><a href="#扩展模型" class="headerlink" title="扩展模型"></a>扩展模型</h2><p><code>whoosh.classify</code> 模块中的 <code>ExpansionModel</code> 子类对关键词实现了不同的权重函数。 这些模型从 Terrier 中的原始 Java 实现转换为 Python。</p>
-]]></content>
-      <tags>
-        <tag>Whoosh</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Whoosh 15 - 高亮显示 (highlighted) 搜索结果</title>
     <url>/whoosh/15-%E9%AB%98%E4%BA%AE%E6%98%BE%E7%A4%BA%20(highlighted)%20%E6%90%9C%E7%B4%A2%E7%BB%93%E6%9E%9C/</url>
     <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>高亮显示 (highlighted) 系统以管道 (pipeline) 方式进行工作，具有四种组件类型。</p>
@@ -4621,6 +5021,56 @@
       </tags>
   </entry>
   <entry>
+    <title>Whoosh 16 - 查询扩展和关键词提取</title>
+    <url>/whoosh/16-%E6%9F%A5%E8%AF%A2%E6%89%A9%E5%B1%95%E5%92%8C%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8F%90%E5%8F%96/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 提供了计算一组文档的“关键术语”的方法。 对于这些方法，“关键术语”基本上是指在给定文档中频繁出现但在整个索引集合中相对不常见的术语。</p>
+<span id="more"></span>
+
+<p>因为这是一个纯粹的统计操作，而不是自然语言处理或 AI 功能，所以结果的质量会根据内容、文档集合的大小以及您提取关键字的文档数量而有所不同。</p>
+<p>这些方法可用于为用户提供以下功能：</p>
+<ul>
+<li>搜索词扩展。 您可以从查询中提取前 N 个结果的关键术语，并将它们作为附加&#x2F;替代查询术语建议给用户尝试。</li>
+<li>标签建议。 提取单个文档的关键术语可能会为标记文档提供有用的建议。</li>
+<li>“更像这样”。 您可以从查询中提取前十个左右结果的关键术语（并删除原始查询术语），并将这些关键字用作另一个查询的基础，该查询可能会使用用户没有想到的术语找到更多文档。</li>
+</ul>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><ul>
+<li><p>获取更多文档，例如某个搜索结果。 这要求您要匹配的字段是矢量或存储的，或者您可以访问原始文本（例如来自数据库）。</p>
+<p>使用 more_like_this()：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">results = mysearcher.search(myquery)</span><br><span class="line">first_hit = results[<span class="number">0</span>]</span><br><span class="line">more_results = first_hit.more_like_this(<span class="string">&quot;content&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>在 <code>whoosh.searching.Results</code> 对象中提取前 N 个文档的关键字。 这要求该字段是向量化的或存储的。</p>
+<p>使用 <code>whoosh.searching.Results</code> 对象的 <code>key_terms()</code> 方法从结果集的前 N 个文档中提取关键字。</p>
+<p>例如，要从结果对象的前十个文档的内容字段中提取五个关键术语：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">            <span class="keyword">in</span> results.key_terms(<span class="string">&quot;content&quot;</span>, docs=<span class="number">10</span>, numterms=<span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>为任意一组文档提取关键字。 这要求该字段是向量化的或存储的。</p>
+<p>使用 <code>whoosh.searching.Searcher</code> 对象的 <code>document_number()</code> 或 <code>document_numbers()</code> 方法获取要从中提取关键字的文档的文档编号。</p>
+<p>给定文档编号列表，使用 <code>whoosh.searching.Searcher</code> 的 <code>key_terms()</code> 方法提取关键字。</p>
+<p>例如，假设您有一个电子邮件索引。 从 <code>emailto</code> 字段包含 <code>matt@whoosh.ca</code> 的电子邮件的内容字段中提取关键术语：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    docnums = s.document_numbers(emailto=<span class="string">u&quot;matt@whoosh.ca&quot;</span>)</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms(docnums, <span class="string">&quot;body&quot;</span>)]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>从不在索引中的任意文本中提取关键字。</p>
+<p>给定文本，使用 whoosh.searching.Searcher 的 key_terms_from_text() 方法提取关键字：</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> email_index.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    keywords = [keyword <span class="keyword">for</span> keyword, score</span><br><span class="line">                <span class="keyword">in</span> s.key_terms_from_text(<span class="string">&quot;body&quot;</span>, mytext)]</span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展模型"><a href="#扩展模型" class="headerlink" title="扩展模型"></a>扩展模型</h2><p><code>whoosh.classify</code> 模块中的 <code>ExpansionModel</code> 子类对关键词实现了不同的权重函数。 这些模型从 Terrier 中的原始 Java 实现转换为 Python。</p>
+]]></content>
+      <tags>
+        <tag>Whoosh</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Whoosh 18 - 字段缓存</title>
     <url>/whoosh/18-%E5%AD%97%E6%AE%B5%E7%BC%93%E5%AD%98/</url>
     <content><![CDATA[<p>默认 (filedb) 后端在某些情况下使用字段缓存。 字段缓存基本上预先计算索引中文档的顺序以加速排序和分面。</p>
@@ -4637,29 +5087,6 @@
 
 <h2 id="创建自定义缓存策略"><a href="#创建自定义缓存策略" class="headerlink" title="创建自定义缓存策略"></a>创建自定义缓存策略</h2><p>想要实现自定义缓存策略（例如，添加缓存过期）的专家用户应该继承 <code>whoosh.filedb.fieldcache.FieldCachingPolicy</code>。 然后你可以将策略对象的实例传递给 <code>set_caching_policy</code> 方法：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">searcher.set_caching_policy(MyPolicy())</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Whoosh</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Whoosh 20 - 并发、锁定和版本控制</title>
-    <url>/whoosh/20-%E5%B9%B6%E5%8F%91%E3%80%81%E9%94%81%E5%AE%9A%E5%92%8C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</url>
-    <content><![CDATA[<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p><code>FileIndex</code> 对象是“无状态”的，应该可以在线程之间共享。</p>
-<span id="more"></span>
-
-<p><code>Reader</code> 对象（位于 <code>Searcher</code> 对象的基础上）包装打开的文件，并且通常各个方法依赖于一致的文件光标位置（例如，它们连续执行两个 file.read()s，因此如果另一个线程在两个读取调用之间移动光标 坏事会发生）。 你应该在代码中为每个线程使用一个阅读器&#x2F;搜索器。</p>
-<p>读者&#x2F;搜索者倾向于缓存信息（例如用于排序的字段缓存），因此如果你可以在多个搜索请求之间共享一个信息，那将是一个巨大的性能胜利。</p>
-<h2 id="锁定"><a href="#锁定" class="headerlink" title="锁定"></a>锁定</h2><p>一次只有一个线程&#x2F;进程可以写入索引。 当你打开编写器时，它会锁定索引。 如果你尝试在另一个线程&#x2F;进程中打开同一索引上的编写器，它将引发 whoosh.store.LockError。</p>
-<p>在多线程或多进程环境中，你的代码需要注意，如果编写器已经打开，则打开编写器可能会引发此异常。 Whoosh 包括几个示例实现（whoosh.writing.AsyncWriter 和 whoosh.writing.BufferedWriter）来解决写锁问题。</p>
-<p>当写入器处于打开状态且在提交期间，索引仍可用于读取。 现有读者不受影响，新读者可以正常打开当前索引。</p>
-<h2 id="锁定文件"><a href="#锁定文件" class="headerlink" title="锁定文件"></a>锁定文件</h2><p>锁定索引是通过在索引目录中的 <code>&lt;indexname&gt;\_WRITELOCK</code> 文件上获取独占文件锁来实现的。 释放文件锁后，文件并没有被删除，所以文件存在并不代表索引被锁定。</p>
-<h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><p>当你打开阅读器&#x2F;搜索器时，阅读器代表索引当前版本的视图。 如果有人对索引进行更改，任何已经打开的读者都不会自动获取更改。 阅读器看到的索引始终与打开阅读器时的索引相同。</p>
-<p>如果你在多个搜索请求中重复使用 <code>Searcher</code>，你可以使用 <code>whoosh.searching.Searcher.up_to_date()</code> 检查 <code>Searcher</code> 是否是最新版本索引的视图。 如果搜索器不是最新的，你可以使用 <code>whoosh.searching.Searcher.refresh()</code> 获取搜索器的最新副本：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果&#x27;searcher&#x27;不是最新的，替换它</span></span><br><span class="line">searcher = searcher.refresh()</span><br></pre></td></tr></table></figure>
-
-<p>（如果搜索者有最新版本的索引，<code>refresh()</code> 简单地返回它。）</p>
-<p>调用 <code>Searcher.refresh()</code> 比关闭搜索器并打开一个新搜索器更有效，因为它将重新使用任何未更改的底层读取器和缓存。</p>
 ]]></content>
       <tags>
         <tag>Whoosh</tag>
@@ -4703,50 +5130,23 @@
       </tags>
   </entry>
   <entry>
-    <title>Whoosh 21 - 索引和搜索文档层次结构</title>
-    <url>/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 的全文索引本质上是一个平面文档数据库。 但是，Whoosh 支持两种技术来模拟分层文档的索引和查询，即形成父子层次结构的文档集，例如“章节 - 部分 - 段落”或“模块 - 类 - 方法”。</p>
+    <title>Whoosh 20 - 并发、锁定和版本控制</title>
+    <url>/whoosh/20-%E5%B9%B6%E5%8F%91%E3%80%81%E9%94%81%E5%AE%9A%E5%92%8C%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><p><code>FileIndex</code> 对象是“无状态”的，应该可以在线程之间共享。</p>
 <span id="more"></span>
 
-<p>你可以在索引时指定父子关系，方法是将文档分组在同一层次结构中，然后使用 <code>whoosh.query.NestedParent</code> 和 <code>whoosh.query.NestedChildren</code> 根据其子项查找父项，反之亦然。</p>
-<p>或者，你可以使用查询时连接，本质上类似于数据库中的外部键连接，你可以在其中执行一次搜索以查找相关文档，然后使用该文档上的存储值（例如，父字段）来查找另一个文档 .</p>
-<p>这两种方法各有利弊。</p>
-<h2 id="使用嵌套文档索引"><a href="#使用嵌套文档索引" class="headerlink" title="使用嵌套文档索引"></a>使用嵌套文档索引</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>此方法通过将“父”文档及其所有“子”文档索引为一个“组”来工作，因此可以保证它们最终位于同一段中。 你可以使用 <code>IndexWriter.group()</code> 返回的上下文管理器对文档进行分组：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;get result&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add all&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add some&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;multiply&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;delete&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><code>Reader</code> 对象（位于 <code>Searcher</code> 对象的基础上）包装打开的文件，并且通常各个方法依赖于一致的文件光标位置（例如，它们连续执行两个 file.read()s，因此如果另一个线程在两个读取调用之间移动光标 坏事会发生）。 你应该在代码中为每个线程使用一个阅读器&#x2F;搜索器。</p>
+<p>读者&#x2F;搜索者倾向于缓存信息（例如用于排序的字段缓存），因此如果你可以在多个搜索请求之间共享一个信息，那将是一个巨大的性能胜利。</p>
+<h2 id="锁定"><a href="#锁定" class="headerlink" title="锁定"></a>锁定</h2><p>一次只有一个线程&#x2F;进程可以写入索引。 当你打开编写器时，它会锁定索引。 如果你尝试在另一个线程&#x2F;进程中打开同一索引上的编写器，它将引发 whoosh.store.LockError。</p>
+<p>在多线程或多进程环境中，你的代码需要注意，如果编写器已经打开，则打开编写器可能会引发此异常。 Whoosh 包括几个示例实现（whoosh.writing.AsyncWriter 和 whoosh.writing.BufferedWriter）来解决写锁问题。</p>
+<p>当写入器处于打开状态且在提交期间，索引仍可用于读取。 现有读者不受影响，新读者可以正常打开当前索引。</p>
+<h2 id="锁定文件"><a href="#锁定文件" class="headerlink" title="锁定文件"></a>锁定文件</h2><p>锁定索引是通过在索引目录中的 <code>&lt;indexname&gt;\_WRITELOCK</code> 文件上获取独占文件锁来实现的。 释放文件锁后，文件并没有被删除，所以文件存在并不代表索引被锁定。</p>
+<h2 id="版本控制"><a href="#版本控制" class="headerlink" title="版本控制"></a>版本控制</h2><p>当你打开阅读器&#x2F;搜索器时，阅读器代表索引当前版本的视图。 如果有人对索引进行更改，任何已经打开的读者都不会自动获取更改。 阅读器看到的索引始终与打开阅读器时的索引相同。</p>
+<p>如果你在多个搜索请求中重复使用 <code>Searcher</code>，你可以使用 <code>whoosh.searching.Searcher.up_to_date()</code> 检查 <code>Searcher</code> 是否是最新版本索引的视图。 如果搜索器不是最新的，你可以使用 <code>whoosh.searching.Searcher.refresh()</code> 获取搜索器的最新副本：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 如果&#x27;searcher&#x27;不是最新的，替换它</span></span><br><span class="line">searcher = searcher.refresh()</span><br></pre></td></tr></table></figure>
 
-<p>或者，你可以使用 start_group() 和 end_group() 方法：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.start_group()</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    w.end_group()</span><br></pre></td></tr></table></figure>
-
-<p>层次结构的每一层都应该有一个区别于其他层次的查询（例如，在上面的索引中，可以使用 kind:class 或 kind:method 来匹配层次结构的不同层次）。</p>
-<p>为文档的层次结构编制索引后，你可以使用两种查询类型根据子项查找父项，反之亦然。</p>
-<p>（目前默认查询解析器不支持嵌套查询。）</p>
-<h3 id="嵌套父查询"><a href="#嵌套父查询" class="headerlink" title="嵌套父查询"></a>嵌套父查询</h3><p><code>whoosh.query.NestedParent</code> 查询类型允许你指定对子文档的查询，但让查询返回层次结构中更高层的“祖先”文档：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 首先，我们需要一个查询来匹配层次结构中我们想要的“父”</span></span><br><span class="line"><span class="comment"># 级别中的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后，我们需要一个匹配我们想要找到的孩子的查询</span></span><br><span class="line">wanted_kids = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;close&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以进行查询来匹配“name”为“close”的文档，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配子项的“父”文档</span></span><br><span class="line">q = query.NestedParent(all_parents, wanted_kids)</span><br><span class="line"><span class="comment"># results = Index, Calculator</span></span><br></pre></td></tr></table></figure>
-
-<p>请注意，在多于两层的层次结构中，你可以指定匹配层次结构任何层级的“parents”查询，这样你就可以返回匹配子级的顶级祖先，或第二层、第三层等 .</p>
-<p>该查询首先构建一个表示哪些文档是“父”的位向量：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">索引</span><br><span class="line">|      计算器</span><br><span class="line">|      |</span><br><span class="line">1000100100000100</span><br><span class="line">    |        |</span><br><span class="line">    |        累加器</span><br><span class="line">    累加器</span><br></pre></td></tr></table></figure>
-
-<p>然后对于“child”查询的每个匹配项，它从位向量计算前一个父项并将其作为匹配项返回（无论有多少子项匹配，它只返回每个父项一次）。 这个父查找非常有效：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1000100100000100</span><br><span class="line">   |</span><br><span class="line">|&lt;-+ close</span><br></pre></td></tr></table></figure>
-
-<h3 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h3><p><code>NestedParent</code> 的对立面是 <code>whoosh.query.NestedChildren</code>。 此查询允许你匹配父母但返回他们的孩子。 这很有用，例如，搜索专辑标题并返回专辑中的歌曲：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查询匹配我们想要匹配的“父”级别的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;album&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们要匹配的父文档</span></span><br><span class="line">wanted_parents = query.Term(<span class="string">&quot;album_title&quot;</span>, <span class="string">&quot;heaven&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以查询匹配父文档，其中“album_title”包含“heaven”，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配父文档的“子”文档</span></span><br><span class="line">q1 = query.NestedChildren(all_parents, wanted_parents)</span><br></pre></td></tr></table></figure>
-
-<p>然后，你可以将该查询与 <code>AND</code> 子句结合起来，例如，查找出现在专辑名称为“天堂”的专辑中歌曲名称中带有“heaven”的歌曲：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q2 = query.And([q1, query.Term(<span class="string">&quot;song_title&quot;</span>, <span class="string">&quot;hell&quot;</span>)])</span><br></pre></td></tr></table></figure>
-
-<h3 id="删除和更新分层文档"><a href="#删除和更新分层文档" class="headerlink" title="删除和更新分层文档"></a>删除和更新分层文档</h3><p>索引时间方法的缺点是更新和删除。 因为查询的实现依赖于段中连续的父文档和子文档，所以你不能只更新&#x2F;删除一个子文档。 你一次只能更新&#x2F;删除整个顶级文档（例如，如果你的层次结构是“章节 - 部分 - 段落”，则你只能更新或删除整个章节，而不是部分或段落）。 如果层次结构的顶层代表非常大的文本块，这可能涉及大量删除和重建索引。</p>
-<p>目前 <code>Writer.update_document()</code> 不会自动处理嵌套文档。 你必须手动删除并重新添加文档组才能更新它们。</p>
-<p>要删除嵌套文档组，请使用 Writer.delete_by_query() 方法和 NestedParent 查询：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除“累加器”类</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line">to_delete = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">q = query.NestedParent(all_parents, to_delete)</span><br><span class="line"><span class="keyword">with</span> myindex.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.delete_by_query(q)</span><br></pre></td></tr></table></figure>
-
-<h2 id="使用查询时连接"><a href="#使用查询时连接" class="headerlink" title="使用查询时连接"></a>使用查询时连接</h2><p>在 Whoosh 中模拟分层文档的第二种技术涉及使用每个文档上的存储字段指向其父文档，然后在查询时使用该字段的值来查找父文档和子文档。</p>
-<p>例如，如果我们使用指向父类的指针而不是嵌套来索引类和方法的层次结构：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在每个“方法”文档上存储一个指向父级的指针</span></span><br><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Index&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add document&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add reader&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Accumulator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;get result&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Calculator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add all&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add some&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;multiply&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Deleter&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;delete&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在在查询时进行手动连接</span></span><br><span class="line"><span class="keyword">with</span> ix.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    <span class="comment"># 提示：与使用 Searcher.search() 相比，</span></span><br><span class="line">    <span class="comment"># Searcher.document() 和 Searcher.documents()</span></span><br><span class="line">    <span class="comment"># 可让你更轻松地按字段值查找文档</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 子到父：</span></span><br><span class="line">    <span class="comment"># 当&quot;close&quot;方法触发时，打印类的文档字符串</span></span><br><span class="line">    <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(m_name=<span class="string">&quot;close&quot;</span>):</span><br><span class="line">        <span class="comment"># 使用“parent”字段的存储值查找父文档</span></span><br><span class="line">        parent_doc = s.document(c_name=child_doc[<span class="string">&quot;parent&quot;</span>])</span><br><span class="line">        <span class="comment"># 打印父文档存储的文档字符串字段</span></span><br><span class="line">        <span class="built_in">print</span>(parent_doc[<span class="string">&quot;docstring&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 父到子:</span></span><br><span class="line">    <span class="comment"># 在文档字符串中查找带有“big”的类并打印它们的方法</span></span><br><span class="line">    q = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>) &amp; query.Term(<span class="string">&quot;docstring&quot;</span>, <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> hit <span class="keyword">in</span> s.search(q, limit=<span class="literal">None</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Class name=&quot;</span>, hit[<span class="string">&quot;c_name&quot;</span>], <span class="string">&quot;methods:&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(parent=hit[<span class="string">&quot;c_name&quot;</span>]):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;  Method name=&quot;</span>, child_doc[<span class="string">&quot;m_name&quot;</span>])</span><br></pre></td></tr></table></figure>
-
-<p>这种技术比索引时间嵌套更灵活，因为你可以逐个删除&#x2F;更新层次结构中的单个文档，尽管它不支持轻松查找不同的父级别。 它也比索引时间嵌套慢（可能慢得多），因为你必须对每个找到的文档执行额外的搜索。</p>
-<p>Whoosh 的未来版本可能会包含“加入”查询，以使此过程更高效（或至少更自动化）。</p>
+<p>（如果搜索者有最新版本的索引，<code>refresh()</code> 简单地返回它。）</p>
+<p>调用 <code>Searcher.refresh()</code> 比关闭搜索器并打开一个新搜索器更有效，因为它将重新使用任何未更改的底层读取器和缓存。</p>
 ]]></content>
       <tags>
         <tag>Whoosh</tag>
@@ -4808,6 +5208,56 @@
 
 <p>词条 X 在文档 Y 中吗？</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 检查文档 500 的“content”字段是否包含词条“wobble”</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 没有词条向量，跳过列表...</span></span><br><span class="line">postings = searcher.postings(<span class="string">&quot;content&quot;</span>, <span class="string">&quot;wobble&quot;</span>)</span><br><span class="line">postings.skip_to(<span class="number">500</span>)</span><br><span class="line"><span class="keyword">return</span> postings.<span class="built_in">id</span>() == <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...或者更慢但更简单的方法</span></span><br><span class="line">docset = <span class="built_in">set</span>(searcher.postings(<span class="string">&quot;content&quot;</span>, <span class="string">&quot;wobble&quot;</span>).all_ids())</span><br><span class="line"><span class="keyword">return</span> <span class="number">500</span> <span class="keyword">in</span> docset</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果字段有词向量，跳过列表...</span></span><br><span class="line">vector = searcher.vector(<span class="number">500</span>, <span class="string">&quot;content&quot;</span>)</span><br><span class="line">vector.skip_to(<span class="string">&quot;wobble&quot;</span>)</span><br><span class="line"><span class="keyword">return</span> vector.<span class="built_in">id</span>() == <span class="string">&quot;wobble&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ...或者更慢但更简单的方法</span></span><br><span class="line">wordset = <span class="built_in">set</span>(searcher.vector(<span class="number">500</span>, <span class="string">&quot;content&quot;</span>).all_ids())</span><br><span class="line"><span class="keyword">return</span> <span class="string">&quot;wobble&quot;</span> <span class="keyword">in</span> wordset</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Whoosh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Whoosh 21 - 索引和搜索文档层次结构</title>
+    <url>/whoosh/21-%E7%B4%A2%E5%BC%95%E5%92%8C%E6%90%9C%E7%B4%A2%E6%96%87%E6%A1%A3%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Whoosh 的全文索引本质上是一个平面文档数据库。 但是，Whoosh 支持两种技术来模拟分层文档的索引和查询，即形成父子层次结构的文档集，例如“章节 - 部分 - 段落”或“模块 - 类 - 方法”。</p>
+<span id="more"></span>
+
+<p>你可以在索引时指定父子关系，方法是将文档分组在同一层次结构中，然后使用 <code>whoosh.query.NestedParent</code> 和 <code>whoosh.query.NestedChildren</code> 根据其子项查找父项，反之亦然。</p>
+<p>或者，你可以使用查询时连接，本质上类似于数据库中的外部键连接，你可以在其中执行一次搜索以查找相关文档，然后使用该文档上的存储值（例如，父字段）来查找另一个文档 .</p>
+<p>这两种方法各有利弊。</p>
+<h2 id="使用嵌套文档索引"><a href="#使用嵌套文档索引" class="headerlink" title="使用嵌套文档索引"></a>使用嵌套文档索引</h2><h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p>此方法通过将“父”文档及其所有“子”文档索引为一个“组”来工作，因此可以保证它们最终位于同一段中。 你可以使用 <code>IndexWriter.group()</code> 返回的上下文管理器对文档进行分组：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;get result&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add all&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add some&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;multiply&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    <span class="keyword">with</span> w.group():</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">        w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;delete&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或者，你可以使用 start_group() 和 end_group() 方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.start_group()</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, name=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add document&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;add reader&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, name=<span class="string">&quot;close&quot;</span>)</span><br><span class="line">    w.end_group()</span><br></pre></td></tr></table></figure>
+
+<p>层次结构的每一层都应该有一个区别于其他层次的查询（例如，在上面的索引中，可以使用 kind:class 或 kind:method 来匹配层次结构的不同层次）。</p>
+<p>为文档的层次结构编制索引后，你可以使用两种查询类型根据子项查找父项，反之亦然。</p>
+<p>（目前默认查询解析器不支持嵌套查询。）</p>
+<h3 id="嵌套父查询"><a href="#嵌套父查询" class="headerlink" title="嵌套父查询"></a>嵌套父查询</h3><p><code>whoosh.query.NestedParent</code> 查询类型允许你指定对子文档的查询，但让查询返回层次结构中更高层的“祖先”文档：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 首先，我们需要一个查询来匹配层次结构中我们想要的“父”</span></span><br><span class="line"><span class="comment"># 级别中的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后，我们需要一个匹配我们想要找到的孩子的查询</span></span><br><span class="line">wanted_kids = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;close&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以进行查询来匹配“name”为“close”的文档，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配子项的“父”文档</span></span><br><span class="line">q = query.NestedParent(all_parents, wanted_kids)</span><br><span class="line"><span class="comment"># results = Index, Calculator</span></span><br></pre></td></tr></table></figure>
+
+<p>请注意，在多于两层的层次结构中，你可以指定匹配层次结构任何层级的“parents”查询，这样你就可以返回匹配子级的顶级祖先，或第二层、第三层等 .</p>
+<p>该查询首先构建一个表示哪些文档是“父”的位向量：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">索引</span><br><span class="line">|      计算器</span><br><span class="line">|      |</span><br><span class="line">1000100100000100</span><br><span class="line">    |        |</span><br><span class="line">    |        累加器</span><br><span class="line">    累加器</span><br></pre></td></tr></table></figure>
+
+<p>然后对于“child”查询的每个匹配项，它从位向量计算前一个父项并将其作为匹配项返回（无论有多少子项匹配，它只返回每个父项一次）。 这个父查找非常有效：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">1000100100000100</span><br><span class="line">   |</span><br><span class="line">|&lt;-+ close</span><br></pre></td></tr></table></figure>
+
+<h3 id="嵌套子查询"><a href="#嵌套子查询" class="headerlink" title="嵌套子查询"></a>嵌套子查询</h3><p><code>NestedParent</code> 的对立面是 <code>whoosh.query.NestedChildren</code>。 此查询允许你匹配父母但返回他们的孩子。 这很有用，例如，搜索专辑标题并返回专辑中的歌曲：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查询匹配我们想要匹配的“父”级别的所有文档</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;album&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 我们要匹配的父文档</span></span><br><span class="line">wanted_parents = query.Term(<span class="string">&quot;album_title&quot;</span>, <span class="string">&quot;heaven&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在我们可以查询匹配父文档，其中“album_title”包含“heaven”，</span></span><br><span class="line"><span class="comment"># 但查询将返回匹配父文档的“子”文档</span></span><br><span class="line">q1 = query.NestedChildren(all_parents, wanted_parents)</span><br></pre></td></tr></table></figure>
+
+<p>然后，你可以将该查询与 <code>AND</code> 子句结合起来，例如，查找出现在专辑名称为“天堂”的专辑中歌曲名称中带有“heaven”的歌曲：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">q2 = query.And([q1, query.Term(<span class="string">&quot;song_title&quot;</span>, <span class="string">&quot;hell&quot;</span>)])</span><br></pre></td></tr></table></figure>
+
+<h3 id="删除和更新分层文档"><a href="#删除和更新分层文档" class="headerlink" title="删除和更新分层文档"></a>删除和更新分层文档</h3><p>索引时间方法的缺点是更新和删除。 因为查询的实现依赖于段中连续的父文档和子文档，所以你不能只更新&#x2F;删除一个子文档。 你一次只能更新&#x2F;删除整个顶级文档（例如，如果你的层次结构是“章节 - 部分 - 段落”，则你只能更新或删除整个章节，而不是部分或段落）。 如果层次结构的顶层代表非常大的文本块，这可能涉及大量删除和重建索引。</p>
+<p>目前 <code>Writer.update_document()</code> 不会自动处理嵌套文档。 你必须手动删除并重新添加文档组才能更新它们。</p>
+<p>要删除嵌套文档组，请使用 Writer.delete_by_query() 方法和 NestedParent 查询：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 删除“累加器”类</span></span><br><span class="line">all_parents = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>)</span><br><span class="line">to_delete = query.Term(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">q = query.NestedParent(all_parents, to_delete)</span><br><span class="line"><span class="keyword">with</span> myindex.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.delete_by_query(q)</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用查询时连接"><a href="#使用查询时连接" class="headerlink" title="使用查询时连接"></a>使用查询时连接</h2><p>在 Whoosh 中模拟分层文档的第二种技术涉及使用每个文档上的存储字段指向其父文档，然后在查询时使用该字段的值来查找父文档和子文档。</p>
+<p>例如，如果我们使用指向父类的指针而不是嵌套来索引类和方法的层次结构：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 在每个“方法”文档上存储一个指向父级的指针</span></span><br><span class="line"><span class="keyword">with</span> ix.writer() <span class="keyword">as</span> w:</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Index&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add document&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add reader&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Index&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Accumulator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;get result&quot;</span>, parent=<span class="string">&quot;Accumulator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Calculator&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add all&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add some&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;multiply&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;close&quot;</span>, parent=<span class="string">&quot;Calculator&quot;</span>)</span><br><span class="line"></span><br><span class="line">    w.add_document(kind=<span class="string">&quot;class&quot;</span>, c_name=<span class="string">&quot;Deleter&quot;</span>, docstring=<span class="string">&quot;...&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;add&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line">    w.add_document(kind=<span class="string">&quot;method&quot;</span>, m_name=<span class="string">&quot;delete&quot;</span>, parent=<span class="string">&quot;Deleter&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现在在查询时进行手动连接</span></span><br><span class="line"><span class="keyword">with</span> ix.searcher() <span class="keyword">as</span> s:</span><br><span class="line">    <span class="comment"># 提示：与使用 Searcher.search() 相比，</span></span><br><span class="line">    <span class="comment"># Searcher.document() 和 Searcher.documents()</span></span><br><span class="line">    <span class="comment"># 可让你更轻松地按字段值查找文档</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 子到父：</span></span><br><span class="line">    <span class="comment"># 当&quot;close&quot;方法触发时，打印类的文档字符串</span></span><br><span class="line">    <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(m_name=<span class="string">&quot;close&quot;</span>):</span><br><span class="line">        <span class="comment"># 使用“parent”字段的存储值查找父文档</span></span><br><span class="line">        parent_doc = s.document(c_name=child_doc[<span class="string">&quot;parent&quot;</span>])</span><br><span class="line">        <span class="comment"># 打印父文档存储的文档字符串字段</span></span><br><span class="line">        <span class="built_in">print</span>(parent_doc[<span class="string">&quot;docstring&quot;</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 父到子:</span></span><br><span class="line">    <span class="comment"># 在文档字符串中查找带有“big”的类并打印它们的方法</span></span><br><span class="line">    q = query.Term(<span class="string">&quot;kind&quot;</span>, <span class="string">&quot;class&quot;</span>) &amp; query.Term(<span class="string">&quot;docstring&quot;</span>, <span class="string">&quot;big&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> hit <span class="keyword">in</span> s.search(q, limit=<span class="literal">None</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Class name=&quot;</span>, hit[<span class="string">&quot;c_name&quot;</span>], <span class="string">&quot;methods:&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> child_doc <span class="keyword">in</span> s.documents(parent=hit[<span class="string">&quot;c_name&quot;</span>]):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;  Method name=&quot;</span>, child_doc[<span class="string">&quot;m_name&quot;</span>])</span><br></pre></td></tr></table></figure>
+
+<p>这种技术比索引时间嵌套更灵活，因为你可以逐个删除&#x2F;更新层次结构中的单个文档，尽管它不支持轻松查找不同的父级别。 它也比索引时间嵌套慢（可能慢得多），因为你必须对每个找到的文档执行额外的搜索。</p>
+<p>Whoosh 的未来版本可能会包含“加入”查询，以使此过程更高效（或至少更自动化）。</p>
 ]]></content>
       <tags>
         <tag>Whoosh</tag>

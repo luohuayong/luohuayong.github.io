@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="netfilter&#x2F;iptables 包过滤系统由两个组件 netfilter 和 iptables 。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iptables 学习笔记">
+<meta property="og:url" content="http://example.com/proxy/iptables%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="netfilter&#x2F;iptables 包过滤系统由两个组件 netfilter 和 iptables 。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/proxy/iptable1.jpg">
+<meta property="og:image" content="http://example.com/images/proxy/iptable2.jpg">
+<meta property="article:published_time" content="2023-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-09-13T04:15:05.536Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="Proxy 代理">
+<meta property="article:tag" content="iptables">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/proxy/iptable1.jpg">
+
+
+<link rel="canonical" href="http://example.com/proxy/iptables%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/proxy/iptables%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"proxy/iptables 学习笔记/","title":"iptables 学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>iptables 学习笔记 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E3%80%81%E8%A1%A8%E5%92%8C%E9%93%BE"><span class="nav-number">1.</span> <span class="nav-text">规则、表和链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables-%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">iptables 命令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iptables-%E8%A7%84%E5%88%99%E7%9A%84%E5%8A%A8%E4%BD%9C"><span class="nav-number">3.</span> <span class="nav-text">iptables 规则的动作</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/proxy/iptables%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="iptables 学习笔记 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          iptables 学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2023-09-12T00:00:00+08:00">2023-09-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-09-13 12:15:05" itemprop="dateModified" datetime="2023-09-13T12:15:05+08:00">2023-09-13</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>netfilter&#x2F;iptables 包过滤系统由两个组件 netfilter 和 iptables 。</p>
+<span id="more"></span>
+
+<p>netfilter 组件也称为内核空间（kernelspace），是内核的一部分，由一些信息包过滤表组成，这些表包含内核用来控制信息包过滤处理的规则集。</p>
+<p>iptables 组件是一种工具，也称为用户空间（userspace），它使插入、修改和除去信息包过滤表中的规则变得容易。</p>
+<p><img src="/../../images/proxy/iptable1.jpg" alt="iptable1"></p>
+<ol>
+<li><p>一个数据包进入网卡时，它首先进入 PREROUTING 链，内核根据数据包目的 IP 判断是否需要转发出去。</p>
+</li>
+<li><p>如果数据包就是进入本机的，它就会沿着图向下移动，到达 INPUT 链。数据包到了 INPUT 链后，任何进程都会收到它。本机上运行的程序可以发送数据包，这些数据包会经过 OUTPUT 链，然后到达 POSTROUTING 链输出。</p>
+</li>
+<li><p>如果数据包是要转发出去的，且内核允许转发，数据包就会如图所示向右移动，经过 FORWARD 链，然后到达 POSTROUTING 链输出。</p>
+</li>
+</ol>
+<h3 id="规则、表和链"><a href="#规则、表和链" class="headerlink" title="规则、表和链"></a>规则、表和链</h3><ol>
+<li><p>规则（rules）<br>规则（rules）其实就是网络管理员预定义的条件，规则一般的定义为“如果数据包头符合这样的条件，就这样处理这个数据包”。规则存储在内核空间的信息包过滤表中，这些规则分别指定了源地址、目的地址、传输协议（如 TCP、UDP、ICMP）和服务类型（如 HTTP、FTP 和 SMTP）等。当数据包与规则匹配时，iptables 就根据规则所定义的方法来处理这些数据包，如放行（accept）、拒绝（reject）和丢弃（drop）等。配置防火墙的主要工作就是添加、修改和删除这些规则。</p>
+</li>
+<li><p>链（chains）<br>链（chains）是数据包传播的路径，每一条链其实就是众多规则中的一个检查清单，每一条链中可以有一条或数条规则。当一个数据包到达一个链时，iptables 就会从链中第一条规则开始检查，看该数据包是否满足规则所定义的条件。如果满足，系统就会根据该条规则所定义的方法处理该数据包；否则 iptables 将继续检查下一条规则，如果该数据包不符合链中任一条规则，iptables 就会根据该链预先定义的默认策略来处理数据包。</p>
+</li>
+<li><p>表（tables）<br>表（tables）提供特定的功能，iptables 内置了 4 个表，即 raw 表、filter 表、nat 表和 mangle 表，分别用于实现包过滤，网络地址转换和包重构的功能。<br><img src="/../../images/proxy/iptable2.jpg" alt="iptable2"></p>
+<ol>
+<li><p>raw 表<br>只使用在 PREROUTING 链和 OUTPUT 链上,因为优先级最高，从而可以对收到的数据包在连接跟踪前进行处理。一但用户使用了 RAW 表,在 某个链上,RAW 表处理完后,将跳过 NAT 表和 ip_conntrack 处理,即不再做地址转换和数据包的链接跟踪处理了.</p>
+</li>
+<li><p>filter 表<br>主要用于过滤数据包，该表根据系统管理员预定义的一组规则过滤符合条件的数据包。对于防火墙而言，主要利用在 filter 表中指定的规则来实现对数据包的过滤。Filter 表是默认的表，如果没有指定哪个表，iptables 就默认使用 filter 表来执行所有命令，filter 表包含了 INPUT 链（处理进入的数据包），RORWARD 链（处理转发的数据包），OUTPUT 链（处理本地生成的数据包）在 filter 表中只能允许对数据包进行接受，丢弃的操作，而无法对数据包进行更改</p>
+</li>
+<li><p>nat 表<br>主要用于网络地址转换 NAT，该表可以实现一对一，一对多，多对多等 NAT 工作，iptables 就是使用该表实现共享上网的，NAT 表包含了 PREROUTING 链（修改即将到来的数据包），POSTROUTING 链（修改即将出去的数据包），OUTPUT 链（修改路由之前本地生成的数据包）</p>
+</li>
+<li><p>mangle 表<br>主要用于对指定数据包进行更改，在内核版本 2.4.18 后的 linux 版本中该表包含的链为：INPUT 链（处理进入的数据包），RORWARD 链（处理转发的数据包），OUTPUT 链（处理本地生成的数据包）POSTROUTING 链（修改即将出去的数据包），PREROUTING 链（修改即将到来的数据包）</p>
+</li>
+<li><p>规则表之间的优先顺序：<br>raw——mangle——nat——filter</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="iptables-命令格式"><a href="#iptables-命令格式" class="headerlink" title="iptables 命令格式"></a>iptables 命令格式</h3><p>iptables 命令一般的格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables [-t 表] -命令 匹配 操作</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>-t 表<br>表选项用于指定命令应用于哪个 iptables 内置表。</p>
+</li>
+<li><p>命令<br> 命令选项用于指定 iptables 的执行方式，包括插入规则，删除规则和添加规则，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="left">命令</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">-A –append &lt;链名&gt;</td>
+<td align="left">在规则列表的最后增加 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-D –delete &lt;链名&gt;</td>
+<td align="left">从规则列表中删除 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-E –rename-chain &lt;链名&gt;</td>
+<td align="left">修改自订规则链的名称</td>
+</tr>
+<tr>
+<td align="left">-F –flush &lt;链名&gt;</td>
+<td align="left">删除表中所有规则</td>
+</tr>
+<tr>
+<td align="left">-I –insert &lt;链名&gt;</td>
+<td align="left">在指定的位置插入 1 条规则</td>
+</tr>
+<tr>
+<td align="left">-L –list &lt;链名&gt;</td>
+<td align="left">查看 iptables 规则列表</td>
+</tr>
+<tr>
+<td align="left">-N –new-chain &lt;链名&gt;</td>
+<td align="left">定义新的自订规则链</td>
+</tr>
+<tr>
+<td align="left">-P –policy &lt;链名&gt;</td>
+<td align="left">定义默认策略</td>
+</tr>
+<tr>
+<td align="left">-R –replace &lt;链名&gt;</td>
+<td align="left">替换规则列表中的某条规则</td>
+</tr>
+<tr>
+<td align="left">-Z –zero &lt;链名&gt;</td>
+<td align="left">将表中数据包计数器和流量计数器归零</td>
+</tr>
+<tr>
+<td align="left">-X –delete-chain &lt;链名&gt;</td>
+<td align="left">删除自定义链</td>
+</tr>
+<tr>
+<td align="left">-v –verbose &lt;链名&gt;</td>
+<td align="left">与 -L 命令一起使用显示更多更详细的信息</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>匹配规则<br> 匹配选项指定数据包与规则匹配所具有的特征，包括源地址，目的地址，传输协议和端口号，如下表所示</p>
+<table>
+<thead>
+<tr>
+<th>匹配</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-i –in-interface &lt;网络接口名&gt;</td>
+<td>指定数据包从哪个网络接口进入</td>
+</tr>
+<tr>
+<td>-o –out-interface &lt;网络接口名&gt;</td>
+<td>指定数据包从哪个网络接口输出</td>
+</tr>
+<tr>
+<td>-p —proto &lt;协议类型&gt;</td>
+<td>指定数据包匹配的协议，如 TCP、UDP 和 ICMP 等</td>
+</tr>
+<tr>
+<td>-s –source &lt;源地址或子网&gt;</td>
+<td>指定数据包匹配的源地址</td>
+</tr>
+<tr>
+<td>–sport &lt;源端口号&gt;</td>
+<td>指定数据包匹配的源端口号</td>
+</tr>
+<tr>
+<td>–dport &lt;目的端口号&gt;</td>
+<td>指定数据包匹配的目的端口号</td>
+</tr>
+<tr>
+<td>-m –match &lt;匹配的模块&gt;</td>
+<td>指定数据包规则所使用的过滤模块</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h3 id="iptables-规则的动作"><a href="#iptables-规则的动作" class="headerlink" title="iptables 规则的动作"></a>iptables 规则的动作</h3><ul>
+<li><p>REJECT<br>拦阻该数据包，并返回数据包通知对方，可以返回的数据包有几个选择：ICMP port-unreachable、ICMP echo-reply 或是 tcp-reset（这个数据包包会要求对方关闭联机），进行完此处理动作后，将不再比对其它规则，直接中断过滤程序。 范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A  INPUT -p TCP --dport 22 -j REJECT --reject-with ICMP echo-reply</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DROP<br>丢弃数据包不予处理，进行完此处理动作后，将不再比对其它规则，直接中断过滤程序。</p>
+</li>
+<li><p>REDIRECT<br>将封包重新导向到另一个端口（PNAT），进行完此处理动作后，将会继续比对其它规则。这个功能可以用来实作透明代理 或用来保护 web 服务器。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8081</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MASQUERADE<br>改写封包来源 IP 为防火墙的 IP，可以指定 port 对应的范围，进行完此处理动作后，直接跳往下一个规则链（mangle:postrouting）。这个功能与 SNAT 略有不同，当进行 IP 伪装时，不需指定要伪装成哪个 IP，IP 会从网卡直接读取，当使用拨接连线时，IP 通常是由 ISP 公司的 DHCP 服务器指派的，这个时候 MASQUERADE 特别有用。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -p TCP -j MASQUERADE --to-ports 21000-31000</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>LOG<br>将数据包相关信息纪录在 &#x2F;var&#x2F;log 中，详细位置请查阅 &#x2F;etc&#x2F;syslog.conf 配置文件，进行完此处理动作后，将会继续比对其它规则。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -A INPUT -p tcp -j LOG --log-prefix <span class="string">&quot;input packet&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SNAT<br>改写封包来源 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将直接跳往下一个规则炼（mangle:postrouting）。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -p tcp-o eth0 -j SNAT --to-source 192.168.10.15-192.168.10.160:2100-3200</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>DNAT<br>改写数据包包目的地 IP 为某特定 IP 或 IP 范围，可以指定 port 对应的范围，进行完此处理动作后，将会直接跳往下一个规则链（filter:input 或 filter:forward）。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp -d 15.45.23.67 --dport 80 -j DNAT --to-destination 192.168.10.1-192.168.10.10:80-100</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MIRROR<br>镜像数据包，也就是将来源 IP 与目的地 IP 对调后，将数据包返回，进行完此处理动作后，将会中断过滤程序。</p>
+</li>
+<li><p>QUEUE<br>中断过滤程序，将封包放入队列，交给其它程序处理。透过自行开发的处理程序，可以进行其它应用，例如：计算联机费用…….等。</p>
+</li>
+<li><p>RETURN<br>结束在目前规则链中的过滤程序，返回主规则链继续过滤，如果把自订规则链看成是一个子程序，那么这个动作，就相当于提早结束子程序并返回到主程序中。</p>
+</li>
+<li><p>MARK<br>将封包标上某个代号，以便提供作为后续过滤的条件判断依据，进行完此处理动作后，将会继续比对其它规则。范例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t mangle -A PREROUTING -p tcp --dport 22 -j MARK --set-mark 22</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Proxy-%E4%BB%A3%E7%90%86/" rel="tag"># Proxy 代理</a>
+              <a href="/tags/iptables/" rel="tag"># iptables</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/proxy/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AC%94%E8%AE%B0/" rel="prev" title="代理服务器笔记">
+                  <i class="fa fa-chevron-left"></i> 代理服务器笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/proxy/iptables%20%E5%AE%9E%E6%88%98/" rel="next" title="iptables 实战">
+                  iptables 实战 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
