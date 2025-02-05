@@ -143,12 +143,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-count">40</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -165,6 +165,1285 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-05 18:07:05 / 修改时间：18:07:21" itemprop="dateCreated datePublished" datetime="2025-02-05T18:07:05+08:00">2025-02-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Dart-注释"><a href="#Dart-注释" class="headerlink" title="Dart 注释"></a>Dart 注释</h1><p>Dart 支持单行注释、多行注释和文档注释。</p>
+<h2 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h2><p>单行注释以 <code>//</code> 开头。 <code>//</code> 和行尾之间的所有内容都被 Dart 编译器忽略。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> 重构为 AbstractLlamaGreetingFactory？</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;欢迎来到我的羊驼农场！&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h2><p>多行注释以 <code>/*</code> 开头，以 <code>*/</code> 结尾。 <code>/*</code> 和 <code>*/</code> 之间的所有内容都被 Dart 编译器忽略（除非注释是文档注释；请参见下一节）。多行注释可以嵌套。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 这是很多工作。考虑养鸡。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  Llama larry = Llama();</span></span><br><span class="line"><span class="comment">  larry.feed();</span></span><br><span class="line"><span class="comment">  larry.exercise();</span></span><br><span class="line"><span class="comment">  larry.clean();</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档注释"><a href="#文档注释" class="headerlink" title="文档注释"></a>文档注释</h2><p>文档注释是开头为 <code>///</code> 或 <code>/**</code> 的多行或单行注释。在连续行上使用 <code>///</code> 与多行文档注释的效果相同。</p>
+<p>在文档注释中，分析器会忽略所有文本，除非它包含在方括号中。使用方括号，您可以引用类、方法、字段、顶级变量、函数和参数。方括号中的名称在已记录程序元素的词法作用域中解析。</p>
+<p>这是一个带有对其他类和参数引用的文档注释示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="language-markdown">一种驯养的南美骆驼科动物（羊驼）。</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">安第斯文化自前西班牙时代以来就一直将羊驼用作肉类和驮畜。</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">与任何其他动物一样，羊驼也需要吃东西，</span></span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">所以不要忘记用一些 [Food] [feed] 它们。</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Llama</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String?</span> name;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">用 [food] 喂你的羊驼。</span></span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">一只典型的羊驼每周吃一捆干草。</span></span></span><br><span class="line">  <span class="keyword">void</span> feed(Food food) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">用 [activity] 活动让你的羊驼锻炼 [timeLimit] 分钟。</span></span></span><br><span class="line">  <span class="keyword">void</span> exercise(Activity activity, <span class="built_in">int</span> timeLimit) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在类的生成的文档中， <code>[feed]</code> 成为指向 <code>feed</code> 方法文档的链接，</p>
+<p>而 <code>[Food]</code> 成为指向 <code>Food</code> 类文档的链接。</p>
+<p>要解析 Dart 代码并生成 HTML 文档，您可以使用 Dart 的文档生成工具， <a target="_blank" rel="noopener" href="https://dart.wendang.dev/tools/dart-doc"><code>dart doc</code></a> 。</p>
+<p>有关生成的文档示例，请参见</p>
+<p><a target="_blank" rel="noopener" href="https://api.dart.dev/">Dart API 文档。</a></p>
+<p>有关如何组织注释的建议，请参见</p>
+<p><a target="_blank" rel="noopener" href="https://dart.wendang.dev/effective-dart/documentation">Effective Dart：文档。</a></p>
+<h1 id="Dart-元数据"><a href="#Dart-元数据" class="headerlink" title="Dart 元数据"></a>Dart 元数据</h1><p>使用元数据为代码提供附加信息。元数据注释以字符 <code>@</code> 开头，后跟编译时常量的引用（例如 <code>deprecated</code> ）或对常量构造函数的调用。</p>
+<p>所有 Dart 代码都可以使用四种注释： <code>@Deprecated</code> 、 <code>@deprecated</code> 、 <code>@override</code> 和 <code>@pragma</code> 。有关使用 <code>@override</code> 的示例，请参阅 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/extend">扩展类</a> 。以下是如何使用 <code>@Deprecated</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Television</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">使用 [turnOn] 代替打开电源。</span></span></span><br><span class="line">  [!<span class="meta">@Deprecated</span>(<span class="string">&#x27;Use turnOn instead&#x27;</span>)!]</span><br><span class="line">  <span class="keyword">void</span> activate() &#123;</span><br><span class="line">    turnOn();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">打开电视电源。</span></span></span><br><span class="line">  <span class="keyword">void</span> turnOn() &#123;...&#125;</span><br><span class="line">  <span class="comment">// ···</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果您不想指定消息，可以使用 <code>@deprecated</code> 。但是，我们 建议 始终使用 <code>@Deprecated</code> 指定消息。</p>
+<p>您可以定义自己的元数据注释。以下是如何定义一个带有两个参数的 <code>@Todo</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Todo</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> who;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> what;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> Todo(<span class="keyword">this</span>.who, <span class="keyword">this</span>.what);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是如何使用该 <code>@Todo</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Todo</span>(<span class="string">&#x27;Dash&#x27;</span>, <span class="string">&#x27;Implement this function&#x27;</span>)</span><br><span class="line"><span class="keyword">void</span> doSomething() &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Do something&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>元数据可以出现在库、类、typedef、类型参数、构造函数、工厂、函数、字段、参数或变量声明之前，以及 import 或 export 指令之前。</p>
+<h1 id="Dart-库与导入"><a href="#Dart-库与导入" class="headerlink" title="Dart 库与导入"></a>Dart 库与导入</h1><p><code>import</code> 和 <code>library</code> 指令可以帮助您创建模块化且可共享的代码库。库不仅提供 API，而且还是隐私单元：以下划线 (<code>_</code>) 开头的标识符仅在库内可见。_每个 Dart 文件（及其部分）都是一个 库_，即使它不使用 <a href="#library-directive"><code>library</code></a> 指令。</p>
+<p>库可以使用 包 进行分发。</p>
+<blockquote>
+<p>注意<br>要了解为什么 Dart 使用下划线而不是 <code>public</code> 或 <code>private</code> 等访问修饰符关键字，请参阅<br>SDK issue 33383 。</p>
+</blockquote>
+<h2 id="使用库"><a href="#使用库" class="headerlink" title="使用库"></a>使用库</h2><p>使用 <code>import</code> 指定一个库的命名空间如何在另一个库的范围内使用。</p>
+<p>例如，Dart Web 应用通常使用 dart:html 库，它们可以这样导入：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;dart:html&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>import</code> 唯一必需的参数是指定库的 URI。</p>
+<p>对于内置库，URI 具有特殊的 <code>dart:</code> 模式。</p>
+<p>对于其他库，您可以使用文件系统路径或 <code>package:</code> 模式。 <code>package:</code> 模式指定由包管理器（例如 pub 工具）提供的库。例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:test/test.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<br><em>URI</em> 代表统一资源标识符。<br>_URL_（统一资源定位符）是一种常见的 URI。</p>
+</blockquote>
+<h3 id="指定库前缀"><a href="#指定库前缀" class="headerlink" title="指定库前缀"></a>指定库前缀</h3><p>如果您导入了两个具有冲突标识符的库，则可以为一个或两个库指定前缀。例如，如果库 1 和库 2 都具有 Element 类，则您的代码可能如下所示：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib1/lib1.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib2/lib2.dart&#x27;</span> <span class="keyword">as</span> lib2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 lib1 中的 Element。</span></span><br><span class="line"><span class="built_in">Element</span> element1 = <span class="built_in">Element</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 lib2 中的 Element。</span></span><br><span class="line">lib2.<span class="built_in">Element</span> element2 = lib2.<span class="built_in">Element</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="只导入库的一部分"><a href="#只导入库的一部分" class="headerlink" title="只导入库的一部分"></a>只导入库的一部分</h3><p>如果您只想使用库的一部分，可以选择性地导入库。例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只导入 foo。</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib1/lib1.dart&#x27;</span> <span class="keyword">show</span> foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入除 foo 之外的所有名称。</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib2/lib2.dart&#x27;</span> <span class="keyword">hide</span> foo;</span><br></pre></td></tr></table></figure>
+
+<h4 id="延迟加载库"><a href="#延迟加载库" class="headerlink" title="延迟加载库"></a>延迟加载库</h4><p><em>延迟加载</em> （也称为 <em>懒加载</em> ）</p>
+<p>允许 Web 应用根据需要按需加载库。</p>
+<p>当您需要满足以下一项或多项需求时，请使用延迟加载。</p>
+<ul>
+<li>减少 Web 应用的初始启动时间。</li>
+<li>执行 A&#x2F;B 测试——例如，尝试算法的替代实现。</li>
+<li>加载很少使用的功能，例如可选屏幕和对话框。</li>
+</ul>
+<p>这并不意味着 Dart 会在启动时加载所有延迟组件。</p>
+<p>Web 应用可以在需要时通过 Web 下载延迟组件。</p>
+<p><code>dart</code> 工具不支持针对 Web 以外的目标的延迟加载。</p>
+<p>如果您正在构建 Flutter 应用，</p>
+<p>请参阅 Flutter 指南中关于</p>
+<p>延迟组件 的延迟加载实现。</p>
+<p>undefined</p>
+<p>要延迟加载库，首先使用 <code>deferred as</code> 导入它。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:greetings/hello.dart&#x27;</span> <span class="keyword">deferred</span> <span class="keyword">as</span> hello;</span><br></pre></td></tr></table></figure>
+
+<p>当您需要该库时，使用库的标识符调用 <code>loadLibrary()</code> 。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="keyword">void</span>&gt; greet() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">await</span> hello.loadLibrary();</span><br><span class="line">  hello.printGreeting();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在前面的代码中，</p>
+<p><code>await</code> 关键字会暂停执行，直到库加载完毕。</p>
+<p>有关 <code>async</code> 和 <code>await</code> 的更多信息，</p>
+<p>请参见 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/async">异步支持</a> 。</p>
+<p>您可以多次在库上调用 <code>loadLibrary()</code> 而不出现问题。</p>
+<p>库只加载一次。</p>
+<p>使用延迟加载时，请记住以下几点：</p>
+<ul>
+<li>延迟库的常量在导入文件中不是常量。<br>请记住，这些常量在延迟库加载之前不存在。</li>
+<li>您不能在导入文件中使用延迟库中的类型。<br>相反，请考虑将接口类型移动到由延迟库和导入文件同时导入的库。</li>
+<li>Dart 会隐式地将 <code>loadLibrary()</code> 插入到您使用 <code>deferred as 命名空间</code> 定义的命名空间中。<br><code>loadLibrary()</code> 函数返回一个 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/libraries/dart-async#future"><code>Future</code></a> 。</li>
+</ul>
+<h3 id="library-指令-library-directive"><a href="#library-指令-library-directive" class="headerlink" title="library 指令 {:#library-directive}"></a><code>library</code> 指令 {:#library-directive}</h3><p>要指定库级 文档注释 或 元数据注释 ，</p>
+<p>请将它们附加到文件开头的 <code>library</code> 声明。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="language-markdown">一个非常棒的测试库。</span></span></span><br><span class="line"><span class="meta">@TestOn</span>(<span class="string">&#x27;browser&#x27;</span>)</span><br><span class="line"><span class="keyword">library</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现库"><a href="#实现库" class="headerlink" title="实现库"></a>实现库</h2><p>有关如何实现包的建议，请参阅</p>
+<p>创建包 ，其中包括：</p>
+<ul>
+<li>如何组织库源代码。</li>
+<li>如何使用 <code>export</code> 指令。</li>
+<li>何时使用 <code>part</code> 指令。</li>
+<li>如何使用条件导入和导出来实现支持多个平台的库。</li>
+</ul>
+<p>来源：<a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/comments/">Dart 中文开发文档</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/dart/Dart%20%E8%BF%90%E7%AE%97%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/dart/Dart%20%E8%BF%90%E7%AE%97%E7%AC%A6/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-05 18:05:11 / 修改时间：18:06:29" itemprop="dateCreated datePublished" datetime="2025-02-05T18:05:11+08:00">2025-02-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Dart-运算符"><a href="#Dart-运算符" class="headerlink" title="Dart 运算符"></a>Dart 运算符</h1><p>Dart 支持下表中所示的运算符。</p>
+<p>该表按从高到低的顺序显示了 Dart 的运算符结合性和 <a href="#operator-precedence-example">运算符优先级</a> ，这只是 Dart 运算符关系的 <strong>近似值</strong> 。</p>
+<p>您可以将许多这些 运算符实现为类成员 。</p>
+<table>
+<thead>
+<tr>
+<th align="left">描述</th>
+<th align="left">运算符</th>
+<th align="left">结合性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">一元后缀</td>
+<td align="left"><em><code>expr</code></em><code>++</code>    <em><code>expr</code></em><code>--</code>    <code>()</code>    <code>[]</code>    <code>?[]</code>    <code>.</code>    <code>?.</code>    <code>!</code></td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="left">一元前缀</td>
+<td align="left"><code>-</code><em><code>expr</code></em>    <code>!</code><em><code>expr</code></em>    <code>~</code><em><code>expr</code></em>    <code>++</code><em><code>expr</code></em>    <code>--</code><em><code>expr</code></em>      <code>await</code> <em><code>expr</code></em></td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="left">乘法</td>
+<td align="left"><code>*</code>    <code>/</code>    <code>%</code>   <code>~/</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">加法</td>
+<td align="left"><code>+</code>    <code>-</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">移位</td>
+<td align="left"><code>&lt;&lt;</code>    <code>&gt;&gt;</code>    <code>&gt;&gt;&gt;</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">按位与</td>
+<td align="left"><code>&amp;</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">按位异或</td>
+<td align="left"><code>^</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">按位或</td>
+<td align="left"><code>&#124;</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">关系和类型测试</td>
+<td align="left"><code>&gt;=</code>    <code>&gt;</code>    <code>&lt;=</code>    <code>&lt;</code>    <code>as</code>    <code>is</code>    <code>is!</code></td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="left">等式</td>
+<td align="left"><code>==</code>    <code>!=</code></td>
+<td align="left">无</td>
+</tr>
+<tr>
+<td align="left">逻辑与</td>
+<td align="left"><code>&amp;&amp;</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">逻辑或</td>
+<td align="left"><code>&#124;&#124;</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">空值合并</td>
+<td align="left"><code>??</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">条件</td>
+<td align="left"><em><code>expr1</code></em>    <code>?</code>    <em><code>expr2</code></em>    <code>:</code>    <em><code>expr3</code></em></td>
+<td align="left">右结合</td>
+</tr>
+<tr>
+<td align="left">级联</td>
+<td align="left"><code>..</code>    <code>?..</code></td>
+<td align="left">左结合</td>
+</tr>
+<tr>
+<td align="left">赋值</td>
+<td align="left"><code>=</code>    <code>*=</code>    <code>/=</code>    <code>+=</code>    <code>-=</code>    <code>&amp;=</code>    <code>^=</code>   <em>etc.</em></td>
+<td align="left">右结合</td>
+</tr>
+<tr>
+<td align="left">展开 (<a href="#spread-operators">参见注释</a>)</td>
+<td align="left"><code>...</code>    <code>...?</code></td>
+<td align="left">无</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>警告<br>上表仅供参考。<br>运算符优先级和结合性的概念是对语言语法中真实情况的近似。<br>您可以在 Dart 语言规范 中定义的语法中找到 Dart 运算符关系的权威行为。</p>
+</blockquote>
+<p>使用运算符时，您会创建表达式。以下是一些运算符表达式的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a++</span><br><span class="line">a + b</span><br><span class="line">a = b</span><br><span class="line">a == b</span><br><span class="line">c ? a : b</span><br><span class="line">a <span class="keyword">is</span> T</span><br></pre></td></tr></table></figure>
+
+<h2 id="运算符优先级示例"><a href="#运算符优先级示例" class="headerlink" title="运算符优先级示例"></a>运算符优先级示例</h2><p>在 <a href="#operators">运算符表</a> 中，</p>
+<p>每个运算符的优先级都高于其后行的运算符。例如，乘法运算符 <code>%</code> 的优先级高于（因此在执行之前）等于运算符 <code>==</code> ，而 <code>==</code> 的优先级高于逻辑与运算符 <code>&amp;&amp;</code> 。</p>
+<p>这种优先级意味着以下两行代码的执行方式相同：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 括号提高了可读性。</span></span><br><span class="line"><span class="keyword">if</span> ((n % i == <span class="number">0</span>) &amp;&amp; (d % i == <span class="number">0</span>)) ...</span><br><span class="line"></span><br><span class="line"><span class="comment">// 更难阅读，但等效。</span></span><br><span class="line"><span class="keyword">if</span> (n % i == <span class="number">0</span> &amp;&amp; d % i == <span class="number">0</span>) ...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>警告<br>对于采用两个操作数的运算符，最左边的操作数决定使用哪种方法。例如，如果您有一个 <code>Vector</code> 对象和一个 <code>Point</code> 对象，则 <code>aVector + aPoint</code> 使用 <code>Vector</code> 加法 (<code>+</code>)。</p>
+</blockquote>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><p>Dart 支持常用的算术运算符，如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>+</code></td>
+<td align="left">加</td>
+</tr>
+<tr>
+<td align="left"><code>-</code></td>
+<td align="left">减</td>
+</tr>
+<tr>
+<td align="left"><code>-</code><em><code>expr</code></em></td>
+<td align="left">一元负号，也称为否定（反转表达式的符号）</td>
+</tr>
+<tr>
+<td align="left"><code>*</code></td>
+<td align="left">乘</td>
+</tr>
+<tr>
+<td align="left"><code>/</code></td>
+<td align="left">除</td>
+</tr>
+<tr>
+<td align="left"><code>~/</code></td>
+<td align="left">除，返回整数结果</td>
+</tr>
+<tr>
+<td align="left"><code>%</code></td>
+<td align="left">获取整数除法的余数（模）</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> + <span class="number">3</span> == <span class="number">5</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> - <span class="number">3</span> == <span class="number">-1</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> * <span class="number">3</span> == <span class="number">6</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">5</span> / <span class="number">2</span> == <span class="number">2.5</span>); <span class="comment">// 结果是 double</span></span><br><span class="line"><span class="keyword">assert</span>(<span class="number">5</span> ~/ <span class="number">2</span> == <span class="number">2</span>); <span class="comment">// 结果是 int</span></span><br><span class="line"><span class="keyword">assert</span>(<span class="number">5</span> % <span class="number">2</span> == <span class="number">1</span>); <span class="comment">// 余数</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(<span class="string">&#x27;5/2 = <span class="subst">$&#123;<span class="number">5</span> ~/ <span class="number">2</span>&#125;</span> r <span class="subst">$&#123;<span class="number">5</span> % <span class="number">2</span>&#125;</span>&#x27;</span> == <span class="string">&#x27;5/2 = 2 r 1&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Dart 还支持前缀和后缀自增和自减运算符。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>++</code><em><code>var</code></em></td>
+<td align="left"><em><code>var</code></em>   <code>=</code>  <em><code>var</code></em> <code>+ 1</code> (表达式的值为 <em><code>var</code></em> <code>+ 1</code>)</td>
+</tr>
+<tr>
+<td align="left"><em><code>var</code></em><code>++</code></td>
+<td align="left"><em><code>var</code></em>   <code>=</code>  <em><code>var</code></em> <code>+ 1</code> (表达式的值为 <em><code>var</code></em>)</td>
+</tr>
+<tr>
+<td align="left"><code>--</code><em><code>var</code></em></td>
+<td align="left"><em><code>var</code></em>   <code>=</code>  <em><code>var</code></em> <code>- 1</code> (表达式的值为 <em><code>var</code></em> <code>- 1</code>)</td>
+</tr>
+<tr>
+<td align="left"><em><code>var</code></em><code>--</code></td>
+<td align="left"><em><code>var</code></em>   <code>=</code>  <em><code>var</code></em> <code>- 1</code> (表达式的值为 <em><code>var</code></em>)</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a;</span><br><span class="line"><span class="built_in">int</span> b;</span><br><span class="line"></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line">b = ++a; <span class="comment">// 在 b 获取其值之前递增 a。</span></span><br><span class="line"><span class="keyword">assert</span>(a == b); <span class="comment">// 1 == 1</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line">b = a++; <span class="comment">// 在 b 获取其值之后递增 a。</span></span><br><span class="line"><span class="keyword">assert</span>(a != b); <span class="comment">// 1 != 0</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line">b = --a; <span class="comment">// 在 b 获取其值之前递减 a。</span></span><br><span class="line"><span class="keyword">assert</span>(a == b); <span class="comment">// -1 == -1</span></span><br><span class="line"></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line">b = a--; <span class="comment">// 在 b 获取其值之后递减 a。</span></span><br><span class="line"><span class="keyword">assert</span>(a != b); <span class="comment">// -1 != 0</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="等式和关系运算符"><a href="#等式和关系运算符" class="headerlink" title="等式和关系运算符"></a>等式和关系运算符</h2><p>下表列出了等式和关系运算符的含义。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>==</code></td>
+<td align="left">等于；见下文讨论</td>
+</tr>
+<tr>
+<td align="left"><code>!=</code></td>
+<td align="left">不等于</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;</code></td>
+<td align="left">大于</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;</code></td>
+<td align="left">小于</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;=</code></td>
+<td align="left">大于或等于</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;=</code></td>
+<td align="left">小于或等于</td>
+</tr>
+</tbody></table>
+<p>要测试两个对象 x 和 y 是否表示相同的事物，请使用 <code>==</code> 运算符。（在极少数情况下，如果您需要知道两个对象是否是完全相同的对象，请改用 identical() 函数。）以下是 <code>==</code> 运算符的工作原理：</p>
+<ol>
+<li>如果 <em>x</em> 或 <em>y</em> 为 null，则如果两者都为 null，则返回 true，如果只有一个为 null，则返回 false。</li>
+<li>返回在 <em>x</em> 上调用 <code>==</code> 方法并使用参数 <em>y</em> 的结果。（没错，像 <code>==</code> 这样的运算符是在其第一个操作数上调用的方法。有关详细信息，请参阅 运算符 。）</li>
+</ol>
+<p>以下是使用每个等式和关系运算符的示例：</p>
+<?code-excerpt "misc/test/language\_tour/operators\_test.dart (relational)"?>
+
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> == <span class="number">2</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> != <span class="number">3</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">3</span> &gt; <span class="number">2</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> &lt; <span class="number">3</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">3</span> &gt;= <span class="number">3</span>);</span><br><span class="line"><span class="keyword">assert</span>(<span class="number">2</span> &lt;= <span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="类型测试运算符"><a href="#类型测试运算符" class="headerlink" title="类型测试运算符"></a>类型测试运算符</h2><p><code>as</code> 、 <code>is</code> 和 <code>is!</code> 运算符非常方便，用于在运行时检查类型。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>as</code></td>
+<td align="left">类型转换（也用于指定 库前缀 ）</td>
+</tr>
+<tr>
+<td align="left"><code>is</code></td>
+<td align="left">如果对象具有指定的类型，则为 true</td>
+</tr>
+<tr>
+<td align="left"><code>is!</code></td>
+<td align="left">如果对象不具有指定的类型，则为 true</td>
+</tr>
+</tbody></table>
+<p><code>obj is T</code> 的结果如果 <code>obj</code> 实现 <code>T</code> 指定的接口则为 true。例如， <code>obj is Object?</code> 总是为 true。</p>
+<p>仅当您确定对象属于该类型时，才使用 <code>as</code> 运算符将对象转换为特定类型。示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(employee <span class="keyword">as</span> Person).firstName = <span class="string">&#x27;Bob&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果您不确定对象是否为 <code>T</code> 类型，则在使用对象之前使用 <code>is T</code> 检查类型。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (employee <span class="keyword">is</span> Person) &#123;</span><br><span class="line">  <span class="comment">// 类型检查</span></span><br><span class="line">  employee.firstName = <span class="string">&#x27;Bob&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<br>代码不等效。如果 <code>employee</code> 为 null 或不是 <code>Person</code> ，则第一个示例会抛出异常；第二个示例什么也不做。</p>
+</blockquote>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><p>如您所见，您可以使用 <code>=</code> 运算符赋值。</p>
+<p>要仅在被赋值变量为 null 时赋值，</p>
+<p>请使用 <code>??=</code> 运算符。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将值赋给 a</span></span><br><span class="line">a = value;</span><br><span class="line"><span class="comment">// 如果 b 为 null，则将值赋给 b；否则，b 保持不变</span></span><br><span class="line">b ??= value;</span><br></pre></td></tr></table></figure>
+
+<p>诸如 <code>+=</code> 之类的复合赋值运算符将运算与赋值结合起来。</p>
+<table>
+<thead>
+<tr>
+<th align="left">​</th>
+<th align="left">​</th>
+<th align="left">​</th>
+<th align="left">​</th>
+<th align="left">​</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>=</code></td>
+<td align="left"><code>*=</code></td>
+<td align="left"><code>%=</code></td>
+<td align="left"><code>&gt;&gt;&gt;=</code></td>
+<td align="left"><code>^=</code></td>
+</tr>
+<tr>
+<td align="left"><code>+=</code></td>
+<td align="left"><code>/=</code></td>
+<td align="left"><code>&lt;&lt;=</code></td>
+<td align="left"><code>&amp;=</code></td>
+<td align="left"><code>&amp;#124;=</code></td>
+</tr>
+<tr>
+<td align="left"><code>-=</code></td>
+<td align="left"><code>~/=</code></td>
+<td align="left"><code>&gt;&gt;=</code></td>
+<td align="left">​</td>
+<td align="left">​</td>
+</tr>
+</tbody></table>
+<p>以下是复合赋值运算符的工作原理：</p>
+<table>
+<thead>
+<tr>
+<th align="left">​</th>
+<th align="left">复合赋值</th>
+<th align="left">等效表达式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>对于运算符</strong> <em><strong>op</strong></em><strong>：</strong></td>
+<td align="left"><code>a</code> <em><code>op</code></em><code>= b</code></td>
+<td align="left"><code>a = a</code> <em><code>op</code></em> <code>b</code></td>
+</tr>
+<tr>
+<td align="left"><strong>示例：</strong></td>
+<td align="left"><code>a += b</code></td>
+<td align="left"><code>a = a + b</code></td>
+</tr>
+</tbody></table>
+<p>以下示例使用了赋值和复合赋值运算符：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">2</span>; <span class="comment">// 使用 = 赋值</span></span><br><span class="line">a *= <span class="number">3</span>; <span class="comment">// 赋值并乘：a = a * 3</span></span><br><span class="line"><span class="keyword">assert</span>(a == <span class="number">6</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>您可以使用逻辑运算符反转或组合布尔表达式。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>!</code><em><code>expr</code></em></td>
+<td align="left">反转后面的表达式（将 false 更改为 true，反之亦然）</td>
+</tr>
+<tr>
+<td align="left"><code>&#124;&#124;</code></td>
+<td align="left">逻辑或</td>
+</tr>
+<tr>
+<td align="left"><code>&amp;&amp;</code></td>
+<td align="left">逻辑与</td>
+</tr>
+</tbody></table>
+<p>以下是使用逻辑运算符的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!done &amp;&amp; (col == <span class="number">0</span> || col == <span class="number">3</span>)) &#123;</span><br><span class="line">  <span class="comment">// ...执行某些操作...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="位运算符和移位运算符"><a href="#位运算符和移位运算符" class="headerlink" title="位运算符和移位运算符"></a>位运算符和移位运算符</h2><p>您可以操作 Dart 中数字的各个位。通常，您会将这些位运算符和移位运算符与整数一起使用。</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>&amp;</code></td>
+<td align="left">与</td>
+</tr>
+<tr>
+<td align="left"><code>&amp;#124;</code></td>
+<td align="left">或</td>
+</tr>
+<tr>
+<td align="left"><code>^</code></td>
+<td align="left">异或</td>
+</tr>
+<tr>
+<td align="left"><code>~</code><em><code>expr</code></em></td>
+<td align="left">一元按位取反（0 变成 1；1 变成 0）</td>
+</tr>
+<tr>
+<td align="left"><code>&lt;&lt;</code></td>
+<td align="left">左移</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;&gt;</code></td>
+<td align="left">右移</td>
+</tr>
+<tr>
+<td align="left"><code>&gt;&gt;&gt;</code></td>
+<td align="left">无符号右移</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>备注<br>使用大操作数或负操作数的位运算的行为可能因平台而异。<br>要了解更多信息，请查看 位运算平台差异 。</p>
+</blockquote>
+<p>以下是使用位运算符和移位运算符的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> value = <span class="number">0x22</span>;</span><br><span class="line"><span class="keyword">final</span> bitmask = <span class="number">0x0f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>((value &amp; bitmask) == <span class="number">0x02</span>); <span class="comment">// 与</span></span><br><span class="line"><span class="keyword">assert</span>((value &amp; ~bitmask) == <span class="number">0x20</span>); <span class="comment">// 与非</span></span><br><span class="line"><span class="keyword">assert</span>((value | bitmask) == <span class="number">0x2f</span>); <span class="comment">// 或</span></span><br><span class="line"><span class="keyword">assert</span>((value ^ bitmask) == <span class="number">0x2d</span>); <span class="comment">// 异或</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>((value &lt;&lt; <span class="number">4</span>) == <span class="number">0x220</span>); <span class="comment">// 左移</span></span><br><span class="line"><span class="keyword">assert</span>((value &gt;&gt; <span class="number">4</span>) == <span class="number">0x02</span>); <span class="comment">// 右移</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 右移示例，在 Web 上的结果行为不同，</span></span><br><span class="line"><span class="comment">// 因为操作数的值在掩码为 32 位时会发生变化：</span></span><br><span class="line"><span class="keyword">assert</span>((-value &gt;&gt; <span class="number">4</span>) == <span class="number">-0x03</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>((value &gt;&gt;&gt; <span class="number">4</span>) == <span class="number">0x02</span>); <span class="comment">// 无符号右移</span></span><br><span class="line"><span class="keyword">assert</span>((-value &gt;&gt;&gt; <span class="number">4</span>) &gt; <span class="number">0</span>); <span class="comment">// 无符号右移</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意版本<br><code>&gt;&gt;&gt;</code> 运算符（称为 <em>三元移位</em> 或 <em>无符号移位</em> ）需要至少 2.14 的 语言版本 。</p>
+</blockquote>
+<h2 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h2><p>Dart 有两个运算符，允许您简洁地计算否则可能需要 if-else 语句的表达式：</p>
+<p><em><code>condition</code></em>  <code>?</code>  <em><code>expr1</code></em>  <code>:</code>  <em><code>expr2</code></em></p>
+<p>: 如果 <em>condition</em> 为 true，则计算 _expr1_（并返回其值）；</p>
+<p>否则，计算并返回 <em>expr2</em> 的值。</p>
+<p><em><code>expr1</code></em>  <code>??</code>  <em><code>expr2</code></em></p>
+<p>: 如果 <em>expr1</em> 不为 null，则返回其值；</p>
+<p>否则，计算并返回 <em>expr2</em> 的值。</p>
+<p>当您需要根据布尔表达式赋值时，</p>
+<p>请考虑使用条件运算符 <code>?</code> 和 <code>:</code> 。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> visibility = isPublic ? <span class="string">&#x27;public&#x27;</span> : <span class="string">&#x27;private&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果布尔表达式测试 null 值，</p>
+<p>请考虑使用空值合并运算符 <code>??</code></p>
+<p>（也称为空值合并运算符）。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> playerName(<span class="built_in">String?</span> name) =&gt; name ?? <span class="string">&#x27;Guest&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>前面的示例可以用至少另外两种方式编写，</p>
+<p>但没有那么简洁：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 稍长的版本使用 ?: 运算符。</span></span><br><span class="line"><span class="built_in">String</span> playerName(<span class="built_in">String?</span> name) =&gt; name != <span class="keyword">null</span> ? name : <span class="string">&#x27;Guest&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 很长的版本使用 if-else 语句。</span></span><br><span class="line"><span class="built_in">String</span> playerName(<span class="built_in">String?</span> name) &#123;</span><br><span class="line">  <span class="keyword">if</span> (name != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> name;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Guest&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="级联表示法"><a href="#级联表示法" class="headerlink" title="级联表示法"></a>级联表示法</h2><p>级联（ <code>..</code> ， <code>?..</code> ）允许您对同一对象执行一系列操作。除了访问实例成员外，您还可以对同一对象调用实例方法。这通常可以节省您创建临时变量的步骤，并允许您编写更流畅的代码。</p>
+<p>考虑以下代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paint = Paint()</span><br><span class="line">  ..color = Colors.black</span><br><span class="line">  ..strokeCap = StrokeCap.round</span><br><span class="line">  ..strokeWidth = <span class="number">5.0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>构造函数 <code>Paint()</code></p>
+<p>返回一个 <code>Paint</code> 对象。</p>
+<p>级联表示法后面的代码对该对象进行操作，忽略任何可能返回的值。</p>
+<p>前面的示例等效于以下代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> paint = Paint();</span><br><span class="line">paint.color = Colors.black;</span><br><span class="line">paint.strokeCap = StrokeCap.round;</span><br><span class="line">paint.strokeWidth = <span class="number">5.0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果级联操作的对象可能为 null，</p>
+<p>则对第一个操作使用 <em>空值简写</em> 级联（ <code>?..</code> ）。</p>
+<p>以 <code>?..</code> 开头可以保证不会对该 null 对象尝试任何级联操作。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">querySelector</span>(<span class="string">&#x27;#confirm&#x27;</span>) <span class="comment">// 获取对象。</span></span><br><span class="line">  ?..text = <span class="string">&#x27;Confirm&#x27;</span> <span class="comment">// 使用其成员。</span></span><br><span class="line">  ..classes.add(<span class="string">&#x27;important&#x27;</span>)</span><br><span class="line">  ..onClick.listen((e) =&gt; <span class="built_in">window</span>.alert(<span class="string">&#x27;Confirmed!&#x27;</span>))</span><br><span class="line">  ..scrollIntoView();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意版本<br><code>?..</code> 语法需要至少 2.12 的 语言版本 。</p>
+</blockquote>
+<p>前面的代码等效于以下代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> button = <span class="built_in">querySelector</span>(<span class="string">&#x27;#confirm&#x27;</span>);</span><br><span class="line">button?.text = <span class="string">&#x27;Confirm&#x27;</span>;</span><br><span class="line">button?.classes.add(<span class="string">&#x27;important&#x27;</span>);</span><br><span class="line">button?.onClick.listen((e) =&gt; <span class="built_in">window</span>.alert(<span class="string">&#x27;Confirmed!&#x27;</span>));</span><br><span class="line">button?.scrollIntoView();</span><br></pre></td></tr></table></figure>
+
+<p>您还可以嵌套级联。例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> addressBook = (AddressBookBuilder()</span><br><span class="line">      ..name = <span class="string">&#x27;jenny&#x27;</span></span><br><span class="line">      ..email = <span class="string">&#x27;jenny@example.com&#x27;</span></span><br><span class="line">      ..phone = (PhoneNumberBuilder()</span><br><span class="line">            ..number = <span class="string">&#x27;415-555-0100&#x27;</span></span><br><span class="line">            ..label = <span class="string">&#x27;home&#x27;</span>)</span><br><span class="line">          .build())</span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
+
+<p>小心地在一个返回实际对象的函数上构建级联。例如，以下代码会失败：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sb = <span class="built_in">StringBuffer</span>();</span><br><span class="line">sb.write(<span class="string">&#x27;foo&#x27;</span>)</span><br><span class="line">  ..write(<span class="string">&#x27;bar&#x27;</span>); <span class="comment">// 错误：方法 &#x27;write&#x27; 未为 &#x27;void&#x27; 定义。</span></span><br></pre></td></tr></table></figure>
+
+<p><code>sb.write()</code> 调用返回 void，</p>
+<p>您不能在 <code>void</code> 上构建级联。</p>
+<blockquote>
+<p>注意<br>严格来说，级联的“双点”表示法不是运算符。<br>它只是 Dart 语法的一部分。</p>
+</blockquote>
+<h2 id="展开运算符"><a href="#展开运算符" class="headerlink" title="展开运算符"></a>展开运算符</h2><p>展开运算符计算一个产生集合的表达式，</p>
+<p>解包结果值，并将它们插入另一个集合中。</p>
+<p><strong>展开运算符实际上不是运算符表达式</strong> 。</p>
+<p><code>...</code> &#x2F; <code>...?</code> 语法是集合字面量本身的一部分。</p>
+<p>因此，您可以在</p>
+<p>集合 页面上了解有关展开运算符的更多信息。</p>
+<p>因为它不是运算符，所以语法没有任何“ <a href="#operators">运算符优先级</a> ”。</p>
+<p>实际上，它具有最低的“优先级”——任何类型的表达式都可以作为展开目标，例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[...a + b]</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他运算符"><a href="#其他运算符" class="headerlink" title="其他运算符"></a>其他运算符</h2><p>您已经在其他示例中看到了大多数剩余的运算符：</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left">名称</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>()</code></td>
+<td align="left">函数应用</td>
+<td align="left">表示函数调用</td>
+</tr>
+<tr>
+<td align="left"><code>[]</code></td>
+<td align="left">下标访问</td>
+<td align="left">表示对可重写 <code>[]</code> 运算符的调用；示例： <code>fooList[1]</code> 将整数 <code>1</code> 传递给 <code>fooList</code> 以访问索引 <code>1</code> 处的元素</td>
+</tr>
+<tr>
+<td align="left"><code>?[]</code></td>
+<td align="left">条件下标访问</td>
+<td align="left">与 <code>[]</code> 相同，但最左边的操作数可以为 null；示例： <code>fooList?[1]</code> 将整数 <code>1</code> 传递给 <code>fooList</code> 以访问索引 <code>1</code> 处的元素，除非 <code>fooList</code> 为 null（在这种情况下，表达式的值为 null）</td>
+</tr>
+<tr>
+<td align="left"><code>.</code></td>
+<td align="left">成员访问</td>
+<td align="left">指的是表达式的属性；示例： <code>foo.bar</code> 从表达式 <code>foo</code> 中选择属性 <code>bar</code></td>
+</tr>
+<tr>
+<td align="left"><code>?.</code></td>
+<td align="left">条件成员访问</td>
+<td align="left">与 <code>.</code> 相同，但最左边的操作数可以为 null；示例： <code>foo?.bar</code> 从表达式 <code>foo</code> 中选择属性 <code>bar</code> ，除非 <code>foo</code> 为 null（在这种情况下， <code>foo?.bar</code> 的值为 null）</td>
+</tr>
+<tr>
+<td align="left"><code>!</code></td>
+<td align="left">非空断言运算符</td>
+<td align="left">将表达式转换为其底层的非空类型，如果转换失败则抛出运行时异常；示例： <code>foo!.bar</code> 断言 <code>foo</code> 不为 null 并选择属性 <code>bar</code> ，除非 <code>foo</code> 为 null，在这种情况下会抛出运行时异常</td>
+</tr>
+</tbody></table>
+<p>有关 <code>.</code> 、 <code>?.</code> 和 <code>..</code> 运算符的更多信息，请参阅 类 。</p>
+<p>来源：<a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/operators/">Dart 中文开发文档</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/dart/Dart%20%E5%8F%98%E9%87%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/dart/Dart%20%E5%8F%98%E9%87%8F/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-05 17:59:10 / 修改时间：18:05:36" itemprop="dateCreated datePublished" datetime="2025-02-05T17:59:10+08:00">2025-02-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Dart-变量"><a href="#Dart-变量" class="headerlink" title="Dart 变量"></a>Dart 变量</h1><p>这是一个创建变量并对其进行初始化的示例：</p>
+<p>​</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>变量存储引用。名为 <code>name</code> 的变量包含对值为“Bob”的 <code>String</code> 对象的引用。</p>
+<p><code>name</code> 变量的类型被推断为 <code>String</code> ，但您可以通过指定它来更改该类型。如果对象不受限于单一类型，请指定 <code>Object</code> 类型（如果需要，则指定 <code>dynamic</code> ）。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>另一种选择是显式声明将被推断的类型：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> name = <span class="string">&#x27;Bob&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此页面遵循 样式指南建议<br>即对局部变量使用 <code>var</code> ，而不是类型注解。</p>
+</blockquote>
+<h2 id="空安全"><a href="#空安全" class="headerlink" title="空安全"></a>空安全</h2><p>Dart 语言强制执行健全的空安全。</p>
+<p>空安全可防止因无意访问设置为 <code>null</code> 的变量而导致的错误。此错误称为空解引用错误。当您访问表达式（其计算结果为 <code>null</code> ）的属性或调用其方法时，就会发生空解引用错误。此规则的例外情况是当 <code>null</code> 支持属性或方法时，例如 <code>toString()</code> 或 <code>hashCode</code> 。使用空安全，Dart 编译器会在编译时检测这些潜在错误。</p>
+<p>例如，假设您想找到 <code>int</code> 变量 <code>i</code> 的绝对值。如果 <code>i</code> 为 <code>null</code> ，则调用 <code>i.abs()</code> 会导致空解引用错误。在其他语言中，尝试此操作可能会导致运行时错误，但 Dart 的编译器会禁止这些操作。因此，Dart 应用不会导致运行时错误。</p>
+<p>空安全引入了三个主要更改：</p>
+<ol>
+<li>当您为变量、参数或其他相关组件指定类型时，您可以控制该类型是否允许 <code>null</code> 。要启用可空性，请在类型声明的末尾添加 <code>?</code> 。</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String?</span> name  <span class="comment">// 可空类型。可以是 `null` 或字符串。</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> name   <span class="comment">// 不可空类型。不能是 `null` ，但可以是字符串。</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>您必须在使用变量之前对其进行初始化。可空变量默认为 <code>null</code> ，因此它们默认情况下已初始化。Dart 不会为不可空类型设置初始值。它强制您设置初始值。Dart 不允许您观察未初始化的变量。这可以防止您访问属性或调用方法，其中接收方的类型可以是 <code>null</code> ，但 <code>null</code> 不支持使用的方法或属性。</li>
+<li>您不能访问具有可空类型的表达式的属性或调用其方法。相同的异常适用于 <code>null</code> 支持的属性或方法，例如 <code>hashCode</code> 或 <code>toString()</code> 。</li>
+</ol>
+<p>健全的空安全将潜在的 <strong>运行时错误</strong> 转换为 <strong>编辑时</strong> 分析错误。当非空变量已被：</p>
+<ul>
+<li>未初始化为非空值。</li>
+<li>分配了 <code>null</code> 值。</li>
+</ul>
+<p>此检查允许您在部署应用 <em>之前</em> 纠正这些错误。</p>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值"></a>默认值</h2><p>具有可空类型的未初始化变量的初始值为 <code>null</code> 。即使是具有数字类型的变量最初也是 null，因为数字（就像 Dart 中的所有其他内容一样）都是对象。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int?</span> lineCount;</span><br><span class="line"><span class="keyword">assert</span>(lineCount == <span class="keyword">null</span>);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>生产代码会忽略 <code>assert()</code> 调用。另一方面，在开发过程中，如果 <em>condition</em> 为假，则<br><code>assert(condition)</code> 会引发异常。</p>
+</blockquote>
+<p>使用空安全，您必须在使用不可空变量之前对其进行初始化：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>您不必在声明局部变量的地方对其进行初始化，但您确实需要在使用它之前为其赋值。例如，以下代码是有效的，因为 Dart 可以检测到在将 <code>lineCount</code> 传递给 <code>print()</code> 之前它是非空的：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> lineCount;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (weLikeToCount) &#123;</span><br><span class="line">  lineCount = countLines();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  lineCount = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(lineCount);</span><br></pre></td></tr></table></figure>
+
+<p>顶级变量和类变量是延迟初始化的；初始化代码在第一次使用变量时运行。</p>
+<h2 id="延迟变量"><a href="#延迟变量" class="headerlink" title="延迟变量"></a>延迟变量</h2><p><code>late</code> 修饰符有两种用例：</p>
+<ul>
+<li>声明一个在声明后初始化的不可空变量。</li>
+<li>延迟初始化变量。</li>
+</ul>
+<p>通常，Dart 的控制流分析可以检测到在使用不可空变量之前何时将其设置为非空值，但有时分析会失败。两种常见情况是顶级变量和实例变量：Dart 通常无法确定它们是否已设置，因此它不会尝试。</p>
+<p>如果您确定在使用变量之前已设置该变量，但 Dart 不同意，则可以通过将变量标记为 <code>late</code> 来纠正此错误：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">late</span> <span class="built_in">String</span> description;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  description = <span class="string">&#x27;Feijoada!&#x27;</span>;</span><br><span class="line">  <span class="built_in">print</span>(description);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<br>如果您未能初始化 <code>late</code> 变量，则在使用该变量时会发生运行时错误。</p>
+</blockquote>
+<p>当您将变量标记为 <code>late</code> 但在其声明处对其进行初始化时，则在第一次使用该变量时运行初始化程序。这种延迟初始化在以下几种情况下非常方便：</p>
+<ul>
+<li>可能不需要该变量，并且初始化该变量的成本很高。</li>
+<li>您正在初始化实例变量，并且其初始化程序需要访问 <code>this</code> 。</li>
+</ul>
+<p>在以下示例中，如果从未使用 <code>temperature</code> 变量，则从未调用代价高昂的 <code>readThermometer()</code> 函数：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是程序对 readThermometer() 的唯一调用。</span></span><br><span class="line"><span class="keyword">late</span> <span class="built_in">String</span> temperature = readThermometer(); <span class="comment">// 延迟初始化。</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="final-和-const"><a href="#final-和-const" class="headerlink" title="final 和 const"></a>final 和 const</h2><p>如果您不打算更改变量，请使用 <code>final</code> 或 <code>const</code> ，替换 <code>var</code> 或添加到类型中。 <code>final</code> 变量只能设置一次； <code>const</code> 变量是编译时常量。（ <code>const</code> 变量隐式为 <code>final</code> 。）</p>
+<blockquote>
+<p>备注<br>实例变量 可以是 <code>final</code> ，但不能是 <code>const</code> 。</p>
+</blockquote>
+<p>以下是创建和设置 <code>final</code> 变量的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> name = <span class="string">&#x27;Bob&#x27;</span>; <span class="comment">// 没有类型注解</span></span><br><span class="line"><span class="keyword">final</span> <span class="built_in">String</span> nickname = <span class="string">&#x27;Bobby&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>您不能更改 <code>final</code> 变量的值：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">name = <span class="string">&#x27;Alice&#x27;</span>; <span class="comment">// 错误：final 变量只能设置一次。</span></span><br></pre></td></tr></table></figure>
+
+<p>对于希望成为 <strong>编译时常量</strong> 的变量，请使用 <code>const</code> 。如果 <code>const</code> 变量位于类级别，请将其标记为 <code>static const</code> 。在声明变量的地方，将值设置为编译时常量，例如数字或字符串文字、 <code>const</code> 变量或对常量数字进行算术运算的结果：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bar = <span class="number">1000000</span>; <span class="comment">// 压力单位 (dynes/cm2)</span></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">double</span> atm = <span class="number">1.01325</span> * bar; <span class="comment">// 标准大气压</span></span><br></pre></td></tr></table></figure>
+
+<p><code>const</code> 关键字不仅仅用于声明常量变量。您还可以使用它来创建常量 <em>值</em> ，以及声明创建常量值的构造函数。任何变量都可以具有常量值。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="keyword">const</span> [];</span><br><span class="line"><span class="keyword">final</span> bar = <span class="keyword">const</span> [];</span><br><span class="line"><span class="keyword">const</span> baz = []; <span class="comment">// 等同于 `const []`</span></span><br></pre></td></tr></table></figure>
+
+<p>您可以从 <code>const</code> 声明的初始化表达式中省略 <code>const</code> ，如上面的 <code>baz</code> 一样。有关详细信息，请参阅 不要冗余地使用 const 。</p>
+<p>您可以更改非 final、非 const 变量的值，即使它以前具有 <code>const</code> 值：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foo = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]; <span class="comment">// 以前是 const []</span></span><br></pre></td></tr></table></figure>
+
+<p>您不能更改 <code>const</code> 变量的值：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baz = [<span class="number">42</span>]; <span class="comment">// 错误：常量变量不能赋值。</span></span><br></pre></td></tr></table></figure>
+
+<p>您可以定义使用</p>
+<p>类型检查和强制转换 （ <code>is</code> 和 <code>as</code> ）、</p>
+<p>集合 <code>if</code></p>
+<p>和 扩展运算符 （ <code>...</code> 和 <code>...?</code> ）的常量：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="built_in">Object</span> i = <span class="number">3</span>; <span class="comment">// i 是具有 int 值的 const Object ...</span></span><br><span class="line"><span class="keyword">const</span> list = [i <span class="keyword">as</span> <span class="built_in">int</span>]; <span class="comment">// 使用类型转换。</span></span><br><span class="line"><span class="keyword">const</span> map = &#123;<span class="keyword">if</span> (i <span class="keyword">is</span> <span class="built_in">int</span>) i: <span class="string">&#x27;int&#x27;</span>&#125;; <span class="comment">// 使用 is 和集合 if。</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">set</span> = &#123;<span class="keyword">if</span> (list <span class="keyword">is</span> <span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt;) ...list&#125;; <span class="comment">// ...和扩展运算符。</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>备注<br>虽然不能修改 <code>final</code> 对象，但可以更改其字段。相比之下，不能更改 <code>const</code> 对象及其字段：它们是 <em>不可变的</em> 。</p>
+</blockquote>
+<p>原文：<a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/variables/">https://dart.wendang.dev/language/variables/</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">yt-dlp 中文使用手册</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-04 18:21:55 / 修改时间：18:25:24" itemprop="dateCreated datePublished" datetime="2025-02-04T18:21:55+08:00">2025-02-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!-- MANPAGE: BEGIN EXCLUDED SECTION -->
+<div align="center">
+
+<p><a href="#readme"><img src="https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg" alt="YT-DLP"></a></p>
+<p><a href="#installation" title="Installation"><img src="https://img.shields.io/github/v/release/yt-dlp/yt-dlp?color=brightgreen&label=Download&style=for-the-badge" alt="Release version"></a><br><a target="_blank" rel="noopener" href="https://pypi.org/project/yt-dlp" title="PyPI"><img src="https://img.shields.io/badge/-PyPI-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge" alt="PyPI"></a><br><a href="Collaborators.md#collaborators" title="Donate"><img src="https://img.shields.io/badge/_-Donate-red.svg?logo=githubsponsors&labelColor=555555&style=for-the-badge" alt="Donate"></a><br><a target="_blank" rel="noopener" href="https://matrix.to/#/#yt-dlp:matrix.org" title="Matrix"><img src="https://img.shields.io/matrix/yt-dlp:matrix.org?color=brightgreen&labelColor=555555&label=&logo=element&style=for-the-badge" alt="Matrix"></a><br><a target="_blank" rel="noopener" href="https://discord.gg/H5MNcFW63r" title="Discord"><img src="https://img.shields.io/discord/807245652072857610?color=blue&labelColor=555555&label=&logo=discord&style=for-the-badge" alt="Discord"></a><br><a href="supportedsites.md" title="Supported Sites"><img src="https://img.shields.io/badge/-Supported_Sites-brightgreen.svg?style=for-the-badge" alt="Supported Sites"></a><br><a href="LICENSE" title="License"><img src="https://img.shields.io/badge/-Unlicense-blue.svg?style=for-the-badge" alt="License: Unlicense"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/actions" title="CI Status"><img src="https://img.shields.io/github/actions/workflow/status/yt-dlp/yt-dlp/core.yml?branch=master&label=Tests&style=for-the-badge" alt="CI Status"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/commits" title="Commit History"><img src="https://img.shields.io/github/commit-activity/m/yt-dlp/yt-dlp?label=commits&style=for-the-badge" alt="Commits"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/pulse/monthly" title="Last activity"><img src="https://img.shields.io/github/last-commit/yt-dlp/yt-dlp/master?label=&style=for-the-badge&display_timestamp=committer" alt="Last Commit"></a></p>
+</div>
+<!-- MANPAGE: END EXCLUDED SECTION -->
+
+<p>yt-dlp 是一个功能丰富的命令行音频&#x2F;视频下载器，支持 <a href="supportedsites.md">数千个网站</a> 。该项目是从现已失效的 <a target="_blank" rel="noopener" href="https://github.com/blackjack4494/yt-dlc">youtube-dlc</a> 项目派生出的 <a target="_blank" rel="noopener" href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a> 的分支。</p>
+<!-- MANPAGE: MOVE "USAGE AND OPTIONS" SECTION HERE -->
+
+<!-- MANPAGE: BEGIN EXCLUDED SECTION -->
+
+<ul>
+<li><a href="#installation">安装</a><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki/Installation">详细说明</a></li>
+<li><a href="#release-files">发行文件</a></li>
+<li><a href="#update">更新</a></li>
+<li><a href="#dependencies">依赖项</a></li>
+<li><a href="#compile">编译</a></li>
+</ul>
+</li>
+<li><a href="#usage-and-options">用法和选项</a><ul>
+<li><a href="#general-options">常规选项</a></li>
+<li><a href="#network-options">网络选项</a></li>
+<li><a href="#geo-restriction">地理限制</a></li>
+<li><a href="#video-selection">视频选择</a></li>
+<li><a href="#download-options">下载选项</a></li>
+<li><a href="#filesystem-options">文件系统选项</a></li>
+<li><a href="#thumbnail-options">缩略图选项</a></li>
+<li><a href="#internet-shortcut-options">互联网快捷方式选项</a></li>
+<li><a href="#verbosity-and-simulation-options">详细程度和模拟选项</a></li>
+<li><a href="#workarounds">变通方法</a></li>
+<li><a href="#video-format-options">视频格式选项</a></li>
+<li><a href="#subtitle-options">字幕选项</a></li>
+<li><a href="#authentication-options">身份验证选项</a></li>
+<li><a href="#post-processing-options">后处理选项</a></li>
+<li><a href="#sponsorblock-options">SponsorBlock 选项</a></li>
+<li><a href="#extractor-options">提取器选项</a></li>
+</ul>
+</li>
+<li><a href="#configuration">配置</a><ul>
+<li><a href="#configuration-file-encoding">配置文件编码</a></li>
+<li><a href="#authentication-with-netrc">使用 netrc 进行身份验证</a></li>
+<li><a href="#notes-about-environment-variables">关于环境变量的说明</a></li>
+</ul>
+</li>
+<li><a href="#output-template">输出模板</a><ul>
+<li><a href="#output-template-examples">输出模板示例</a></li>
+</ul>
+</li>
+<li><a href="#format-selection">格式选择</a><ul>
+<li><a href="#filtering-formats">过滤格式</a></li>
+<li><a href="#sorting-formats">排序格式</a></li>
+<li><a href="#format-selection-examples">格式选择示例</a></li>
+</ul>
+</li>
+<li><a href="#modifying-metadata">修改元数据</a><ul>
+<li><a href="#modifying-metadata-examples">修改元数据示例</a></li>
+</ul>
+</li>
+<li><a href="#extractor-arguments">提取器参数</a></li>
+<li><a href="#plugins">插件</a><ul>
+<li><a href="#installing-plugins">安装插件</a></li>
+<li><a href="#developing-plugins">开发插件</a></li>
+</ul>
+</li>
+<li><a href="#embedding-yt-dlp">嵌入 YT-DLP</a><ul>
+<li><a href="#embedding-examples">嵌入示例</a></li>
+</ul>
+</li>
+<li><a href="#changes-from-youtube-dl">与 YOUTUBE-DL 的差异</a><ul>
+<li><a href="#new-features">新功能</a></li>
+<li><a href="#differences-in-default-behavior">默认行为的差异</a></li>
+<li><a href="#deprecated-options">已弃用的选项</a></li>
+</ul>
+</li>
+<li><a href="CONTRIBUTING.md#contributing-to-yt-dlp">贡献</a><ul>
+<li><a href="CONTRIBUTING.md#opening-an-issue">提交问题</a></li>
+<li><a href="CONTRIBUTING.md#developer-instructions">开发者说明</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki">WIKI</a> * <a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki/FAQ">常见问题</a><!-- MANPAGE: END EXCLUDED SECTION --></li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/email/%E5%80%9F%E9%89%B4%20jwt%20%E7%9A%84%E9%82%AE%E4%BB%B6%E9%80%80%E8%AE%A2%E6%80%9D%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/email/%E5%80%9F%E9%89%B4%20jwt%20%E7%9A%84%E9%82%AE%E4%BB%B6%E9%80%80%E8%AE%A2%E6%80%9D%E8%B7%AF/" class="post-title-link" itemprop="url">借鉴 jwt 的邮件退订思路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-30 16:41:18 / 修改时间：17:55:05" itemprop="dateCreated datePublished" datetime="2024-10-30T16:41:18+08:00">2024-10-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在平常的验证码, 推广邮件中, 我们通常会在最下角找到 <del>退订链接</del>。通常访问它, 我们就不会再收到他们发送的邮件。</p>
+<p>但是, 如何以最简单, 最节省性能的方式去实现这一功能呢?</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/email/%E5%80%9F%E9%89%B4%20jwt%20%E7%9A%84%E9%82%AE%E4%BB%B6%E9%80%80%E8%AE%A2%E6%80%9D%E8%B7%AF/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/email/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E8%90%A5%E9%94%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/email/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E8%90%A5%E9%94%80/" class="post-title-link" itemprop="url">电子邮件营销开发相关</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-10-30 15:33:13 / 修改时间：18:02:36" itemprop="dateCreated datePublished" datetime="2024-10-30T15:33:13+08:00">2024-10-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>电子邮件营销开发相关.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/email/%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E8%90%A5%E9%94%80/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/nextjs/Next.js%20%E4%B8%AD%20useEffect%20%E6%89%A7%E8%A1%8C%E4%B8%A4%E6%AC%A1%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/nextjs/Next.js%20%E4%B8%AD%20useEffect%20%E6%89%A7%E8%A1%8C%E4%B8%A4%E6%AC%A1%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">Next.js 中 useEffect 执行两次的问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-09-07 00:00:00 / 修改时间：15:32:08" itemprop="dateCreated datePublished" datetime="2024-09-07T00:00:00+08:00">2024-09-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在 Next.js 开发中会发现 useEffect() 中的代码会执行两次,这个问题源于 React 18 的严格模式.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/nextjs/Next.js%20%E4%B8%AD%20useEffect%20%E6%89%A7%E8%A1%8C%E4%B8%A4%E6%AC%A1%E7%9A%84%E9%97%AE%E9%A2%98/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -394,553 +1673,8 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/hexo/%E4%BD%BF%E7%94%A8%20Github%20%E5%92%8C%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/hexo/%E4%BD%BF%E7%94%A8%20Github%20%E5%92%8C%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/" class="post-title-link" itemprop="url">使用 Github 和 Hexo 搭建博客网站</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-10-11 00:00:00" itemprop="dateCreated datePublished" datetime="2023-10-11T00:00:00+08:00">2023-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-05-10 12:39:43" itemprop="dateModified" datetime="2024-05-10T12:39:43+08:00">2024-05-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>通过 Github Pages 和 Hexo 系统搭建博客网站.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/hexo/%E4%BD%BF%E7%94%A8%20Github%20%E5%92%8C%20Hexo%20%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/ubuntu/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/ubuntu/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4/" class="post-title-link" itemprop="url">Linux 系统下查看目录占用空间</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-24 00:00:00 / 修改时间：13:34:14" itemprop="dateCreated datePublished" datetime="2023-09-24T00:00:00+08:00">2023-09-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在 Linux 系统中,我们可以使用 <code>du</code> 命令来查看目录的占用空间.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/ubuntu/Linux%20%E7%B3%BB%E7%BB%9F%E4%B8%8B%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20GTM%20%E5%92%8C%20GA4%20%E5%81%9A%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20GTM%20%E5%92%8C%20GA4%20%E5%81%9A%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/" class="post-title-link" itemprop="url">Next.js 使用 GTM 和 GA4 做统计分析</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-15 00:00:00 / 修改时间：15:56:11" itemprop="dateCreated datePublished" datetime="2023-09-15T00:00:00+08:00">2023-09-15</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>GTM 全称是 Google Tag Manager（谷歌标签管理器）, GA4 是 Google Analytics（谷歌分析）的最新版本.<br>这两个都是由 Google 提供的免费统计分析工具.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/nextjs/Next.js%20%E4%BD%BF%E7%94%A8%20GTM%20%E5%92%8C%20GA4%20%E5%81%9A%E7%BB%9F%E8%AE%A1%E5%88%86%E6%9E%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/proxy/Linux%20%E7%BD%91%E7%BB%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/proxy/Linux%20%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">Linux 网络</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-13 00:00:00 / 修改时间：18:15:38" itemprop="dateCreated datePublished" datetime="2023-09-13T00:00:00+08:00">2023-09-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Linux 网络相关知识笔记</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/proxy/Linux%20%E7%BD%91%E7%BB%9C/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/proxy/gost%20%E5%AE%9E%E6%88%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/proxy/gost%20%E5%AE%9E%E6%88%98/" class="post-title-link" itemprop="url">gost 实战</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-13 00:00:00 / 修改时间：13:40:21" itemprop="dateCreated datePublished" datetime="2023-09-13T00:00:00+08:00">2023-09-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>gost 实战代码分析</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/proxy/gost%20%E5%AE%9E%E6%88%98/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/proxy/gost/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/proxy/gost/" class="post-title-link" itemprop="url">gost</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-13 00:00:00 / 修改时间：12:50:59" itemprop="dateCreated datePublished" datetime="2023-09-13T00:00:00+08:00">2023-09-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Gost 是一个多功能的安全隧道工具，Gost 是开源软件,使用 go 语言编写</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/proxy/gost/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/proxy/ip%20%E5%9C%B0%E5%9D%80%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Leo">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="技术博客">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 技术博客">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/proxy/ip%20%E5%9C%B0%E5%9D%80%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">ip 地址知识</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-09-13 00:00:00 / 修改时间：08:51:51" itemprop="dateCreated datePublished" datetime="2023-09-13T00:00:00+08:00">2023-09-13</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>ip 地址知识笔记</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/proxy/ip%20%E5%9C%B0%E5%9D%80%E7%9F%A5%E8%AF%86/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -952,7 +1686,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

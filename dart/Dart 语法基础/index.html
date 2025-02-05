@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"luohuayong.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Dart 注释Dart 支持单行注释、多行注释和文档注释。 单行注释单行注释以 &#x2F;&#x2F; 开头。 &#x2F;&#x2F; 和行尾之间的所有内容都被 Dart 编译器忽略。 1234void main() &amp;#123;  &#x2F;&#x2F; TODO: 重构为 AbstractLlamaGreetingFactory？  print(&amp;#x27;欢迎来到我的羊驼农场！&amp;#x27;);&amp;#125;  多行注释多行注释以 &#x2F;* 开头，以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="技术博客">
+<meta property="og:url" content="https://luohuayong.github.io/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="Dart 注释Dart 支持单行注释、多行注释和文档注释。 单行注释单行注释以 &#x2F;&#x2F; 开头。 &#x2F;&#x2F; 和行尾之间的所有内容都被 Dart 编译器忽略。 1234void main() &amp;#123;  &#x2F;&#x2F; TODO: 重构为 AbstractLlamaGreetingFactory？  print(&amp;#x27;欢迎来到我的羊驼农场！&amp;#x27;);&amp;#125;  多行注释多行注释以 &#x2F;* 开头，以">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-02-05T10:07:05.377Z">
+<meta property="article:modified_time" content="2025-02-05T10:07:21.497Z">
+<meta property="article:author" content="Leo">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://luohuayong.github.io/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://luohuayong.github.io/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/","path":"dart/Dart 语法基础/","title":""}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title> | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Dart-%E6%B3%A8%E9%87%8A"><span class="nav-number">1.</span> <span class="nav-text">Dart 注释</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.</span> <span class="nav-text">单行注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%E6%B3%A8%E9%87%8A"><span class="nav-number">1.2.</span> <span class="nav-text">多行注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="nav-number">1.3.</span> <span class="nav-text">文档注释</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dart-%E5%85%83%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">Dart 元数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dart-%E5%BA%93%E4%B8%8E%E5%AF%BC%E5%85%A5"><span class="nav-number">3.</span> <span class="nav-text">Dart 库与导入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BA%93"><span class="nav-number">3.1.</span> <span class="nav-text">使用库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E5%BA%93%E5%89%8D%E7%BC%80"><span class="nav-number">3.1.1.</span> <span class="nav-text">指定库前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E5%AF%BC%E5%85%A5%E5%BA%93%E7%9A%84%E4%B8%80%E9%83%A8%E5%88%86"><span class="nav-number">3.1.2.</span> <span class="nav-text">只导入库的一部分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E5%8A%A0%E8%BD%BD%E5%BA%93"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">延迟加载库</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#library-%E6%8C%87%E4%BB%A4-library-directive"><span class="nav-number">3.1.3.</span> <span class="nav-text">library 指令 {:#library-directive}</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%BA%93"><span class="nav-number">3.2.</span> <span class="nav-text">实现库</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/dart/Dart%20%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-05 18:07:05 / 修改时间：18:07:21" itemprop="dateCreated datePublished" datetime="2025-02-05T18:07:05+08:00">2025-02-05</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="Dart-注释"><a href="#Dart-注释" class="headerlink" title="Dart 注释"></a>Dart 注释</h1><p>Dart 支持单行注释、多行注释和文档注释。</p>
+<h2 id="单行注释"><a href="#单行注释" class="headerlink" title="单行注释"></a>单行注释</h2><p>单行注释以 <code>//</code> 开头。 <code>//</code> 和行尾之间的所有内容都被 Dart 编译器忽略。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> 重构为 AbstractLlamaGreetingFactory？</span></span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;欢迎来到我的羊驼农场！&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h2><p>多行注释以 <code>/*</code> 开头，以 <code>*/</code> 结尾。 <code>/*</code> 和 <code>*/</code> 之间的所有内容都被 Dart 编译器忽略（除非注释是文档注释；请参见下一节）。多行注释可以嵌套。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> main() &#123;</span><br><span class="line">  <span class="comment">/*</span></span><br><span class="line"><span class="comment">   * 这是很多工作。考虑养鸡。</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">  Llama larry = Llama();</span></span><br><span class="line"><span class="comment">  larry.feed();</span></span><br><span class="line"><span class="comment">  larry.exercise();</span></span><br><span class="line"><span class="comment">  larry.clean();</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文档注释"><a href="#文档注释" class="headerlink" title="文档注释"></a>文档注释</h2><p>文档注释是开头为 <code>///</code> 或 <code>/**</code> 的多行或单行注释。在连续行上使用 <code>///</code> 与多行文档注释的效果相同。</p>
+<p>在文档注释中，分析器会忽略所有文本，除非它包含在方括号中。使用方括号，您可以引用类、方法、字段、顶级变量、函数和参数。方括号中的名称在已记录程序元素的词法作用域中解析。</p>
+<p>这是一个带有对其他类和参数引用的文档注释示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="language-markdown">一种驯养的南美骆驼科动物（羊驼）。</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">安第斯文化自前西班牙时代以来就一直将羊驼用作肉类和驮畜。</span></span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">与任何其他动物一样，羊驼也需要吃东西，</span></span></span><br><span class="line"><span class="comment">/// <span class="language-markdown">所以不要忘记用一些 [Food] [feed] 它们。</span></span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Llama</span> </span>&#123;</span><br><span class="line">  <span class="built_in">String?</span> name;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">用 [food] 喂你的羊驼。</span></span></span><br><span class="line">  <span class="comment">///</span></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">一只典型的羊驼每周吃一捆干草。</span></span></span><br><span class="line">  <span class="keyword">void</span> feed(Food food) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">用 [activity] 活动让你的羊驼锻炼 [timeLimit] 分钟。</span></span></span><br><span class="line">  <span class="keyword">void</span> exercise(Activity activity, <span class="built_in">int</span> timeLimit) &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在类的生成的文档中， <code>[feed]</code> 成为指向 <code>feed</code> 方法文档的链接，</p>
+<p>而 <code>[Food]</code> 成为指向 <code>Food</code> 类文档的链接。</p>
+<p>要解析 Dart 代码并生成 HTML 文档，您可以使用 Dart 的文档生成工具， <a target="_blank" rel="noopener" href="https://dart.wendang.dev/tools/dart-doc"><code>dart doc</code></a> 。</p>
+<p>有关生成的文档示例，请参见</p>
+<p><a target="_blank" rel="noopener" href="https://api.dart.dev/">Dart API 文档。</a></p>
+<p>有关如何组织注释的建议，请参见</p>
+<p><a target="_blank" rel="noopener" href="https://dart.wendang.dev/effective-dart/documentation">Effective Dart：文档。</a></p>
+<h1 id="Dart-元数据"><a href="#Dart-元数据" class="headerlink" title="Dart 元数据"></a>Dart 元数据</h1><p>使用元数据为代码提供附加信息。元数据注释以字符 <code>@</code> 开头，后跟编译时常量的引用（例如 <code>deprecated</code> ）或对常量构造函数的调用。</p>
+<p>所有 Dart 代码都可以使用四种注释： <code>@Deprecated</code> 、 <code>@deprecated</code> 、 <code>@override</code> 和 <code>@pragma</code> 。有关使用 <code>@override</code> 的示例，请参阅 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/extend">扩展类</a> 。以下是如何使用 <code>@Deprecated</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Television</span> </span>&#123;</span><br><span class="line">  <span class="comment">/// <span class="language-markdown">使用 [turnOn] 代替打开电源。</span></span></span><br><span class="line">  [!<span class="meta">@Deprecated</span>(<span class="string">&#x27;Use turnOn instead&#x27;</span>)!]</span><br><span class="line">  <span class="keyword">void</span> activate() &#123;</span><br><span class="line">    turnOn();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/// <span class="language-markdown">打开电视电源。</span></span></span><br><span class="line">  <span class="keyword">void</span> turnOn() &#123;...&#125;</span><br><span class="line">  <span class="comment">// ···</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果您不想指定消息，可以使用 <code>@deprecated</code> 。但是，我们 建议 始终使用 <code>@Deprecated</code> 指定消息。</p>
+<p>您可以定义自己的元数据注释。以下是如何定义一个带有两个参数的 <code>@Todo</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Todo</span> </span>&#123;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> who;</span><br><span class="line">  <span class="keyword">final</span> <span class="built_in">String</span> what;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> Todo(<span class="keyword">this</span>.who, <span class="keyword">this</span>.what);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以下是如何使用该 <code>@Todo</code> 注释的示例：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Todo</span>(<span class="string">&#x27;Dash&#x27;</span>, <span class="string">&#x27;Implement this function&#x27;</span>)</span><br><span class="line"><span class="keyword">void</span> doSomething() &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;Do something&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>元数据可以出现在库、类、typedef、类型参数、构造函数、工厂、函数、字段、参数或变量声明之前，以及 import 或 export 指令之前。</p>
+<h1 id="Dart-库与导入"><a href="#Dart-库与导入" class="headerlink" title="Dart 库与导入"></a>Dart 库与导入</h1><p><code>import</code> 和 <code>library</code> 指令可以帮助您创建模块化且可共享的代码库。库不仅提供 API，而且还是隐私单元：以下划线 (<code>_</code>) 开头的标识符仅在库内可见。_每个 Dart 文件（及其部分）都是一个 库_，即使它不使用 <a href="#library-directive"><code>library</code></a> 指令。</p>
+<p>库可以使用 包 进行分发。</p>
+<blockquote>
+<p>注意<br>要了解为什么 Dart 使用下划线而不是 <code>public</code> 或 <code>private</code> 等访问修饰符关键字，请参阅<br>SDK issue 33383 。</p>
+</blockquote>
+<h2 id="使用库"><a href="#使用库" class="headerlink" title="使用库"></a>使用库</h2><p>使用 <code>import</code> 指定一个库的命名空间如何在另一个库的范围内使用。</p>
+<p>例如，Dart Web 应用通常使用 dart:html 库，它们可以这样导入：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;dart:html&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>import</code> 唯一必需的参数是指定库的 URI。</p>
+<p>对于内置库，URI 具有特殊的 <code>dart:</code> 模式。</p>
+<p>对于其他库，您可以使用文件系统路径或 <code>package:</code> 模式。 <code>package:</code> 模式指定由包管理器（例如 pub 工具）提供的库。例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:test/test.dart&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<br><em>URI</em> 代表统一资源标识符。<br>_URL_（统一资源定位符）是一种常见的 URI。</p>
+</blockquote>
+<h3 id="指定库前缀"><a href="#指定库前缀" class="headerlink" title="指定库前缀"></a>指定库前缀</h3><p>如果您导入了两个具有冲突标识符的库，则可以为一个或两个库指定前缀。例如，如果库 1 和库 2 都具有 Element 类，则您的代码可能如下所示：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib1/lib1.dart&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib2/lib2.dart&#x27;</span> <span class="keyword">as</span> lib2;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 lib1 中的 Element。</span></span><br><span class="line"><span class="built_in">Element</span> element1 = <span class="built_in">Element</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 lib2 中的 Element。</span></span><br><span class="line">lib2.<span class="built_in">Element</span> element2 = lib2.<span class="built_in">Element</span>();</span><br></pre></td></tr></table></figure>
+
+<h3 id="只导入库的一部分"><a href="#只导入库的一部分" class="headerlink" title="只导入库的一部分"></a>只导入库的一部分</h3><p>如果您只想使用库的一部分，可以选择性地导入库。例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只导入 foo。</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib1/lib1.dart&#x27;</span> <span class="keyword">show</span> foo;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导入除 foo 之外的所有名称。</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:lib2/lib2.dart&#x27;</span> <span class="keyword">hide</span> foo;</span><br></pre></td></tr></table></figure>
+
+<h4 id="延迟加载库"><a href="#延迟加载库" class="headerlink" title="延迟加载库"></a>延迟加载库</h4><p><em>延迟加载</em> （也称为 <em>懒加载</em> ）</p>
+<p>允许 Web 应用根据需要按需加载库。</p>
+<p>当您需要满足以下一项或多项需求时，请使用延迟加载。</p>
+<ul>
+<li>减少 Web 应用的初始启动时间。</li>
+<li>执行 A&#x2F;B 测试——例如，尝试算法的替代实现。</li>
+<li>加载很少使用的功能，例如可选屏幕和对话框。</li>
+</ul>
+<p>这并不意味着 Dart 会在启动时加载所有延迟组件。</p>
+<p>Web 应用可以在需要时通过 Web 下载延迟组件。</p>
+<p><code>dart</code> 工具不支持针对 Web 以外的目标的延迟加载。</p>
+<p>如果您正在构建 Flutter 应用，</p>
+<p>请参阅 Flutter 指南中关于</p>
+<p>延迟组件 的延迟加载实现。</p>
+<p>undefined</p>
+<p>要延迟加载库，首先使用 <code>deferred as</code> 导入它。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;package:greetings/hello.dart&#x27;</span> <span class="keyword">deferred</span> <span class="keyword">as</span> hello;</span><br></pre></td></tr></table></figure>
+
+<p>当您需要该库时，使用库的标识符调用 <code>loadLibrary()</code> 。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Future&lt;<span class="keyword">void</span>&gt; greet() <span class="keyword">async</span> &#123;</span><br><span class="line">  <span class="keyword">await</span> hello.loadLibrary();</span><br><span class="line">  hello.printGreeting();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在前面的代码中，</p>
+<p><code>await</code> 关键字会暂停执行，直到库加载完毕。</p>
+<p>有关 <code>async</code> 和 <code>await</code> 的更多信息，</p>
+<p>请参见 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/async">异步支持</a> 。</p>
+<p>您可以多次在库上调用 <code>loadLibrary()</code> 而不出现问题。</p>
+<p>库只加载一次。</p>
+<p>使用延迟加载时，请记住以下几点：</p>
+<ul>
+<li>延迟库的常量在导入文件中不是常量。<br>请记住，这些常量在延迟库加载之前不存在。</li>
+<li>您不能在导入文件中使用延迟库中的类型。<br>相反，请考虑将接口类型移动到由延迟库和导入文件同时导入的库。</li>
+<li>Dart 会隐式地将 <code>loadLibrary()</code> 插入到您使用 <code>deferred as 命名空间</code> 定义的命名空间中。<br><code>loadLibrary()</code> 函数返回一个 <a target="_blank" rel="noopener" href="https://dart.wendang.dev/libraries/dart-async#future"><code>Future</code></a> 。</li>
+</ul>
+<h3 id="library-指令-library-directive"><a href="#library-指令-library-directive" class="headerlink" title="library 指令 {:#library-directive}"></a><code>library</code> 指令 {:#library-directive}</h3><p>要指定库级 文档注释 或 元数据注释 ，</p>
+<p>请将它们附加到文件开头的 <code>library</code> 声明。</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// <span class="language-markdown">一个非常棒的测试库。</span></span></span><br><span class="line"><span class="meta">@TestOn</span>(<span class="string">&#x27;browser&#x27;</span>)</span><br><span class="line"><span class="keyword">library</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实现库"><a href="#实现库" class="headerlink" title="实现库"></a>实现库</h2><p>有关如何实现包的建议，请参阅</p>
+<p>创建包 ，其中包括：</p>
+<ul>
+<li>如何组织库源代码。</li>
+<li>如何使用 <code>export</code> 指令。</li>
+<li>何时使用 <code>part</code> 指令。</li>
+<li>如何使用条件导入和导出来实现支持多个平台的库。</li>
+</ul>
+<p>来源：<a target="_blank" rel="noopener" href="https://dart.wendang.dev/language/comments/">Dart 中文开发文档</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/dart/Dart%20%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

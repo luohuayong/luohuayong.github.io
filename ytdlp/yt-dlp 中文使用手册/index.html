@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"luohuayong.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="yt-dlp 是一个功能丰富的命令行音频&#x2F;视频下载器，支持 数千个网站 。该项目是从现已失效的 youtube-dlc 项目派生出的 youtube-dl 的分支。      安装 详细说明 发行文件 更新 依赖项 编译   用法和选项 常规选项 网络选项 地理限制 视频选择 下载选项 文件系统选项 缩略图选项 互联网快捷方式选项 详细程度和模拟选项 变通方法 视频格式选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yt-dlp 中文使用手册">
+<meta property="og:url" content="https://luohuayong.github.io/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="yt-dlp 是一个功能丰富的命令行音频&#x2F;视频下载器，支持 数千个网站 。该项目是从现已失效的 youtube-dlc 项目派生出的 youtube-dl 的分支。      安装 详细说明 发行文件 更新 依赖项 编译   用法和选项 常规选项 网络选项 地理限制 视频选择 下载选项 文件系统选项 缩略图选项 互联网快捷方式选项 详细程度和模拟选项 变通方法 视频格式选">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg">
+<meta property="og:image" content="https://img.shields.io/github/v/release/yt-dlp/yt-dlp?color=brightgreen&label=Download&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/badge/-PyPI-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/badge/_-Donate-red.svg?logo=githubsponsors&labelColor=555555&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/matrix/yt-dlp:matrix.org?color=brightgreen&labelColor=555555&label=&logo=element&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/discord/807245652072857610?color=blue&labelColor=555555&label=&logo=discord&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/badge/-Supported_Sites-brightgreen.svg?style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/badge/-Unlicense-blue.svg?style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/github/actions/workflow/status/yt-dlp/yt-dlp/core.yml?branch=master&label=Tests&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/github/commit-activity/m/yt-dlp/yt-dlp?label=commits&style=for-the-badge">
+<meta property="og:image" content="https://img.shields.io/github/last-commit/yt-dlp/yt-dlp/master?label=&style=for-the-badge&display_timestamp=committer">
+<meta property="article:published_time" content="2025-02-04T10:21:55.914Z">
+<meta property="article:modified_time" content="2025-02-04T10:25:24.956Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="yt-dlp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg">
+
+
+<link rel="canonical" href="https://luohuayong.github.io/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://luohuayong.github.io/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/","path":"ytdlp/yt-dlp 中文使用手册/","title":"yt-dlp 中文使用手册"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>yt-dlp 中文使用手册 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/ytdlp/yt-dlp%20%E4%B8%AD%E6%96%87%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="yt-dlp 中文使用手册 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          yt-dlp 中文使用手册
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-04 18:21:55 / 修改时间：18:25:24" itemprop="dateCreated datePublished" datetime="2025-02-04T18:21:55+08:00">2025-02-04</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><!-- MANPAGE: BEGIN EXCLUDED SECTION -->
+<div align="center">
+
+<p><a href="#readme"><img src="https://raw.githubusercontent.com/yt-dlp/yt-dlp/master/.github/banner.svg" alt="YT-DLP"></a></p>
+<p><a href="#installation" title="Installation"><img src="https://img.shields.io/github/v/release/yt-dlp/yt-dlp?color=brightgreen&label=Download&style=for-the-badge" alt="Release version"></a><br><a target="_blank" rel="noopener" href="https://pypi.org/project/yt-dlp" title="PyPI"><img src="https://img.shields.io/badge/-PyPI-blue.svg?logo=pypi&labelColor=555555&style=for-the-badge" alt="PyPI"></a><br><a href="Collaborators.md#collaborators" title="Donate"><img src="https://img.shields.io/badge/_-Donate-red.svg?logo=githubsponsors&labelColor=555555&style=for-the-badge" alt="Donate"></a><br><a target="_blank" rel="noopener" href="https://matrix.to/#/#yt-dlp:matrix.org" title="Matrix"><img src="https://img.shields.io/matrix/yt-dlp:matrix.org?color=brightgreen&labelColor=555555&label=&logo=element&style=for-the-badge" alt="Matrix"></a><br><a target="_blank" rel="noopener" href="https://discord.gg/H5MNcFW63r" title="Discord"><img src="https://img.shields.io/discord/807245652072857610?color=blue&labelColor=555555&label=&logo=discord&style=for-the-badge" alt="Discord"></a><br><a href="supportedsites.md" title="Supported Sites"><img src="https://img.shields.io/badge/-Supported_Sites-brightgreen.svg?style=for-the-badge" alt="Supported Sites"></a><br><a href="LICENSE" title="License"><img src="https://img.shields.io/badge/-Unlicense-blue.svg?style=for-the-badge" alt="License: Unlicense"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/actions" title="CI Status"><img src="https://img.shields.io/github/actions/workflow/status/yt-dlp/yt-dlp/core.yml?branch=master&label=Tests&style=for-the-badge" alt="CI Status"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/commits" title="Commit History"><img src="https://img.shields.io/github/commit-activity/m/yt-dlp/yt-dlp?label=commits&style=for-the-badge" alt="Commits"></a><br><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/pulse/monthly" title="Last activity"><img src="https://img.shields.io/github/last-commit/yt-dlp/yt-dlp/master?label=&style=for-the-badge&display_timestamp=committer" alt="Last Commit"></a></p>
+</div>
+<!-- MANPAGE: END EXCLUDED SECTION -->
+
+<p>yt-dlp 是一个功能丰富的命令行音频&#x2F;视频下载器，支持 <a href="supportedsites.md">数千个网站</a> 。该项目是从现已失效的 <a target="_blank" rel="noopener" href="https://github.com/blackjack4494/yt-dlc">youtube-dlc</a> 项目派生出的 <a target="_blank" rel="noopener" href="https://github.com/ytdl-org/youtube-dl">youtube-dl</a> 的分支。</p>
+<!-- MANPAGE: MOVE "USAGE AND OPTIONS" SECTION HERE -->
+
+<!-- MANPAGE: BEGIN EXCLUDED SECTION -->
+
+<ul>
+<li><a href="#installation">安装</a><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki/Installation">详细说明</a></li>
+<li><a href="#release-files">发行文件</a></li>
+<li><a href="#update">更新</a></li>
+<li><a href="#dependencies">依赖项</a></li>
+<li><a href="#compile">编译</a></li>
+</ul>
+</li>
+<li><a href="#usage-and-options">用法和选项</a><ul>
+<li><a href="#general-options">常规选项</a></li>
+<li><a href="#network-options">网络选项</a></li>
+<li><a href="#geo-restriction">地理限制</a></li>
+<li><a href="#video-selection">视频选择</a></li>
+<li><a href="#download-options">下载选项</a></li>
+<li><a href="#filesystem-options">文件系统选项</a></li>
+<li><a href="#thumbnail-options">缩略图选项</a></li>
+<li><a href="#internet-shortcut-options">互联网快捷方式选项</a></li>
+<li><a href="#verbosity-and-simulation-options">详细程度和模拟选项</a></li>
+<li><a href="#workarounds">变通方法</a></li>
+<li><a href="#video-format-options">视频格式选项</a></li>
+<li><a href="#subtitle-options">字幕选项</a></li>
+<li><a href="#authentication-options">身份验证选项</a></li>
+<li><a href="#post-processing-options">后处理选项</a></li>
+<li><a href="#sponsorblock-options">SponsorBlock 选项</a></li>
+<li><a href="#extractor-options">提取器选项</a></li>
+</ul>
+</li>
+<li><a href="#configuration">配置</a><ul>
+<li><a href="#configuration-file-encoding">配置文件编码</a></li>
+<li><a href="#authentication-with-netrc">使用 netrc 进行身份验证</a></li>
+<li><a href="#notes-about-environment-variables">关于环境变量的说明</a></li>
+</ul>
+</li>
+<li><a href="#output-template">输出模板</a><ul>
+<li><a href="#output-template-examples">输出模板示例</a></li>
+</ul>
+</li>
+<li><a href="#format-selection">格式选择</a><ul>
+<li><a href="#filtering-formats">过滤格式</a></li>
+<li><a href="#sorting-formats">排序格式</a></li>
+<li><a href="#format-selection-examples">格式选择示例</a></li>
+</ul>
+</li>
+<li><a href="#modifying-metadata">修改元数据</a><ul>
+<li><a href="#modifying-metadata-examples">修改元数据示例</a></li>
+</ul>
+</li>
+<li><a href="#extractor-arguments">提取器参数</a></li>
+<li><a href="#plugins">插件</a><ul>
+<li><a href="#installing-plugins">安装插件</a></li>
+<li><a href="#developing-plugins">开发插件</a></li>
+</ul>
+</li>
+<li><a href="#embedding-yt-dlp">嵌入 YT-DLP</a><ul>
+<li><a href="#embedding-examples">嵌入示例</a></li>
+</ul>
+</li>
+<li><a href="#changes-from-youtube-dl">与 YOUTUBE-DL 的差异</a><ul>
+<li><a href="#new-features">新功能</a></li>
+<li><a href="#differences-in-default-behavior">默认行为的差异</a></li>
+<li><a href="#deprecated-options">已弃用的选项</a></li>
+</ul>
+</li>
+<li><a href="CONTRIBUTING.md#contributing-to-yt-dlp">贡献</a><ul>
+<li><a href="CONTRIBUTING.md#opening-an-issue">提交问题</a></li>
+<li><a href="CONTRIBUTING.md#developer-instructions">开发者说明</a></li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki">WIKI</a> * <a target="_blank" rel="noopener" href="https://github.com/yt-dlp/yt-dlp/wiki/FAQ">常见问题</a><!-- MANPAGE: END EXCLUDED SECTION --></li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/yt-dlp/" rel="tag"># yt-dlp</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/email/%E5%80%9F%E9%89%B4%20jwt%20%E7%9A%84%E9%82%AE%E4%BB%B6%E9%80%80%E8%AE%A2%E6%80%9D%E8%B7%AF/" rel="prev" title="借鉴 jwt 的邮件退订思路">
+                  <i class="fa fa-chevron-left"></i> 借鉴 jwt 的邮件退订思路
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/dart/Dart%20%E5%8F%98%E9%87%8F/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
