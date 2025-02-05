@@ -17,12 +17,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"luohuayong.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="笔记 Whoosh 3.0 中用于排序和分面的 API 发生了变化。  概述Whoosh 中的排序和分面搜索结果是基于分面的。 每个方面都将一个值与搜索结果中的每个文档相关联，允许你按键排序或使用它们对文档进行分组。 Whoosh 包含多种可用于排序和分组的方面类型（见下文）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Whoosh 14 - 排序和分面 (faceting)">
-<meta property="og:url" content="http://example.com/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/index.html">
+<meta property="og:url" content="https://luohuayong.github.io/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/index.html">
 <meta property="og:site_name" content="技术博客">
 <meta property="og:description" content="笔记 Whoosh 3.0 中用于排序和分面的 API 发生了变化。  概述Whoosh 中的排序和分面搜索结果是基于分面的。 每个方面都将一个值与搜索结果中的每个文档相关联，允许你按键排序或使用它们对文档进行分组。 Whoosh 包含多种可用于排序和分组的方面类型（见下文）。">
 <meta property="og:locale" content="zh_CN">
@@ -33,11 +33,11 @@
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/">
+<link rel="canonical" href="https://luohuayong.github.io/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/","path":"whoosh/14-排序和分面 (faceting)/","title":"Whoosh 14 - 排序和分面 (faceting)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://luohuayong.github.io/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/","path":"whoosh/14-排序和分面 (faceting)/","title":"Whoosh 14 - 排序和分面 (faceting)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>Whoosh 14 - 排序和分面 (faceting) | 技术博客</title>
@@ -149,12 +149,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">47</span>
+          <span class="site-state-item-count">50</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">37</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -181,7 +181,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/whoosh/14-%E6%8E%92%E5%BA%8F%E5%92%8C%E5%88%86%E9%9D%A2%20(faceting)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -497,7 +497,7 @@
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

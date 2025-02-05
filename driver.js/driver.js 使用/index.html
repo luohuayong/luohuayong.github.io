@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"luohuayong.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="driver.js 是一个用于创建用户引导和演示功能的 JavaScript 库。它提供了一种简单而强大的方式来创建交互式的用户引导、演示和教程，以帮助用户更好地了解和使用你的应用程序。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="driver.js 使用">
+<meta property="og:url" content="https://luohuayong.github.io/driver.js/driver.js%20%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="技术博客">
+<meta property="og:description" content="driver.js 是一个用于创建用户引导和演示功能的 JavaScript 库。它提供了一种简单而强大的方式来创建交互式的用户引导、演示和教程，以帮助用户更好地了解和使用你的应用程序。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-12-16T06:08:24.330Z">
+<meta property="article:author" content="Leo">
+<meta property="article:tag" content="driver.js">
+<meta property="article:tag" content="使用教程">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://luohuayong.github.io/driver.js/driver.js%20%E4%BD%BF%E7%94%A8/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://luohuayong.github.io/driver.js/driver.js%20%E4%BD%BF%E7%94%A8/","path":"driver.js/driver.js 使用/","title":"driver.js 使用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>driver.js 使用 | 技术博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">技术博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6%E5%8C%85"><span class="nav-number">1.1.</span> <span class="nav-text">安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E8%BD%BD%E5%85%A5"><span class="nav-number">1.2.</span> <span class="nav-text">页面载入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">驱动器配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E6%A1%86%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">弹出框配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A9%B1%E5%8A%A8%E6%AD%A5%E9%AA%A4%E9%85%8D%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">驱动步骤配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8A%B6%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API-%E5%8F%82%E8%80%83"><span class="nav-number">6.</span> <span class="nav-text">API 参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%B9%E5%87%BA%E7%AA%97%E6%A0%B7%E5%BC%8F"><span class="nav-number">7.</span> <span class="nav-text">弹出窗样式</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Leo</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">50</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">37</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://luohuayong.github.io/driver.js/driver.js%20%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Leo">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="技术博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="driver.js 使用 | 技术博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          driver.js 使用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-12-16 00:00:00 / 修改时间：14:08:24" itemprop="dateCreated datePublished" datetime="2023-12-16T00:00:00+08:00">2023-12-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>driver.js 是一个用于创建用户引导和演示功能的 JavaScript 库。它提供了一种简单而强大的方式来创建交互式的用户引导、演示和教程，以帮助用户更好地了解和使用你的应用程序。</p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add driver.js</span><br></pre></td></tr></table></figure>
+
+<p>项目中导入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; driver &#125; <span class="keyword">from</span> <span class="string">&#x27;driver.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;driver.js/dist/driver.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> driverObj = <span class="title function_">driver</span>();</span><br><span class="line">driverObj.<span class="title function_">highlight</span>(&#123;</span><br><span class="line">  <span class="attr">element</span>: <span class="string">&#x27;#some-element&#x27;</span>,</span><br><span class="line">  <span class="attr">popover</span>: &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;Title&#x27;</span>,</span><br><span class="line">    <span class="attr">description</span>: <span class="string">&#x27;Description&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="页面载入"><a href="#页面载入" class="headerlink" title="页面载入"></a>页面载入</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span></span></span><br><span class="line"><span class="tag">  <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span></span></span><br><span class="line"><span class="tag">  <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css&quot;</span></span></span><br><span class="line"><span class="tag">/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果是页面载入方式,项目中必须使用 <code>window</code> 对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> driver = <span class="variable language_">window</span>.<span class="property">driver</span>.<span class="property">js</span>.<span class="property">driver</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> driverObj = <span class="title function_">driver</span>();</span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">highlight</span>(&#123;</span><br><span class="line">  <span class="attr">element</span>: <span class="string">&#x27;#some-element&#x27;</span>,</span><br><span class="line">  <span class="attr">popover</span>: &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;Title&#x27;</span>,</span><br><span class="line">    <span class="attr">description</span>: <span class="string">&#x27;Description&#x27;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="驱动器配置"><a href="#驱动器配置" class="headerlink" title="驱动器配置"></a>驱动器配置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">type <span class="title class_">Config</span> = &#123;</span><br><span class="line">  <span class="comment">// 高亮显示的引导步骤</span></span><br><span class="line">  steps?: <span class="title class_">DriveStep</span>[];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 是否以动画方式显示引导. (默认: true)</span></span><br><span class="line">  animate?: boolean;</span><br><span class="line">  <span class="comment">// 背景遮罩颜色 (默认: black)</span></span><br><span class="line">  overlayColor?: string;</span><br><span class="line">  <span class="comment">// 平滑滚动到突出显示的元素。 (默认: false)</span></span><br><span class="line">  smoothScroll?: boolean;</span><br><span class="line">  <span class="comment">// 允许通过点击背景遮罩关闭引导. (默认: true)</span></span><br><span class="line">  allowClose?: boolean;</span><br><span class="line">  <span class="comment">// 背景的不透明度. (默认: 0.5)</span></span><br><span class="line">  overlayOpacity?: number;</span><br><span class="line">  <span class="comment">// 突出显示的元素与高亮区域的边距. (默认: 10)</span></span><br><span class="line">  stagePadding?: number;</span><br><span class="line">  <span class="comment">// 高亮区域的圆角半径. (默认: 5)</span></span><br><span class="line">  stageRadius?: number;</span><br><span class="line">  <span class="comment">// 允许键盘导航. (默认: true)</span></span><br><span class="line">  allowKeyboardControl?: boolean;</span><br><span class="line">  <span class="comment">// 禁用与突出显示元素的交互. (默认: false)</span></span><br><span class="line">  disableActiveInteraction?: boolean;</span><br><span class="line">  <span class="comment">// 自定义弹出窗口样式的类名</span></span><br><span class="line">  popoverClass?: string;</span><br><span class="line">  <span class="comment">// 弹出框和突出显示元素之间的距离. (默认: 10)</span></span><br><span class="line">  popoverOffset?: number;</span><br><span class="line">  <span class="comment">// 要在弹出窗口中显示的按钮数组。(默认: [&quot;next&quot;, &quot;previous&quot;, &quot;close&quot;], 单元素高亮默认:[])</span></span><br><span class="line">  showButtons?: <span class="title class_">AllowedButtons</span>[];</span><br><span class="line">  <span class="comment">// 要禁用的按钮数组。</span></span><br><span class="line">  disableButtons?: <span class="title class_">AllowedButtons</span>[];</span><br><span class="line">  <span class="comment">// 在弹出窗口中显示进度文本. (默认: true)</span></span><br><span class="line">  showProgress?: boolean;</span><br><span class="line">  <span class="comment">// 进度文本的模板。 您可以在模板中使用以下占位符：</span></span><br><span class="line">  <span class="comment">//  - &#123;&#123;current&#125;&#125;: 当前步数</span></span><br><span class="line">  <span class="comment">//  - &#123;&#123;total&#125;&#125;: 总步数</span></span><br><span class="line">  progressText?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 按钮中显示的文本. `doneBtnText`</span></span><br><span class="line">  <span class="comment">// `doneBtnText` 在导航的最后一步显示。</span></span><br><span class="line">  nextBtnText?: string;</span><br><span class="line">  prevBtnText?: string;</span><br><span class="line">  doneBtnText?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在渲染弹出窗口后调用。</span></span><br><span class="line">  <span class="comment">// PopoverDOM 是一个引用 popover DOM 元素的对象，</span></span><br><span class="line">  <span class="comment">// 例如按钮标题、描述、正文、容器等.</span></span><br><span class="line">  onPopoverRender?: <span class="function">(<span class="params">popover: PopoverDOM, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在每一步高亮显示之前和之后运行的钩子。</span></span><br><span class="line">  <span class="comment">// 每个钩子接收以下内容参数：</span></span><br><span class="line">  <span class="comment">// - element: 该步骤的目标 DOM 元素</span></span><br><span class="line">  <span class="comment">// - step: 为步骤配置的步骤对象</span></span><br><span class="line">  <span class="comment">// - options.config：当前配置选项</span></span><br><span class="line">  <span class="comment">// - options.state：驱动程序的当前状态</span></span><br><span class="line">  onHighlightStarted?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">  onHighlighted?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">  onDeselected?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在 driver 被销毁之前和之后运行的钩子。</span></span><br><span class="line">  <span class="comment">// 每个钩子接收以下参数：</span></span><br><span class="line">  <span class="comment">// - element: 当前活动元素</span></span><br><span class="line">  <span class="comment">// - step：为当前活动配置的步骤对象</span></span><br><span class="line">  <span class="comment">// - options.config：当前配置选项</span></span><br><span class="line">  <span class="comment">// - options.state：驱动程序的当前状态</span></span><br><span class="line">  onDestroyStarted?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">  onDestroyed?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 单击按钮时运行的钩子。</span></span><br><span class="line">  <span class="comment">// 每个钩子接收以下参数：</span></span><br><span class="line">  <span class="comment">// - element: 该步骤的当前 DOM 元素</span></span><br><span class="line">  <span class="comment">// - step: 为步骤配置的步骤对象</span></span><br><span class="line">  <span class="comment">// - options.config：当前配置选项</span></span><br><span class="line">  <span class="comment">// - options.state：驱动程序的当前状态</span></span><br><span class="line">  onNextClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">  onPrevClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">  onCloseClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="弹出框配置"><a href="#弹出框配置" class="headerlink" title="弹出框配置"></a>弹出框配置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">type <span class="title class_">Popover</span> = &#123;</span><br><span class="line">  <span class="comment">// 弹出窗口中显示的标题和描述。</span></span><br><span class="line">  <span class="comment">// 可以在其中使用 HTML。</span></span><br><span class="line">  <span class="comment">// 可以省略其中之一，仅显示另一个</span></span><br><span class="line">  title?: string;</span><br><span class="line">  description?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 相对于目标元素</span></span><br><span class="line">  <span class="comment">// 弹出框的位置和对齐方式</span></span><br><span class="line">  side?: <span class="string">&quot;top&quot;</span> | <span class="string">&quot;right&quot;</span> | <span class="string">&quot;bottom&quot;</span> | <span class="string">&quot;left&quot;</span>;</span><br><span class="line">  align?: <span class="string">&quot;start&quot;</span> | <span class="string">&quot;center&quot;</span> | <span class="string">&quot;end&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 要在弹出窗口中显示的按钮数组。</span></span><br><span class="line">  <span class="comment">// 高亮单个元素时，默认没有按钮。</span></span><br><span class="line">  <span class="comment">// 显示游览时，默认按钮为“下一个”、“上一个”和“关闭”。</span></span><br><span class="line">  showButtons?: (<span class="string">&quot;next&quot;</span> | <span class="string">&quot;previous&quot;</span> | <span class="string">&quot;close&quot;</span>)[];</span><br><span class="line">  <span class="comment">// 要禁用的按钮数组。</span></span><br><span class="line">  disableButtons?: (<span class="string">&quot;next&quot;</span> | <span class="string">&quot;previous&quot;</span> | <span class="string">&quot;close&quot;</span>)[];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在按钮中显示的文本。</span></span><br><span class="line">  <span class="comment">// `doneBtnText` 用于游览的最后一步。</span></span><br><span class="line">  nextBtnText?: string;</span><br><span class="line">  prevBtnText?: string;</span><br><span class="line">  doneBtnText?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 是否在弹出窗口中显示进度文本.</span></span><br><span class="line">  showProgress?: boolean;</span><br><span class="line">  <span class="comment">// 进度文本的模板。</span></span><br><span class="line">  <span class="comment">// 可以使用模板中的以下占位符：</span></span><br><span class="line">  <span class="comment">// - &#123;&#123;current&#125;&#125;：当前步骤号</span></span><br><span class="line">  <span class="comment">// - &#123;&#123;total&#125;&#125;：总步数</span></span><br><span class="line">  <span class="comment">// 如果 `showProgress` 为 true，则默认为以下内容：</span></span><br><span class="line">  <span class="comment">// - &quot;&#123;&#123;current&#125;&#125; of &#123;&#123;total&#125;&#125;&quot;</span></span><br><span class="line">  progressText?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 添加到弹出框元素的自定义类。</span></span><br><span class="line">  <span class="comment">// 这可用于设置弹出框的样式。</span></span><br><span class="line">  popoverClass?: string;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 渲染弹出窗口后运行的钩子。</span></span><br><span class="line">  <span class="comment">// 您可以在此处修改弹出框元素。</span></span><br><span class="line">  <span class="comment">// 参数是一个对象，引用弹出框 DOM 元素，</span></span><br><span class="line">  <span class="comment">// 例如按钮标题、描述、正文等。</span></span><br><span class="line">  onPopoverRender?: <span class="function">(<span class="params">popover: PopoverDOM, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 按钮点击的回调,可以使用它们向按钮添加自定义行为。</span></span><br><span class="line">  <span class="comment">// 每个回调接收以下参数：</span></span><br><span class="line">  <span class="comment">// - element: 该步骤的当前 DOM 元素</span></span><br><span class="line">  <span class="comment">// - step: 为步骤配置的步骤对象</span></span><br><span class="line">  <span class="comment">// - options.config：当前配置选项</span></span><br><span class="line">  <span class="comment">// - options.state：驱动程序的当前状态</span></span><br><span class="line">  onNextClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">  onPrevClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">  onCloseClick?: <span class="function">(<span class="params">element?: Element, step: DriveStep, options: &#123; config: Config; state: State &#125;</span>) =&gt;</span> <span class="keyword">void</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="驱动步骤配置"><a href="#驱动步骤配置" class="headerlink" title="驱动步骤配置"></a>驱动步骤配置</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">type <span class="title class_">DriveStep</span> = &#123;</span><br><span class="line">  <span class="comment">// 要突出显示的目标元素。</span></span><br><span class="line">  <span class="comment">// 这可以是 DOM 元素，也可以是 CSS 选择器。</span></span><br><span class="line">  <span class="comment">// 如果这是一个选择器，则第一个匹配的</span></span><br><span class="line">  <span class="comment">// 元素将被突出显示。</span></span><br><span class="line">  <span class="attr">element</span>: <span class="title class_">Element</span> | string,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 此步骤的弹出框配置。</span></span><br><span class="line">  <span class="comment">// 查看弹出框配置部分</span></span><br><span class="line">  popover?: <span class="title class_">Popover</span>,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 当前步骤是取消选择、即将高亮或高亮时回调。</span></span><br><span class="line">  <span class="comment">// 每个回调接收以下参数：</span></span><br><span class="line">  <span class="comment">// - element: 该步骤的当前 DOM 元素</span></span><br><span class="line">  <span class="comment">// - step: 为步骤配置的步骤对象</span></span><br><span class="line">  <span class="comment">// - options.config：当前配置选项</span></span><br><span class="line">  <span class="comment">// - options.state：驱动程序的当前状态</span></span><br><span class="line">  onDeselected?: <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    element?: Element,</span></span></span><br><span class="line"><span class="params"><span class="function">    step: DriveStep,</span></span></span><br><span class="line"><span class="params"><span class="function">    options: &#123; config: Config, state: State &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">  </span>) =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">  onHighlightStarted?: <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    element?: Element,</span></span></span><br><span class="line"><span class="params"><span class="function">    step: DriveStep,</span></span></span><br><span class="line"><span class="params"><span class="function">    options: &#123; config: Config, state: State &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">  </span>) =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">  onHighlighted?: <span class="function">(<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">    element?: Element,</span></span></span><br><span class="line"><span class="params"><span class="function">    step: DriveStep,</span></span></span><br><span class="line"><span class="params"><span class="function">    options: &#123; config: Config, state: State &#125;</span></span></span><br><span class="line"><span class="params"><span class="function">  </span>) =&gt;</span> <span class="keyword">void</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="状态"><a href="#状态" class="headerlink" title="状态"></a>状态</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">type <span class="title class_">State</span> = &#123;</span><br><span class="line">  <span class="comment">// 驱动程序当前是否处于活动状态</span></span><br><span class="line">  isInitialized?: boolean,</span><br><span class="line">  <span class="comment">// 如果用作产品导览并配置了步骤数组，</span></span><br><span class="line">  <span class="comment">// 则返回当前活动步骤的索引。</span></span><br><span class="line">  activeIndex?: number,</span><br><span class="line">  <span class="comment">// 当前活动步骤的 DOM 元素</span></span><br><span class="line">  activeElement?: <span class="title class_">Element</span>,</span><br><span class="line">  <span class="comment">// 当前活动步骤的步骤对象</span></span><br><span class="line">  activeStep?: <span class="title class_">DriveStep</span>,</span><br><span class="line">  <span class="comment">// 之前处于活动状态的 DOM 元素</span></span><br><span class="line">  previousElement?: <span class="title class_">Element</span>,</span><br><span class="line">  <span class="comment">// 先前活动步骤的步骤对象</span></span><br><span class="line">  previousStep?: <span class="title class_">DriveStep</span>,</span><br><span class="line">  <span class="comment">// 弹出窗口的 DOM 元素，</span></span><br><span class="line">  <span class="comment">// 包括容器、标题、描述、按钮等。</span></span><br><span class="line">  popover?: <span class="title class_">PopoverDOM</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="API-参考"><a href="#API-参考" class="headerlink" title="API 参考"></a>API 参考</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; driver &#125; <span class="keyword">from</span> <span class="string">&#x27;driver.js&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;driver.js/dist/driver.css&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查看配置部分的驱动器配置</span></span><br><span class="line"><span class="keyword">const</span> driverObj = <span class="title function_">driver</span>(&#123;</span><br><span class="line">  <span class="comment">/*&lt;驱动器配置&gt;*/</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// --------------------------------------------------</span></span><br><span class="line"><span class="comment">// driverObj 是一个具有以下方法的对象</span></span><br><span class="line"><span class="comment">// --------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用配置中给出的 “步骤” 开始游览</span></span><br><span class="line">driverObj.<span class="title function_">drive</span>(); <span class="comment">// 从步骤 0 开始</span></span><br><span class="line">driverObj.<span class="title function_">drive</span>(<span class="number">4</span>); <span class="comment">// 从步骤 4 开始</span></span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">moveNext</span>(); <span class="comment">// 移动到下一步骤</span></span><br><span class="line">driverObj.<span class="title function_">movePrevious</span>(); <span class="comment">// 移动到前一步骤</span></span><br><span class="line">driverObj.<span class="title function_">moveTo</span>(<span class="number">4</span>); <span class="comment">// 移动到步骤 4</span></span><br><span class="line">driverObj.<span class="title function_">hasNextStep</span>(); <span class="comment">// 是否有下一步骤</span></span><br><span class="line">driverObj.<span class="title function_">hasPreviousStep</span>(); <span class="comment">// 是否有前一步骤</span></span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">isFirstStep</span>(); <span class="comment">// 当前是否为第一个步骤</span></span><br><span class="line">driverObj.<span class="title function_">isLastStep</span>(); <span class="comment">// 当前是否为最后一个步骤</span></span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">getActiveIndex</span>(); <span class="comment">// 获取活动步骤的序号</span></span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">getActiveStep</span>(); <span class="comment">// 获取活动步骤的配置</span></span><br><span class="line">driverObj.<span class="title function_">getPreviousStep</span>(); <span class="comment">// 获取前一步骤的配置</span></span><br><span class="line">driverObj.<span class="title function_">getActiveElement</span>(); <span class="comment">// 获取活动的 HTML 元素</span></span><br><span class="line">driverObj.<span class="title function_">getPreviousElement</span>(); <span class="comment">// 获取前一个 HTML 元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 游览或高亮当前是否处于活动状态</span></span><br><span class="line">driverObj.<span class="title function_">isActive</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重新计算并重画高亮</span></span><br><span class="line">driverObj.<span class="title function_">refresh</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取/设置驱动器配置</span></span><br><span class="line">driverObj.<span class="title function_">getConfig</span>();</span><br><span class="line">driverObj.<span class="title function_">setConfig</span>(&#123;</span><br><span class="line">  <span class="comment">/*&lt;驱动器配置&gt;*/</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">driverObj.<span class="title function_">setSteps</span>([</span><br><span class="line">  <span class="comment">/* &lt;步骤数组&gt; */</span></span><br><span class="line">]); <span class="comment">// 设置步骤数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取状态</span></span><br><span class="line">driverObj.<span class="title function_">getState</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 突出显示一个元素</span></span><br><span class="line">driverObj.<span class="title function_">highlight</span>(&#123;</span><br><span class="line">  <span class="comment">/* &lt;驱动步骤配置&gt; */</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 销毁游览</span></span><br><span class="line">driverObj.<span class="title function_">destroy</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="弹出窗样式"><a href="#弹出窗样式" class="headerlink" title="弹出窗样式"></a>弹出窗样式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 驱动器中定义全局样式</span></span><br><span class="line"><span class="keyword">const</span> driverObj = <span class="title function_">driver</span>(&#123;</span><br><span class="line">  <span class="attr">popoverClass</span>: <span class="string">&#x27;my-custom-popover-class&#x27;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在步骤中定义此步骤中的样式</span></span><br><span class="line"><span class="keyword">const</span> driverObj2 = <span class="title function_">driver</span>(&#123;</span><br><span class="line">  <span class="attr">steps</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">element</span>: <span class="string">&#x27;#some-element&#x27;</span>,</span><br><span class="line">      <span class="attr">popover</span>: &#123;</span><br><span class="line">        <span class="attr">title</span>: <span class="string">&#x27;Title&#x27;</span>,</span><br><span class="line">        <span class="attr">description</span>: <span class="string">&#x27;Description&#x27;</span>,</span><br><span class="line">        <span class="attr">popoverClass</span>: <span class="string">&#x27;my-custom-popover-class&#x27;</span>,</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>弹出框样式类</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 弹出窗口包装器的类 */</span></span><br><span class="line">.<span class="property">driver</span>-popover &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 指向突出显示元素的箭头 */</span></span><br><span class="line">.<span class="property">driver</span>-popover-arrow &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 标题和描述 */</span></span><br><span class="line">.<span class="property">driver</span>-popover-title &#123;&#125;</span><br><span class="line">.<span class="property">driver</span>-popover-description &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 右上角显示关闭按钮 */</span></span><br><span class="line">.<span class="property">driver</span>-popover-close-btn &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 显示进度和导航按钮的弹出窗口页脚  */</span></span><br><span class="line">.<span class="property">driver</span>-popover-footer &#123;&#125;</span><br><span class="line">.<span class="property">driver</span>-popover-progress-text &#123;&#125;</span><br><span class="line">.<span class="property">driver</span>-popover-prev-btn &#123;&#125;</span><br><span class="line">.<span class="property">driver</span>-popover-next-btn &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/driver-js/" rel="tag"># driver.js</a>
+              <a href="/tags/%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" rel="tag"># 使用教程</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/nodejs/Node.js%20%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7%20nvm/" rel="prev" title="Node.js 版本管理工具 nvm">
+                  <i class="fa fa-chevron-left"></i> Node.js 版本管理工具 nvm
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/ga4/Google-Analytics%204%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="Google Analytics 4 学习笔记">
+                  Google Analytics 4 学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Leo</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
